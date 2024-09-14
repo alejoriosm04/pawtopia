@@ -111,4 +111,16 @@ class Product extends Model
             'image' => 'image',
         ]);
     }
+    public function uploadImage($file)
+    {
+        if ($file) {
+            $imageName = $this->getId().'.'.$file->extension();
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($file->getRealPath())
+            );
+            $this->setImage($imageName);
+            $this->save();
+        }
+    }
 }
