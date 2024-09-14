@@ -20,7 +20,7 @@ class Pet extends Model
      * $this->attributes['image'] - string - contains the pet image
      * $this->attributes['specie'] - string - contains the pet specie
      * $this->attributes['breed'] - string - contains the pet breed
-     * $this->attributes['birthDate'] - date - contains the pet birth date
+     * $this->attributes['birthDate'] - DateTime - contains the pet birth date
      * $this->attributes['characteristics'] - array - contains the pet characteristics
      * $this->attributes['medications'] - string - contains the pet medications
      * $this->attributes['feeding'] - string - contains the pet feeding
@@ -31,13 +31,13 @@ class Pet extends Model
     protected $fillable = [
         'name',
         'image',
-        'species',
+        'specie',
         'breed',
-        'age',
-        'healthData',
+        'birthDate',
+        'characteristics',
+        'medications',
         'feeding',
-        'exercise',
-        'reminders',
+        'veterinaryNotes',
     ];
 
     protected $casts = [
