@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
+use DateTime;
 
 class Pet extends Model
 {
@@ -24,7 +28,6 @@ class Pet extends Model
      * $this->attributes['user'] - User contains the pet owner
      * $this->attributes['items'] - Item[] contains the pet items
      */
-    
     protected $fillable = [
         'name',
         'image',
@@ -35,6 +38,10 @@ class Pet extends Model
         'feeding',
         'exercise',
         'reminders',
+    ];
+
+    protected $casts = [
+        'birthDate' => 'datetime:Y-m-d',
     ];
 
     public function getId(): int
@@ -82,12 +89,12 @@ class Pet extends Model
         $this->attributes['breed'] = $breed;
     }
 
-    public function getbirthDate(): date
+    public function getBirthDate(): DateTime
     {
         return $this->attributes['birthDate'];
     }
 
-    public function setbirthDate(date $birthDate): void
+    public function setBirthDate(DateTime $birthDate): void
     {
         $this->attributes['birthDate'] = $birthDate;
     }
