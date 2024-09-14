@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Carbon\Carbon;
-use DateTime;
 
 class Pet extends Model
 {
@@ -20,7 +19,7 @@ class Pet extends Model
      * $this->attributes['image'] - string - contains the pet image
      * $this->attributes['specie'] - string - contains the pet specie
      * $this->attributes['breed'] - string - contains the pet breed
-     * $this->attributes['birthDate'] - DateTime - contains the pet birth date
+     * $this->attributes['birthDate'] - string - contains the pet birth date
      * $this->attributes['characteristics'] - array - contains the pet characteristics
      * $this->attributes['medications'] - string - contains the pet medications
      * $this->attributes['feeding'] - string - contains the pet feeding
@@ -38,10 +37,6 @@ class Pet extends Model
         'medications',
         'feeding',
         'veterinaryNotes',
-    ];
-
-    protected $casts = [
-        'birthDate' => 'datetime:Y-m-d',
     ];
 
     public function getId(): int
@@ -89,19 +84,19 @@ class Pet extends Model
         $this->attributes['breed'] = $breed;
     }
 
-    public function getBirthDate(): DateTime
+    public function getBirthDate(): string
     {
         return $this->attributes['birthDate'];
     }
 
-    public function setBirthDate(DateTime $birthDate): void
+    public function setBirthDate(string $birthDate): void
     {
         $this->attributes['birthDate'] = $birthDate;
     }
 
     public function getCharacteristics(): array
     {
-        return $this->attributes['characteristics'];
+        return json_decode($this->attributes['characteristics'], true);
     }
 
     public function setCharacteristics(array $characteristics): void

@@ -8,4 +8,11 @@ return [
     'create_pet_title' => 'Crear mascota',
     'pet_created_title' => 'Mascota creada',
     'pet_created_message' => 'Mascota creada exitosamente',
+    'Species' => 'Especie',
+    'Breed' => 'Raza',
+    'Birth Date' => 'Fecha de nacimiento',
+    'Characteristics' => 'Características',
+    'Medications' => 'Medicamentos',
+    'Feeding' => 'Alimentación',
+    'Veterinary Notes' => 'Notas veterinarias',
 ];
