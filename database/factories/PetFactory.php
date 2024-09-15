@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Pet;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PetFactory extends Factory
 {
@@ -20,7 +20,7 @@ class PetFactory extends Factory
             'characteristics' => json_encode([
                 'color' => $this->faker->safeColorName,
                 'size' => $this->faker->randomElement(['Small', 'Medium', 'Large']),
-                'temperament' => $this->faker->randomElement(['Friendly', 'Aggressive', 'Calm'])
+                'temperament' => $this->faker->randomElement(['Friendly', 'Aggressive', 'Calm']),
             ]),
             'medications' => $this->faker->sentence,
             'feeding' => $this->faker->sentence,

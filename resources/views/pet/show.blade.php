@@ -33,7 +33,9 @@
 
         <!-- Displaying veterinary notes using the getter -->
         <p class="card-text"><strong>{{ __('Veterinary Notes') }}:</strong> {{ $viewData['pet']->getVeterinaryNotes() }}</p>
-        
+
+        <!-- Add an Edit button to allow users to update the pet -->
+        <a href="{{ route('pet.edit', ['id' => $viewData['pet']->getId()]) }}" class="btn btn-warning">{{ __('Edit') }}</a>
       </div>
     </div>
   </div>
