@@ -55,4 +55,5 @@ return [
     'bird' => 'Pájaro',
     'fish' => 'Pez',
     'small_pets' => 'Mascotas pequeñas',
+    'years_old' => 'años',
 ];
