@@ -112,4 +112,15 @@ class PetController extends Controller
 
         return redirect()->route('pet.show', ['id' => $pet->getId()]);
     }
+
+    public function delete(string $id): RedirectResponse
+    {
+        $pet = Pet::findOrFail($id);
+        if ($pet->getImage()) {
+            Storage::disk('public')->delete($pet->getImage());
+        }
+        $pet->delete();
+
+        return redirect()->route('pet.index');
+    }
 }

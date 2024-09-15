@@ -20,6 +20,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <a class="nav-link active" href="{{ route('home.index') }}" style="color: #DB4D20;">Home</a>
+          <a class="nav-link" href="{{ route('pet.index') }}" style="color: #DB4D20;">My Pets</a>
         </div>
       </div>
     </div>
