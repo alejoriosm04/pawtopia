@@ -14,7 +14,7 @@ class PetFactory extends Factory
         return [
             'name' => $this->faker->firstName,
             'image' => 'images/pets/default_pet.png',
-            'specie' => $this->faker->randomElement(['Dog', 'Cat', 'Bird', 'Fish', 'Reptile']),
+            'species' => $this->faker->randomElement(['Dog', 'Cat', 'Fish', 'Bird', 'Small Pet']),
             'breed' => $this->faker->word,
             'birthDate' => $this->faker->dateTimeBetween('-10 years', 'now'),
             'characteristics' => json_encode([
