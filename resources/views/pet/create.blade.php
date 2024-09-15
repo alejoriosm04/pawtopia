@@ -17,96 +17,83 @@
 
           <form method="POST" action="{{ route('pet.save') }}" enctype="multipart/form-data">
             @csrf
-            <!-- Name -->
             <div class="form-group mb-2">
-              <label for="name">{{ __('Enter name') }}</label>
+              <label for="name">{{ __('Pet.enter_name_field') }}</label>
               <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
             </div>
 
-            <!-- Image Upload -->
             <div class="form-group mb-2">
-              <label for="image">{{ __('Pet Image') }}</label>
+              <label for="image">{{ __('Pet.pet_image_field') }}</label>
               <input type="file" class="form-control" id="image" name="image">
             </div>
 
-            <!-- Species -->
             <div class="form-group mb-2">
-              <label for="species">{{ __('Enter species') }}</label>
+              <label for="species">{{ __('Pet.enter_specie_field') }}</label>
               <input type="text" class="form-control" id="species" name="species" value="{{ old('species') }}" required>
             </div>
 
-            <!-- Breed -->
             <div class="form-group mb-2">
-              <label for="breed">{{ __('Enter breed') }}</label>
+              <label for="breed">{{ __('Pet.enter_breed') }}</label>
               <input type="text" class="form-control" id="breed" name="breed" value="{{ old('breed') }}" required>
             </div>
 
-            <!-- Birth Date -->
             <div class="form-group mb-2">
-              <label for="birthDate">{{ __('Enter birth date') }}</label>
+              <label for="birthDate">{{ __('Pet.enter_birth_date') }}</label>
               <input type="date" class="form-control" id="birthDate" name="birthDate" value="{{ old('birthDate') }}" required>
             </div>
 
-            <!-- Characteristics (Color, Size, Temperament) -->
             <div class="form-group mb-2">
-              <label for="characteristics">{{ __('Select characteristics') }}</label>
+              <label for="characteristics">{{ __('Pet.select_characteristics') }}</label>
 
-              <!-- Color -->
               <div class="form-group mb-2">
-                <label for="color">{{ __('Color') }}</label>
+                <label for="color">{{ __('Pet.color') }}</label>
                 <select class="form-control" id="color" name="characteristics[color]">
-                  <option value="">{{ __('Select color') }}</option>
-                  <option value="green" {{ old('characteristics.color') == 'green' ? 'selected' : '' }}>{{ __('Green') }}</option>
-                  <option value="brown" {{ old('characteristics.color') == 'brown' ? 'selected' : '' }}>{{ __('Brown') }}</option>
-                  <option value="black" {{ old('characteristics.color') == 'black' ? 'selected' : '' }}>{{ __('Black') }}</option>
-                  <option value="white" {{ old('characteristics.color') == 'white' ? 'selected' : '' }}>{{ __('White') }}</option>
+                  <option value="">{{ __('Pet.select_color') }}</option>
+                  <option value="green" {{ old('characteristics.color') == 'green' ? 'selected' : '' }}>{{ __('Pet.green') }}</option>
+                  <option value="brown" {{ old('characteristics.color') == 'brown' ? 'selected' : '' }}>{{ __('Pet.brown') }}</option>
+                  <option value="black" {{ old('characteristics.color') == 'black' ? 'selected' : '' }}>{{ __('Pet.black') }}</option>
+                  <option value="white" {{ old('characteristics.color') == 'white' ? 'selected' : '' }}>{{ __('Pet.white') }}</option>
                 </select>
               </div>
 
-              <!-- Size -->
               <div class="form-group mb-2">
-                <label for="size">{{ __('Size') }}</label>
+                <label for="size">{{ __('Pet.size') }}</label>
                 <select class="form-control" id="size" name="characteristics[size]">
-                  <option value="">{{ __('Select size') }}</option>
-                  <option value="Small" {{ old('characteristics.size') == 'Small' ? 'selected' : '' }}>{{ __('Small') }}</option>
-                  <option value="Medium" {{ old('characteristics.size') == 'Medium' ? 'selected' : '' }}>{{ __('Medium') }}</option>
-                  <option value="Large" {{ old('characteristics.size') == 'Large' ? 'selected' : '' }}>{{ __('Large') }}</option>
+                  <option value="">{{ __('Pet.select_size') }}</option>
+                  <option value="Small" {{ old('characteristics.size') == 'Small' ? 'selected' : '' }}>{{ __('Pet.small') }}</option>
+                  <option value="Medium" {{ old('characteristics.size') == 'Medium' ? 'selected' : '' }}>{{ __('Pet.medium') }}</option>
+                  <option value="Large" {{ old('characteristics.size') == 'Large' ? 'selected' : '' }}>{{ __('Pet.large') }}</option>
                 </select>
               </div>
 
-              <!-- Temperament -->
               <div class="form-group mb-2">
-                <label for="temperament">{{ __('Temperament') }}</label>
+                <label for="temperament">{{ __('Pet.temperament') }}</label>
                 <select class="form-control" id="temperament" name="characteristics[temperament]">
-                  <option value="">{{ __('Select temperament') }}</option>
-                  <option value="Friendly" {{ old('characteristics.temperament') == 'Friendly' ? 'selected' : '' }}>{{ __('Friendly') }}</option>
-                  <option value="Aggressive" {{ old('characteristics.temperament') == 'Aggressive' ? 'selected' : '' }}>{{ __('Aggressive') }}</option>
-                  <option value="Calm" {{ old('characteristics.temperament') == 'Calm' ? 'selected' : '' }}>{{ __('Calm') }}</option>
+                  <option value="">{{ __('Pet.select_temperament') }}</option>
+                  <option value="Friendly" {{ old('characteristics.temperament') == 'Friendly' ? 'selected' : '' }}>{{ __('Pet.friendly') }}</option>
+                  <option value="Aggressive" {{ old('characteristics.temperament') == 'Aggressive' ? 'selected' : '' }}>{{ __('Pet.aggressive') }}</option>
+                  <option value="Calm" {{ old('characteristics.temperament') == 'Calm' ? 'selected' : '' }}>{{ __('Pet.calm') }}</option>
                 </select>
               </div>
             </div>
 
-            <!-- Medications -->
             <div class="form-group mb-2">
-              <label for="medications">{{ __('Enter medications') }}</label>
+              <label for="medications">{{ __('Pet.enter_medications') }}</label>
               <input type="text" class="form-control" id="medications" name="medications" value="{{ old('medications') }}">
             </div>
 
-            <!-- Feeding -->
             <div class="form-group mb-2">
-              <label for="feeding">{{ __('Enter feeding') }}</label>
+              <label for="feeding">{{ __('Pet.enter_feeding') }}</label>
               <input type="text" class="form-control" id="feeding" name="feeding" value="{{ old('feeding') }}">
             </div>
 
-            <!-- Veterinary Notes -->
             <div class="form-group mb-2">
-              <label for="veterinaryNotes">{{ __('Enter veterinary notes') }}</label>
+              <label for="veterinaryNotes">{{ __('Pet.enter_veterinary_notes') }}</label>
               <input type="text" class="form-control" id="veterinaryNotes" name="veterinaryNotes" value="{{ old('veterinaryNotes') }}">
             </div>
 
-            <!-- Submit Button -->
             <div class="form-group">
-              <input type="submit" class="btn btn-primary" value="{{ __('Send') }}">
+              <input type="submit" class="btn btn-primary" value="{{ __('Pet.send') }}">
             </div>
           </form>
         </div>
