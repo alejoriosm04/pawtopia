@@ -14,8 +14,7 @@
         <img src="{{ Storage::url($pet->getImage()) }}" alt="{{ $pet->getName() }}" class="img-fluid mb-2" style="max-height: 150px; object-fit: cover;">
         
         <a href="{{ route('pet.show', ['id'=> $pet->getId()]) }}" class="btn bg-primary text-white">
-          {{ $pet->getId() }} - 
-          <strong>{{ $pet->getName() }}</strong> ( {{ $pet->getbirthDate() }} )
+          <strong>{{ $pet->getName() }}</strong> ({{ $pet->getAge() }} {{ __('Pet.years_old') }})
           - {{ __($viewData["species"][$pet->getSpecies()]) }}
         </a>
       </div>

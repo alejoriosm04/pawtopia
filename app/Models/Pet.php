@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use DateTime;
 
 class Pet extends Model
 {
@@ -119,6 +120,15 @@ class Pet extends Model
     public function setBirthDate(string $birthDate): void
     {
         $this->attributes['birthDate'] = $birthDate;
+    }
+
+    public function getAge(): int
+    {
+        $birthDate = new DateTime($this->attributes['birthDate']);
+        $now = new DateTime();
+        $interval = $now->diff($birthDate);
+
+        return $interval->y;
     }
 
     public function getCharacteristics(): array
