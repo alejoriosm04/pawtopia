@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->string('specie');
+            $table->string('species');
             $table->string('breed');
             $table->date('birthDate');
             $table->json('characteristics');

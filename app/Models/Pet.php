@@ -17,7 +17,7 @@ class Pet extends Model
      * $this->attributes['id'] - int - contains the pet primary key (id)
      * $this->attributes['name'] - string - contains the pet name
      * $this->attributes['image'] - string - contains the pet image
-     * $this->attributes['specie'] - string - contains the pet specie
+     * $this->attributes['species'] - array - contains the pet specie
      * $this->attributes['breed'] - string - contains the pet breed
      * $this->attributes['birthDate'] - string - contains the pet birth date
      * $this->attributes['characteristics'] - array - contains the pet characteristics
@@ -30,7 +30,7 @@ class Pet extends Model
     protected $fillable = [
         'name',
         'image',
-        'specie',
+        'species',
         'breed',
         'birthDate',
         'characteristics',
@@ -39,12 +39,19 @@ class Pet extends Model
         'veterinaryNotes',
     ];
 
+    protected static $species = [
+        'Dog' => 'Pet.dog',
+        'Cat' => 'Pet.cat',
+        'Bird' => 'Pet.bird',
+        'Fish' => 'Pet.fish',
+        'Small Pets' => 'Pet.small_pets',
+    ];
+
     public static function validate(Request $request): void
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'species' => 'required|string|max:255',
             'breed' => 'required|string|max:255',
             'birthDate' => 'required|date',
             'characteristics' => 'required|array',
@@ -79,14 +86,19 @@ class Pet extends Model
         $this->attributes['image'] = $image;
     }
 
-    public function getSpecie(): string
+    public function getSpecies(): string
     {
-        return $this->attributes['specie'];
+        return $this->attributes['species'];
     }
 
-    public function setSpecie(string $specie): void
+    public function setSpecies(string $specie): void
     {
-        $this->attributes['specie'] = $specie;
+        $this->attributes['species'] = $species;
+    }
+
+    public static function getAllSpecies(): array
+    {
+        return self::$species;
     }
 
     public function getBreed(): string

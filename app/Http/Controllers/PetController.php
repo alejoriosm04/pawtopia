@@ -18,6 +18,7 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.pets_title');
         $viewData['subtitle'] = __('Pet.pets_subtitle');
         $viewData['pets'] = Pet::all();
+        $viewData['species'] = Pet::getAllSpecies();
 
         return view('pet.index')->with('viewData', $viewData);
     }
@@ -30,6 +31,7 @@ class PetController extends Controller
             $viewData['title'] = __('Pet.pet_info_title', ['name' => $pet->getName()]);
             $viewData['subtitle'] = __('Pet.pet_info_subtitle', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
+            $viewData['species'] = Pet::getAllSpecies();
 
             return view('pet.show')->with('viewData', $viewData);
         } catch (Exception $e) {
@@ -41,6 +43,7 @@ class PetController extends Controller
     {
         $viewData = [];
         $viewData['title'] = __('Pet.create_pet_title');
+        $viewData['species'] = Pet::getAllSpecies();
 
         return view('pet.create')->with('viewData', $viewData);
     }
@@ -52,7 +55,7 @@ class PetController extends Controller
         Pet::create([
             'name' => $request->input('name'),
             'image' => $request->file('image')->store('images/pets', 'public'),
-            'specie' => $request->input('species'),
+            'species' => $request->input('species'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
             'characteristics' => json_encode($request->input('characteristics')),
@@ -75,6 +78,7 @@ class PetController extends Controller
             $pet = Pet::findOrFail($id);
             $viewData['title'] = __('Pet.edit_pet_title', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
+            $viewData['species'] = Pet::getAllSpecies();
 
             return view('pet.edit')->with('viewData', $viewData);
         } catch (Exception $e) {
@@ -84,15 +88,13 @@ class PetController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
-        Pet::validate($request);
-
         $pet = Pet::findOrFail($id);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
         $pet->update([
             'name' => $request->input('name'),
-            'specie' => $request->input('species'),
+            'species' => $request->input('species'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
             'characteristics' => json_encode($request->input('characteristics')),
