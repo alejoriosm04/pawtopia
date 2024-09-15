@@ -11,7 +11,7 @@
     <div class="col-md-8">
       <div class="card-body">
         <!-- Displaying the pet name using the getter -->
-        <h5 class="card-title">{{ $viewData['pet']->getName() }}</h5>
+        <h3 class="card-title">{{ $viewData['pet']->getName() }}</h3>
 
         <!-- Displaying the pet species and breed using getters -->
         <p class="card-text"><strong>{{ __('Species') }}:</strong> {{ $viewData['pet']->getSpecie() }}</p>
@@ -34,8 +34,15 @@
         <!-- Displaying veterinary notes using the getter -->
         <p class="card-text"><strong>{{ __('Veterinary Notes') }}:</strong> {{ $viewData['pet']->getVeterinaryNotes() }}</p>
 
-        <!-- Add an Edit button to allow users to update the pet -->
+        <!-- Edit button -->
         <a href="{{ route('pet.edit', ['id' => $viewData['pet']->getId()]) }}" class="btn btn-warning">{{ __('Edit') }}</a>
+
+        <!-- Delete form and button -->
+        <form action="{{ route('pet.delete', ['id' => $viewData['pet']->getId()]) }}" method="POST" class="d-inline">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger" onclick="return confirm('{{ __('Are you sure you want to delete this pet?') }}');">{{ __('Delete') }}</button>
+        </form>
       </div>
     </div>
   </div>
