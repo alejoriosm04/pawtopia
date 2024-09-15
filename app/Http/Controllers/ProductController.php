@@ -12,8 +12,8 @@ class ProductController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Products - Pawtopia';
-        $viewData['subtitle'] = 'List of products';
+        $viewData['title'] = __('product.index_title');
+        $viewData['subtitle'] = __('product.index_subtitle');
         $viewData['products'] = Product::all();
 
         return view('product.index')->with('viewData', $viewData);
@@ -27,8 +27,8 @@ class ProductController extends Controller
         } catch (Exception $e) {
             return redirect()->route('home.index');
         }
-        $viewData['title'] = $product->getName().' - Pawtopia';
-        $viewData['subtitle'] = $product->getName().' - Product information';
+        $viewData['title'] = $product->getName();
+        $viewData['subtitle'] = $product->getName().' - '.__('product.product_info');
 
         $viewData['product'] = $product;
 
