@@ -10,7 +10,7 @@ class AdminHomeController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = __('admin.home.title');
+        $viewData['title'] = __('admin/Home.title');
 
         return view('admin.home.index')->with('viewData', $viewData);
     }
