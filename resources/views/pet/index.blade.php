@@ -7,10 +7,13 @@
   <div class="col-md-4 col-lg-3 mb-2">
     <div class="card">
       <div class="card-body text-center">
-        <a href="{{ route('pet.show', ['id'=> $pet->getId()]) }}"
-          class="btn bg-primary text-white">
+        <!-- Display Pet Image -->
+        <img src="{{ Storage::url($pet->getImage()) }}" alt="{{ $pet->getName() }}" class="img-fluid mb-2" style="max-height: 150px; object-fit: cover;">
+        
+        <!-- Pet Information -->
+        <a href="{{ route('pet.show', ['id'=> $pet->getId()]) }}" class="btn bg-primary text-white">
           {{ $pet->getId() }} - 
-            <strong>{{ $pet->getName() }}</strong> ( {{ $pet->getbirthDate() }} )
+          <strong>{{ $pet->getName() }}</strong> ( {{ $pet->getbirthDate() }} )
           - {{ $pet->getSpecie() }}
         </a>
       </div>

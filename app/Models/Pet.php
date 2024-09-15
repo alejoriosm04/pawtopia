@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class Pet extends Model
 {
@@ -38,6 +38,21 @@ class Pet extends Model
         'feeding',
         'veterinaryNotes',
     ];
+
+    public static function validate(Request $request): void
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'species' => 'required|string|max:255',
+            'breed' => 'required|string|max:255',
+            'birthDate' => 'required|date',
+            'characteristics' => 'required|array',
+            'medications' => 'required|string|max:255',
+            'feeding' => 'required|string|max:255',
+            'veterinaryNotes' => 'required|string|max:255',
+        ]);
+    }
 
     public function getId(): int
     {
