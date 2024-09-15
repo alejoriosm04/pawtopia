@@ -5,6 +5,6 @@
     <div class="alert alert-success" role="alert">
         {{ $viewData["message"] }}
     </div>
-    <a href="{{ route('home.index') }}" class="btn btn-primary">Back to Home</a>
+    <a href="{{ route('home.index') }}" class="btn btn-primary">{{ __('Pet.back_to_home_button') }}</a>
 </div>
 @endsection

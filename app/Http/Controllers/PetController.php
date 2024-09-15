@@ -62,7 +62,7 @@ class PetController extends Controller
         ]);
 
         $viewData = [];
-        $viewData['title'] = __('Pet.pet_saved_title');
+        $viewData['title'] = __('Pet.pet_created_title');
         $viewData['message'] = __('Pet.pet_created_message');
 
         return view('pet.save')->with('viewData', $viewData);
