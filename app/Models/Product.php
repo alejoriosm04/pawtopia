@@ -83,9 +83,15 @@ class Product extends Model
     {
         return $this->attributes['updated_at'];
     }
+
     public function getSpeciesId(): int
     {
         return $this->attributes['species_id'];
+    }
+
+    public function setSpeciesId(int $speciesId): void
+    {
+        $this->attributes['species_id'] = $speciesId;
     }
 
     public function getCategoryId(): int
@@ -93,6 +99,10 @@ class Product extends Model
         return $this->attributes['category_id'];
     }
 
+    public function setCategoryId(int $categoryId): void
+    {
+        $this->attributes['category_id'] = $categoryId;
+    }
 
     public function category()
     {
@@ -115,6 +125,7 @@ class Product extends Model
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
+
     public function uploadImage($file)
     {
         if ($file) {
@@ -128,4 +139,3 @@ class Product extends Model
         }
     }
 }
-

@@ -15,7 +15,7 @@
         
         <a href="{{ route('pet.show', ['id'=> $pet->getId()]) }}" class="btn bg-primary text-white">
           <strong>{{ $pet->getName() }}</strong> ({{ $pet->getAge() }} {{ __('Pet.years_old') }})
-          - {{ __($viewData["species"][$pet->getSpecies()]) }}
+          - {{ $pet->species->getName() }}
         </a>
       </div>
     </div>

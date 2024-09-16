@@ -42,11 +42,11 @@ class Species extends Model
             'name' => 'required|max:255|unique:species,name',
         ]);
     }
-    /*
+
     public function pets()
     {
         return $this->hasMany(Pet::class);
-    }*/
+    }
 
     public function products()
     {

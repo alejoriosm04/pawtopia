@@ -18,7 +18,7 @@ class Pet extends Model
      * $this->attributes['id'] - int - contains the pet primary key (id)
      * $this->attributes['name'] - string - contains the pet name
      * $this->attributes['image'] - string - contains the pet image
-     * $this->attributes['species'] - string - contains the pet specie
+     * $this->attributes['species_id'] - int - references the associated species
      * $this->attributes['breed'] - string - contains the pet breed
      * $this->attributes['birthDate'] - string - contains the pet birth date
      * $this->attributes['characteristics'] - array - contains the pet characteristics
@@ -31,21 +31,13 @@ class Pet extends Model
     protected $fillable = [
         'name',
         'image',
-        'species',
+        'species_id',
         'breed',
         'birthDate',
         'characteristics',
         'medications',
         'feeding',
         'veterinaryNotes',
-    ];
-
-    protected static $species = [
-        'Dog' => 'Pet.dog',
-        'Cat' => 'Pet.cat',
-        'Bird' => 'Pet.bird',
-        'Fish' => 'Pet.fish',
-        'Small Pets' => 'Pet.small_pets',
     ];
 
     public static function validate(Request $request): void
@@ -85,21 +77,6 @@ class Pet extends Model
     public function setImage(string $image): void
     {
         $this->attributes['image'] = $image;
-    }
-
-    public function getSpecies(): string
-    {
-        return $this->attributes['species'];
-    }
-
-    public function setSpecies(string $specie): void
-    {
-        $this->attributes['species'] = $species;
-    }
-
-    public static function getAllSpecies(): array
-    {
-        return self::$species;
     }
 
     public function getBreed(): string
@@ -184,6 +161,21 @@ class Pet extends Model
     public function setUser(User $user): void
     {
         $this->attributes['user'] = $user;
+    }
+
+    public function species()
+    {
+        return $this->belongsTo(Species::class);
+    }
+
+    public function getSpeciesId(): int
+    {
+        return $this->attributes['species_id'];
+    }
+
+    public function setSpeciesId(int $speciesId): void
+    {
+        $this->attributes['species_id'] = $speciesId;
     }
 
     public function items(): HasMany
