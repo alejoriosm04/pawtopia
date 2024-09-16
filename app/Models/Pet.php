@@ -18,7 +18,7 @@ class Pet extends Model
      * $this->attributes['id'] - int - contains the pet primary key (id)
      * $this->attributes['name'] - string - contains the pet name
      * $this->attributes['image'] - string - contains the pet image
-     * $this->attributes['species'] - array - contains the pet specie
+     * $this->attributes['species'] - string - contains the pet specie
      * $this->attributes['breed'] - string - contains the pet breed
      * $this->attributes['birthDate'] - string - contains the pet birth date
      * $this->attributes['characteristics'] - array - contains the pet characteristics
