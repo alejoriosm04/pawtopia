@@ -37,9 +37,12 @@ class AdminProductController extends Controller
     {
         Product::validate($request);
 
-        $creationData = $request->only(["name", "description", "price", "category_id"]);
-
+        $creationData = $request->only(["name", "description", "price", "category_id", "species_id"]);
+        if (!$request->hasFile('image')) {
+            $creationData['image'] = 'img/default_image.png';
+        }
         $newProduct = Product::create($creationData);
+
         if ($request->hasFile('image')) {
             $newProduct->uploadImage($request->file('image'));
         }
@@ -70,7 +73,13 @@ class AdminProductController extends Controller
         Product::validate($request);
 
         $product = Product::findOrFail($id);
-        $product->update($request->only(['name', 'description', 'price', 'category_id']));
+        $updateData = $request->only(['name', 'description', 'price', 'category_id', 'species_id']);
+
+        if (!$request->hasFile('image')) {
+            $updateData['image'] = $product->getImage();
+        }
+
+        $product->update($updateData);
 
         if ($request->hasFile('image')) {
             $product->uploadImage($request->file('image'));
@@ -78,4 +87,6 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
+
+
 }

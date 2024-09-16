@@ -21,4 +21,5 @@ return [
     'category' => 'Categoría',
     'species' => 'Especie',
     'select_category' => 'Selecciona Categoría',
+    'select_species' => 'Seleccionar Especie',
 ];

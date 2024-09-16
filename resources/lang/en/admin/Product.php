@@ -21,5 +21,6 @@ return [
     'category' => 'Category',
     'species' => 'Species',
     'select_category' => 'Select Category',
+    'select_species' => 'Select Species',
 
 ];

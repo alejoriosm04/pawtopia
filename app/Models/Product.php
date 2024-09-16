@@ -83,6 +83,16 @@ class Product extends Model
     {
         return $this->attributes['updated_at'];
     }
+    public function getSpeciesId(): int
+    {
+        return $this->attributes['species_id'];
+    }
+
+    public function getCategoryId(): int
+    {
+        return $this->attributes['category_id'];
+    }
+
 
     public function category()
     {
