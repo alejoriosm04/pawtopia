@@ -11,7 +11,7 @@
       <div class="card-body">
         <h3 class="card-title">{{ $viewData['pet']->getName() }}</h3>
 
-        <p class="card-text"><strong>{{ __('Pet.species') }}:</strong> {{ __($viewData["species"][$viewData['pet']->getSpecies()]) }}</p>
+        <p class="card-text"><strong>{{ __('Pet.species') }}:</strong> {{ $viewData['pet']->species->getName() }}</p>
         <p class="card-text"><strong>{{ __('Pet.breed') }}:</strong> {{ $viewData['pet']->getBreed() }}</p>
 
         <p class="card-text"><strong>{{ __('Pet.birth_date') }}:</strong> {{ $viewData['pet']->getBirthDate() }}</p>

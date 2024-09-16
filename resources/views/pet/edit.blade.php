@@ -34,8 +34,8 @@
               <label for="species">{{ __('Pet.enter_species_field') }}</label>
                 <select id="species" name="species" class="form-control" required>
                     <option value="">{{ __('Pet.select_species') }}</option>
-                    @foreach ($viewData['species'] as $key => $speciesKey)
-                    <option value="{{ $key }}" {{ old('species', $viewData['pet']->getSpecies()) == $speciesKey ? 'selected' : '' }}>{{ __($speciesKey) }}</option>
+                    @foreach ($viewData['species'] as $species)
+                    <option value="{{ $species->getId() }}" {{ old('species_id', $viewData['pet']->getSpeciesId()) == $species->getId() ? 'selected' : '' }}>{{ $species->getName() }}</option>
                     @endforeach
                 </select>
             </div>

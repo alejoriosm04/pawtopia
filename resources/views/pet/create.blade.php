@@ -28,11 +28,13 @@
             </div>
 
             <div class="form-group mb-2">
-              <label for="species">{{ __('Pet.enter_specie_field') }}</label>
-              <select id="species" name="species" class="form-control" required>
+              <label for="species_id">{{ __('Pet.enter_specie_field') }}</label>
+              <select id="species_id" name="species_id" class="form-control" required>
                 <option value="">{{ __('Pet.select_species') }}</option>
-                @foreach ($viewData['species'] as $key => $speciesKey)
-                  <option value="{{ $key }}" {{ old('species') == $speciesKey ? 'selected' : '' }}>{{ __($speciesKey) }}</option>
+                @foreach ($viewData['species'] as $species)
+                  <option value="{{ $species->getId() }}" {{ old('species_id') == $species->getId() ? 'selected' : '' }}>
+                                  {{ $species->getName() }}
+                              </option>
                 @endforeach
               </select>
             </div>

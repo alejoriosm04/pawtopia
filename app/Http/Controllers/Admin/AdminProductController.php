@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Species;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Category;
-use App\Models\Species;
 
 class AdminProductController extends Controller
 {
@@ -37,8 +37,8 @@ class AdminProductController extends Controller
     {
         Product::validate($request);
 
-        $creationData = $request->only(["name", "description", "price", "category_id", "species_id"]);
-        if (!$request->hasFile('image')) {
+        $creationData = $request->only(['name', 'description', 'price', 'category_id', 'species_id']);
+        if (! $request->hasFile('image')) {
             $creationData['image'] = 'img/default_image.png';
         }
         $newProduct = Product::create($creationData);
@@ -75,7 +75,7 @@ class AdminProductController extends Controller
         $product = Product::findOrFail($id);
         $updateData = $request->only(['name', 'description', 'price', 'category_id', 'species_id']);
 
-        if (!$request->hasFile('image')) {
+        if (! $request->hasFile('image')) {
             $updateData['image'] = $product->getImage();
         }
 
@@ -87,6 +87,4 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
-
-
 }

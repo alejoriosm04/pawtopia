@@ -16,11 +16,10 @@ class Category extends Model
      * $this->attributes['created_at'] - timestamp - contains the category creation date
      * $this->attributes['updated_at'] - timestamp - contains the category update date
      */
-
     protected $fillable = [
         'name',
         'description',
-        'species_id'
+        'species_id',
     ];
 
     public function getId(): int
@@ -77,4 +76,3 @@ class Category extends Model
         ]);
     }
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'index_title' => 'Categorías - Panel de Administración',
     'create_success' => 'Categoría creada exitosamente.',
@@ -13,7 +14,7 @@ return [
     'id' => 'ID',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
-     'edit_category' => 'Editar Categoría',
+    'edit_category' => 'Editar Categoría',
     'edit_button' => 'Actualizar Categoría',
     'species' => 'Especie',
     'dog' => 'Perro',
@@ -21,6 +22,5 @@ return [
     'bird' => 'Ave',
     'fish' => 'Pez',
     'small_pet' => 'Mascota Pequeña',
-
 
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pet;
+use App\Models\Species;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,7 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.pets_title');
         $viewData['subtitle'] = __('Pet.pets_subtitle');
         $viewData['pets'] = Pet::all();
-        $viewData['species'] = Pet::getAllSpecies();
+        $viewData['species'] = Species::all();
 
         return view('pet.index')->with('viewData', $viewData);
     }
@@ -31,7 +32,7 @@ class PetController extends Controller
             $viewData['title'] = __('Pet.pet_info_title', ['name' => $pet->getName()]);
             $viewData['subtitle'] = __('Pet.pet_info_subtitle', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
-            $viewData['species'] = Pet::getAllSpecies();
+            $viewData['species'] = Species::all();
 
             return view('pet.show')->with('viewData', $viewData);
         } catch (Exception $e) {
@@ -43,7 +44,7 @@ class PetController extends Controller
     {
         $viewData = [];
         $viewData['title'] = __('Pet.create_pet_title');
-        $viewData['species'] = Pet::getAllSpecies();
+        $viewData['species'] = Species::all();
 
         return view('pet.create')->with('viewData', $viewData);
     }
@@ -51,11 +52,12 @@ class PetController extends Controller
     public function save(Request $request): View
     {
         Pet::validate($request);
+
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
         Pet::create([
             'name' => $request->input('name'),
             'image' => $request->file('image')->store('images/pets', 'public'),
-            'species' => $request->input('species'),
+            'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
             'characteristics' => json_encode($request->input('characteristics')),
@@ -88,13 +90,14 @@ class PetController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
+        Pet::validate($request);
         $pet = Pet::findOrFail($id);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
         $pet->update([
             'name' => $request->input('name'),
-            'species' => $request->input('species'),
+            'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
             'characteristics' => json_encode($request->input('characteristics')),
@@ -109,6 +112,10 @@ class PetController extends Controller
             }
             $pet->update([
                 'image' => $request->file('image')->store('images/pets', 'public'),
+            ]);
+        } else {
+            $pet->update([
+                'image' => $pet->getImage(),
             ]);
         }
 
