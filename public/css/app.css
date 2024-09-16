@@ -1,0 +1,159 @@
+.header-top_area ul.list-inline {
+    padding-left: 0;
+    margin: 0;
+}
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 700;
+}
+
+p, a, .navbar-nav .nav-link {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 400;
+}
+
+
+.header-top_area ul.list-inline li {
+    margin-right: 15px;
+    color: #000;
+}
+
+.social_media_links i {
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.social_media_links i:hover {
+    color: #DB4D20;
+}
+
+.navbar-nav .nav-link {
+    color: #000 !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FF6347 !important;
+}
+/* app.css */
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.slider_area {
+    background-color: #DB4D20;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider_text h3 {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.service_area {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+}
+
+.single_service {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.single_service:hover {
+    transform: translateY(-10px);
+}
+
+.service_icon {
+    width: 60px;
+    margin-bottom: 15px;
+}
+/* app.css */
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.slider_area {
+    background: url('/img/banner/slider_bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+}
+
+.slider_text {
+    color: #fff;
+}
+
+.single_service {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.single_service:hover {
+    background-color: #DB4D20;
+    color: #fff;
+}
+
+.service_icon {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.navbar-brand .logo {
+    height: 60px;
+    width: auto;
+}
+
+.navbar {
+    padding: 0.5rem 1rem;
+}
+.slider_area {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.single_slider {
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+}
+.custom-header {
+            background-color: #DB4D20;
+            color: white;
+            padding: 1rem 0;
+        }
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-img {
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.1);
+}
