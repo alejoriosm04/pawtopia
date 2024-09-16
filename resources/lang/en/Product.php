@@ -7,5 +7,6 @@ return [
     'index_title' => 'Products',
     'index_subtitle' => 'List of products',
     'product_info' => 'Product information',
+    'buy' => 'BUY',
 
 ];

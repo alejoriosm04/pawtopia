@@ -7,4 +7,6 @@ return [
     'index_title' => 'Productos',
     'index_subtitle' => 'Lista de productos',
     'product_info' => 'Información del producto',
+    'buy' => 'COMPRAR',
+
 ];
