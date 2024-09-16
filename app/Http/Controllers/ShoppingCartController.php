@@ -10,16 +10,19 @@ class ShoppingCartController extends Controller
     public function add(Request $request, $id)
     {
         $products = $request->session()->get('products', []);
-        $quantity = $request->input('quantity', 1);
-        
-        // Agregar o actualizar el producto en el carrito
-        $products[$id] = $quantity;
-
-        // Guardar en la sesión
+        $newQuantity = $request->input('quantity', 1);
+    
+        if (isset($products[$id])) {
+            $products[$id] += $newQuantity;
+        } else {
+            $products[$id] = $newQuantity;
+        }
+    
         $request->session()->put('products', $products);
-
+    
         return redirect()->route('cart.index');
     }
+    
 
     public function index(Request $request)
     {
@@ -29,19 +32,17 @@ class ShoppingCartController extends Controller
     
         $products = Product::findMany(array_keys($productsInCart));
     
-        // Calcular el total
         $total = 0;
         foreach ($products as $product) {
             $total += $product->getPrice() * $productsInCart[$product->getId()];
         }
     
-        // Preparar datos para la vista
         $viewData = [];
         $viewData['title'] = "Shopping Cart";
         $viewData['subtitle'] = "Review your items";
         $viewData['products'] = $products;
         $viewData['productsInCart'] = $productsInCart;
-        $viewData['total'] = $total; // Aquí se pasa el total a la vista
+        $viewData['total'] = $total; 
     
         return view('shoppingcart.index')->with('viewData', $viewData);
     }
@@ -50,10 +51,8 @@ class ShoppingCartController extends Controller
     {
         $products = $request->session()->get('products', []);
 
-        // Remover el producto del carrito
         unset($products[$id]);
 
-        // Actualizar la sesión
         $request->session()->put('products', $products);
 
         return redirect()->route('cart.index');
