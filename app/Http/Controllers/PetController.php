@@ -80,7 +80,7 @@ class PetController extends Controller
             $pet = Pet::findOrFail($id);
             $viewData['title'] = __('Pet.edit_pet_title', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
-            $viewData['species'] = Pet::getAllSpecies();
+            $viewData['species'] = Species::all();
 
             return view('pet.edit')->with('viewData', $viewData);
         } catch (Exception $e) {
@@ -105,19 +105,6 @@ class PetController extends Controller
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
         ]);
-
-        if ($request->hasFile('image')) {
-            if ($pet->getImage()) {
-                Storage::disk('public')->delete($pet->getImage());
-            }
-            $pet->update([
-                'image' => $request->file('image')->store('images/pets', 'public'),
-            ]);
-        } else {
-            $pet->update([
-                'image' => $pet->getImage(),
-            ]);
-        }
 
         return redirect()->route('pet.show', ['id' => $pet->getId()]);
     }
