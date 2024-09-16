@@ -13,6 +13,11 @@ Route::get('/admin/products/{id}/edit', 'App\Http\Controllers\Admin\AdminProduct
 Route::put('/admin/products/{id}/update', 'App\Http\Controllers\Admin\AdminProductController@update')->name('admin.product.update');
 Route::get('/admin/categories', 'App\Http\Controllers\Admin\AdminCategoryController@index')->name('admin.category.index');
 Route::post('/admin/categories/store', 'App\Http\Controllers\Admin\AdminCategoryController@store')->name('admin.category.store');
-Route::delete('/admin/categories/{id}/delete', 'App\Http\Controllers\Admin\AdminCategoryController@delete')->name('admin.categories.delete');
-Route::get('/admin/categories/{id}/edit', 'App\Http\Controllers\Admin\AdminCategoryController@edit')->name('admin.categories.edit');
-Route::put('/admin/categories/{id}/update', 'App\Http\Controllers\Admin\AdminCategoryController@update')->name('admin.categories.update');
+Route::delete('/admin/categories/{id}/delete', 'App\Http\Controllers\Admin\AdminCategoryController@delete')->name('admin.category.delete');
+Route::get('/admin/categories/{id}/edit', 'App\Http\Controllers\Admin\AdminCategoryController@edit')->name('admin.category.edit');
+Route::put('/admin/categories/{id}/update', 'App\Http\Controllers\Admin\AdminCategoryController@update')->name('admin.category.update');
+Route::get('/admin/species', 'App\Http\Controllers\Admin\AdminSpeciesController@index')->name('admin.species.index');
+Route::post('/admin/species/store', 'App\Http\Controllers\Admin\AdminSpeciesController@store')->name('admin.species.store');
+Route::delete('/admin/species/{id}/delete', 'App\Http\Controllers\Admin\AdminSpeciesController@delete')->name('admin.species.delete');
+Route::get('/admin/species/{id}/edit', 'App\Http\Controllers\Admin\AdminSpeciesController@edit')->name('admin.species.edit');
+Route::put('/admin/species/{id}/update', 'App\Http\Controllers\Admin\AdminSpeciesController@update')->name('admin.species.update');

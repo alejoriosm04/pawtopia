@@ -35,19 +35,44 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.image') }}:</label>
                     <input class="form-control" type="file" name="image" required>
                 </div>
+
+                <!-- Campo de descripción -->
                 <div class="mb-3">
-                    <label class="form-label">{{ __('admin/Product.description') }}</label>
-                    <textarea class="form-control" name="description" rows="3" required>{{ old('description') }}</textarea>
+                    <label class="form-label">{{ __('admin/Product.description') }}:</label>
+                    <textarea name="description" class="form-control" rows="3" required>{{ old('description') }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ __('admin/Product.species') }}:</label>
+                    <div>
+                        @foreach($viewData['species'] as $key => $speciesKey)
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="species" id="species{{ $key }}" value="{{ $key }}" required>
+                                <label class="form-check-label" for="species{{ $key }}">
+                                    {{ __($speciesKey) }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ __('admin/Product.category') }}:</label>
+                    <select name="category_id" id="category-selector" class="form-control" required>
+                        <option value="">{{ __('admin/Product.select_category') }}</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">{{ __('admin/Product.submit_button') }}</button>
             </form>
         </div>
     </div>
+
     <div class="card">
         <div class="card-header">
             {{ __('admin/Product.manage_products') }}
@@ -58,6 +83,7 @@
                 <tr>
                     <th scope="col">{{ __('admin/Product.id') }}</th>
                     <th scope="col">{{ __('admin/Product.name') }}</th>
+                    <th scope="col">{{ __('admin/Product.category') }}</th>
                     <th scope="col">{{ __('admin/Product.edit') }}</th>
                     <th scope="col">{{ __('admin/Product.delete') }}</th>
                 </tr>
@@ -67,6 +93,7 @@
                     <tr>
                         <td>{{ $product->getId() }}</td>
                         <td>{{ $product->getName() }}</td>
+                        <td>{{ $product->category->getName() }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.product.edit', ['id' => $product->getId()]) }}">
                                 <i class="bi-pencil"></i>
@@ -87,4 +114,10 @@
             </table>
         </div>
     </div>
+
+    <script>
+        var adminProductSelectCategory = @json(__('admin/Product.select_category'));
+        var categories = @json($viewData['categories']);
+    </script>
+    <script src="{{ asset('js/species_category.js') }}"></script>
 @endsection

@@ -15,5 +15,10 @@ return [
     'delete' => 'Delete',
     'edit_category' => 'Edit Category',
     'edit_button' => 'Update Category',
-
+    'species' => 'Species',
+    'dog' => 'Dog',
+    'cat' => 'Cat',
+    'bird' => 'Bird',
+    'fish' => 'Fish',
+    'small_pet' => 'Small Pet',
 ];

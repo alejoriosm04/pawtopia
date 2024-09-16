@@ -35,48 +35,64 @@
                         </div>
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">{{ __('admin/Category.species') }}:</label>
+                    <select name="species_id" class="form-control" required>
+                        @foreach($viewData['species'] as $species)
+                            <option value="{{ $species->getId() }}" {{ old('species_id') == $species->getId() ? 'selected' : '' }}>
+                                {{ $species->getName() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <button type="submit" class="btn btn-primary">{{ __('admin/Category.submit_button') }}</button>
             </form>
         </div>
     </div>
+
     <div class="card">
         <div class="card-header">
             {{ __('admin/Category.manage_categories') }}
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">{{ __('admin/Category.id') }}</th>
-                    <th scope="col">{{ __('admin/Category.name') }}</th>
-                    <th scope="col">{{ __('admin/Category.edit') }}</th>
-                    <th scope="col">{{ __('admin/Category.delete') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($viewData["categories"] as $category)
+            @foreach ($viewData['categoriesBySpecies'] as $speciesName => $categories)
+                <h4>{{ $speciesName }}</h4>
+                <table class="table table-bordered table-striped mb-4">
+                    <thead>
                     <tr>
-                        <td>{{ $category->getId() }}</td>
-                        <td>{{ $category->getName() }}</td>
-                        <td>
-                            <a class="btn btn-primary" href="{{ route('admin.category.edit', ['id' => $category->getId()]) }}">
-                                <i class="bi-pencil"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <form action="{{ route('admin.category.delete', $category->getId()) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger">
-                                    <i class="bi-trash"></i>
-                                </button>
-                            </form>
-                        </td>
+                        <th scope="col">{{ __('admin/Category.id') }}</th>
+                        <th scope="col">{{ __('admin/Category.name') }}</th>
+                        <th scope="col">{{ __('admin/Category.description') }}</th>
+                        <th scope="col">{{ __('admin/Category.edit') }}</th>
+                        <th scope="col">{{ __('admin/Category.delete') }}</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach ($categories as $category)
+                        <tr>
+                            <td>{{ $category->getId() }}</td>
+                            <td>{{ $category->getName() }}</td>
+                            <td>{{ $category->getDescription() }}</td> <!-- Aquí mostramos la descripción -->
+                            <td>
+                                <a class="btn btn-primary" href="{{ route('admin.category.edit', ['id' => $category->getId()]) }}">
+                                    <i class="bi-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form action="{{ route('admin.category.delete', $category->getId()) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger">
+                                        <i class="bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @endforeach
         </div>
     </div>
 @endsection

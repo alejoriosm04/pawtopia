@@ -18,4 +18,8 @@ return [
     'id' => 'ID',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'category' => 'Category',
+    'species' => 'Species',
+    'select_category' => 'Select Category',
+
 ];

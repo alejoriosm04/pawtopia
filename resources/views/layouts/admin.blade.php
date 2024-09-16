@@ -21,6 +21,7 @@
                 <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- {{ __('admin/Layout.home') }}</a></li>
                 <li><a href="{{ route('admin.product.index') }}" class="nav-link text-white">- {{ __('admin/Layout.products') }}</a></li>
                 <li><a href="{{ route('admin.category.index') }}" class="nav-link text-white">- {{ __('admin/Layout.categories') }}</a></li>
+                <li><a href="{{ route('admin.species.index') }}" class="nav-link text-white">- {{ __('admin/Layout.species') }}</a></li>
                 <li>
                     <a href="{{ route('home.index') }}" class="mt-2 btn bg-primary text-white">{{ __('admin/Layout.go_back_home') }}</a>
                 </li>
