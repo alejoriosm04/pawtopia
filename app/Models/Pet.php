@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
-use DateTime;
 
 class Pet extends Model
 {
@@ -125,7 +125,7 @@ class Pet extends Model
     public function getAge(): int
     {
         $birthDate = new DateTime($this->attributes['birthDate']);
-        $now = new DateTime();
+        $now = new DateTime;
         $interval = $now->diff($birthDate);
 
         return $interval->y;
