@@ -12,6 +12,7 @@ class Category extends Model
      * $this->attributes['id'] - int - contains the category primary key (id)
      * $this->attributes['name'] - string - contains the category name
      * $this->attributes['description'] - string - contains the category description
+     * $this->attributes['species_id'] - int - references the associated species
      * $this->attributes['created_at'] - timestamp - contains the category creation date
      * $this->attributes['updated_at'] - timestamp - contains the category update date
      */
@@ -19,6 +20,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
+        'species_id'
     ];
 
     public function getId(): int
@@ -51,19 +53,14 @@ class Category extends Model
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
 
-    public function setUpdatedAt($updatedAt): void
+    public function species()
     {
-        $this->attributes['updated_at'] = $updatedAt;
+        return $this->belongsTo(Species::class);
     }
 
     public function products()
@@ -76,6 +73,8 @@ class Category extends Model
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
+            'species_id' => 'required|exists:species,id',
         ]);
     }
 }
+

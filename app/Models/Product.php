@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -12,7 +13,8 @@ class Product extends Model
      * $this->attributes['id'] - int - contains the product primary key (id)
      * $this->attributes['name'] - string - contains the product name
      * $this->attributes['description'] - string - contains the product description
-     * $this->attributes['category'] - string - contains the product category
+     * $this->attributes['category_id'] - int - references the associated category
+     * $this->attributes['species_id'] - int - references the associated species
      * $this->attributes['image'] - string - contains the product image
      * $this->attributes['price'] - int - contains the product price
      * $this->attributes['created_at'] - timestamp - contains the product creation date
@@ -23,7 +25,10 @@ class Product extends Model
         'description',
         'price',
         'image',
+        'category_id',
+        'species_id',
     ];
+
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -74,34 +79,20 @@ class Product extends Model
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
 
-    public function setUpdatedAt($updatedAt): void
-    {
-        $this->attributes['updated_at'] = $updatedAt;
-    }
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    /*
-    public function items()
+
+    public function species()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsTo(Species::class);
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-*/
 
     public static function validate(Request $request): void
     {
@@ -109,7 +100,9 @@ class Product extends Model
             'name' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric|gt:0',
-            'image' => 'image',
+            'category_id' => 'required|exists:categories,id',
+            'species_id' => 'required|exists:species,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
     public function uploadImage($file)
@@ -125,3 +118,4 @@ class Product extends Model
         }
     }
 }
+

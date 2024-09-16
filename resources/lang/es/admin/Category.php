@@ -15,6 +15,12 @@ return [
     'delete' => 'Eliminar',
      'edit_category' => 'Editar Categoría',
     'edit_button' => 'Actualizar Categoría',
+    'species' => 'Especie',
+    'dog' => 'Perro',
+    'cat' => 'Gato',
+    'bird' => 'Ave',
+    'fish' => 'Pez',
+    'small_pet' => 'Mascota Pequeña',
 
 
 ];

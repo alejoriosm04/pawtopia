@@ -8,4 +8,5 @@ return [
     'index_subtitle' => 'List of products',
     'product_info' => 'Product information',
 
+
 ];

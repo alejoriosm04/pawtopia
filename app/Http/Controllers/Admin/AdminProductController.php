@@ -7,6 +7,8 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Category;
+use App\Models\Species;
 
 class AdminProductController extends Controller
 {
@@ -15,6 +17,18 @@ class AdminProductController extends Controller
         $viewData = [];
         $viewData['title'] = __('admin/Product.index_title');
         $viewData['products'] = Product::all();
+        $viewData['species'] = Species::all();
+        $viewData['categories'] = Category::all();
+
+        return view('admin.product.index')->with('viewData', $viewData);
+    }
+
+    public function create(): View
+    {
+        $viewData = [];
+        $viewData['title'] = __('admin/Product.create_title');
+        $viewData['species'] = Species::all();
+        $viewData['categories'] = Category::all();
 
         return view('admin.product.index')->with('viewData', $viewData);
     }
@@ -23,9 +37,12 @@ class AdminProductController extends Controller
     {
         Product::validate($request);
 
-        $creationData = $request->only(["name", "description", "price"]);
+        $creationData = $request->only(["name", "description", "price", "category_id"]);
+
         $newProduct = Product::create($creationData);
-        $newProduct->uploadImage($request->file('image'));
+        if ($request->hasFile('image')) {
+            $newProduct->uploadImage($request->file('image'));
+        }
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
     }
@@ -42,6 +59,8 @@ class AdminProductController extends Controller
         $viewData = [];
         $viewData['title'] = __('admin/Product.edit_title');
         $viewData['product'] = Product::findOrFail($id);
+        $viewData['species'] = Species::all();
+        $viewData['categories'] = Category::all();
 
         return view('admin.product.edit')->with('viewData', $viewData);
     }
@@ -51,10 +70,11 @@ class AdminProductController extends Controller
         Product::validate($request);
 
         $product = Product::findOrFail($id);
-        $product->setName($request->input('name'));
-        $product->setDescription($request->input('description'));
-        $product->setPrice($request->input('price'));
-        $product->uploadImage($request->file('image'));
+        $product->update($request->only(['name', 'description', 'price', 'category_id']));
+
+        if ($request->hasFile('image')) {
+            $product->uploadImage($request->file('image'));
+        }
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
