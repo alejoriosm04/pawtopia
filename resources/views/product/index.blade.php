@@ -8,10 +8,16 @@
             <div class="card">
                 <img src="{{ asset('/storage/'.$product->getImage()) }}" class="card-img-top">
                 <div class="card-body text-center">
-                    <a href="{{ route('product.show', ['id'=> $product->getId()]) }}"
-                       class="btn bg-primary text-white">
-                        {{ $product->getId() }} | {{ $product->getName() }}
-                    </a>
+                    <h5>{{ $product->getName() }}</h5> <!-- Mostrar solo el nombre sin ID -->
+                    <form method="POST" action="{{ route('cart.add', ['id'=> $product->getId()]) }}">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="number" name="quantity" value="1" class="form-control" min="1">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit">{{ __('Add to Cart') }}</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
