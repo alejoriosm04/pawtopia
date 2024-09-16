@@ -21,6 +21,7 @@
             <div class="navbar-nav ms-auto">
                 <a class="nav-link active" href="{{ route('home.index') }}" style="color: #DB4D20;">Home</a>
                 <a class="nav-link active" href="{{ route('product.index') }}">Products</a>
+                <a class="nav-link active" href="{{ route('pet.index') }}" style="color: #DB4D20;">My Pets</a>
                 <a class="nav-link active" href="{{ route('admin.product.index') }}">Admin Panel</a>
             </div>
         </div>
