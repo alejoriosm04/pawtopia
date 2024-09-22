@@ -66,28 +66,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): void
-    {
-        $this->user = $user;
-    }
-
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
-    }
-
-    public function getItems(): array
-    {
-        return $this->items;
-    }
-
-    public function setItems(array $items): void
-    {
-        $this->items = $items;
     }
 }
