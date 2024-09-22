@@ -20,6 +20,8 @@ class PetController extends Controller
         $viewData['subtitle'] = __('Pet.pets_subtitle');
         $viewData['pets'] = Pet::all();
         $viewData['species'] = Species::all();
+        $viewData['species_categories'] = Species::with('categories')->get();
+
 
         return view('pet.index')->with('viewData', $viewData);
     }

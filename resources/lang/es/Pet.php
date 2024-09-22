@@ -56,4 +56,5 @@ return [
     'fish' => 'Pez',
     'small_pets' => 'Mascotas pequeñas',
     'years_old' => 'años',
+     'my_pets' => 'Mis Mascotas',
 ];
