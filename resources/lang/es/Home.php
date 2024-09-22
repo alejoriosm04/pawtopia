@@ -26,4 +26,6 @@ return [
 
     'service_3_title' => 'Productos Recomendados',
     'service_3_description' => 'Recibe recomendaciones personalizadas de productos según las necesidades de tus mascotas.',
+
+    'brands_title' => 'Marcas'
 ];

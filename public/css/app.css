@@ -95,4 +95,66 @@ p, a, .navbar-nav .nav-link {
     z-index: 1000;
     min-width: 200px;
 }
+.custom-carousel-height .carousel-item img {
+    height: 350px;
+    object-fit: cover;
+}
+.service_area .single_service {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    min-height: 300px;
+}
 
+.single_service img {
+    margin-bottom: 15px;
+    max-width: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.single_service h3,
+.single_service p {
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.single_service:hover {
+    background-color: #DB4D20;
+    transform: translateY(-5px);
+}
+
+.single_service:hover h3,
+.single_service:hover p {
+    color: white;
+}
+.brand-logo {
+    width: 100px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.brand-link {
+    display: inline-block;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.brand-link:last-child {
+    border-right: none;
+}
+
+.brand-link:hover .brand-logo {
+    transform: scale(1.1);
+}
+
+.brand-link:hover .brand-logo {
+    transform: scale(1.1) translateY(-5px);
+}
