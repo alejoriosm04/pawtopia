@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->foreignId('species_id')->constrained('species')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('breed');
             $table->date('birthDate');
             $table->json('characteristics');
