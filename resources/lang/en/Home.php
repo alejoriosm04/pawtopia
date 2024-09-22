@@ -27,5 +27,6 @@ return [
     'service_3_title' => 'Recommended Products',
     'service_3_description' => 'Receive personalized product recommendations based on your pet’s needs.',
 
-      'brands_title' => 'Brands'
+    'brands_title' => 'Brands',
+    'services_title' => 'Services',
 ];

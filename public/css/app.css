@@ -50,12 +50,12 @@ p, a, .navbar-nav .nav-link {
     color: #FF6347 !important;
 }
 .icon-box {
-            border: 1px solid white;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .icon-box:hover {
@@ -135,26 +135,78 @@ p, a, .navbar-nav .nav-link {
 .single_service:hover p {
     color: white;
 }
+
 .brand-logo {
     width: 100px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .brand-link {
     display: inline-block;
-    border-right: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
 }
 
-.brand-link:last-child {
-    border-right: none;
-}
-
 .brand-link:hover .brand-logo {
     transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .brand-link:hover .brand-logo {
     transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #DB4D20;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+}
+.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-orange {
+    background-color: #FFA500;
+    color: white;
+}
+
+.btn-orange:hover {
+    background-color: #FF8C00;
+}
+
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
 }
