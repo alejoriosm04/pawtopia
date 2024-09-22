@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Item;
 
 class Product extends Model
 {
@@ -19,6 +20,7 @@ class Product extends Model
      * $this->attributes['price'] - int - contains the product price
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product update date
+     * $this->items - Item[] - contains the associated Items
      */
     protected $fillable = [
         'name',
@@ -138,4 +140,19 @@ class Product extends Model
             $this->save();
         }
     }
+
+    public function items(): hasMany
+    { 
+        return $this->hasMany(Item::class); 
+    } 
+    
+    public function getItems(): array
+    { 
+        return $this->items; 
+    } 
+    
+    public function setItems($items): void 
+    { 
+        $this->items = $items; 
+    } 
 }
