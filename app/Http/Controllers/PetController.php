@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pet;
 use App\Models\Species;
 use Carbon\Carbon;
-use Exception;
+use ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +24,7 @@ class PetController extends Controller
         return view('pet.index')->with('viewData', $viewData);
     }
 
-    public function show(string $id): View|RedirectResponse
+    public function show(int $id): View|RedirectResponse
     {
         try {
             $viewData = [];
@@ -35,7 +35,7 @@ class PetController extends Controller
             $viewData['species'] = Species::all();
 
             return view('pet.show')->with('viewData', $viewData);
-        } catch (Exception $e) {
+        } catch (ModelNotFoundException $e) {
             return redirect()->route('pet.index');
         }
     }
@@ -54,9 +54,10 @@ class PetController extends Controller
         Pet::validate($request);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
+
         Pet::create([
             'name' => $request->input('name'),
-            'image' => $request->file('image')->store('images/pets', 'public'),
+            'image' => Pet::storeImage($request->file('image')),
             'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
@@ -73,7 +74,7 @@ class PetController extends Controller
         return view('pet.save')->with('viewData', $viewData);
     }
 
-    public function edit(string $id): View|RedirectResponse
+    public function edit(int $id): View|RedirectResponse
     {
         try {
             $viewData = [];
@@ -83,12 +84,12 @@ class PetController extends Controller
             $viewData['species'] = Species::all();
 
             return view('pet.edit')->with('viewData', $viewData);
-        } catch (Exception $e) {
+        } catch (ModelNotFoundException $e) {
             return redirect()->route('pet.index');
         }
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Pet::validate($request);
         $pet = Pet::findOrFail($id);
@@ -109,12 +110,10 @@ class PetController extends Controller
         return redirect()->route('pet.show', ['id' => $pet->getId()]);
     }
 
-    public function delete(string $id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         $pet = Pet::findOrFail($id);
-        if ($pet->getImage()) {
-            Storage::disk('public')->delete($pet->getImage());
-        }
+        $pet->deleteImage();
         $pet->delete();
 
         return redirect()->route('pet.index');
