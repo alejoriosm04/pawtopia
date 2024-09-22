@@ -9,7 +9,7 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-inner">
+    <div class="carousel-inner custom-carousel-height">
         <div class="carousel-item active">
             <img src="{{ asset('img/banner/slider_1.jpg') }}" class="d-block w-100" alt="Slide 1">
             <div class="carousel-caption d-none d-md-block">
@@ -41,6 +41,54 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
+<!-- Sección de Marcas -->
+<div class="container py-5">
+    <h2 class="text-center mb-4">{{ __('Home.brands_title') }}</h2>
+    <div class="row justify-content-center text-center brand-grid">
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/dog_chow.png') }}" alt="Dog Chow" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/evolve.png') }}" alt="Evolve" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/felix.png') }}" alt="Felix" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/hills.png') }}" alt="Hills" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/pedigree.png') }}" alt="Pedigree" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/royal_canin.png') }}" alt="Royal Canin" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/taste_of_the_wild.png') }}" alt="Taste of the Wild" class="img-fluid brand-logo">
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a href="#" class="brand-link">
+                <img src="{{ asset('img/brands/whiskas.png') }}" alt="Whiskas" class="img-fluid brand-logo">
+            </a>
+        </div>
+    </div>
+</div>
+
 <div class="service_area py-5">
     <div class="container">
         <div class="row justify-content-center">
