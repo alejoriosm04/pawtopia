@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreignId('pet_id')->constrained('pets')->onDelete('cascade');
             $table->timestamps();
         });
     }
