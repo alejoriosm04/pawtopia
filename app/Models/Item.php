@@ -85,7 +85,7 @@ class Item extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function order()
+    public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
@@ -100,7 +100,7 @@ class Item extends Model
         $this->order = $order;
     }
 
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
@@ -113,5 +113,20 @@ class Item extends Model
     public function setProduct(Product $product): void
     {
         $this->product = $product;
+    }
+
+    public function pet(): HasMany
+    {
+        return $this->hasMany(Pet::class);
+    }
+
+    public function getPets(): array
+    {
+        return $this->pets;
+    }
+
+    public function setPets(array $pets): void
+    {
+        $this->pets = $pets;
     }
 }
