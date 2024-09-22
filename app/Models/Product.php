@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Item;
 
 class Product extends Model
 {
@@ -142,17 +141,17 @@ class Product extends Model
     }
 
     public function items(): HasMany
-    { 
-        return $this->hasMany(Item::class); 
-    } 
-    
+    {
+        return $this->hasMany(Item::class);
+    }
+
     public function getItems(): array
-    { 
-        return $this->items; 
-    } 
-    
-    public function setItems($items): void 
-    { 
-        $this->items = $items; 
-    } 
+    {
+        return $this->items;
+    }
+
+    public function setItems($items): void
+    {
+        $this->items = $items;
+    }
 }
