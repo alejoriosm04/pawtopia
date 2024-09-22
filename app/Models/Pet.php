@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Pet extends Model
 {
@@ -52,6 +54,18 @@ class Pet extends Model
             'feeding' => 'required|string|max:255',
             'veterinaryNotes' => 'required|string|max:255',
         ]);
+    }
+
+    public static function storeImage(UploadedFile $image): string
+    {
+        return $image->store('images/pets', 'public');
+    }
+
+    public function deleteImage(): void
+    {
+        if ($this->image) {
+            Storage::disk('public')->delete($this->image);
+        }
     }
 
     public function getId(): int
