@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Item;
 
 class Order extends Model
 {
@@ -22,7 +22,7 @@ class Order extends Model
     {
         $request->validate([
             'total' => 'required|numeric',
-            'user_id' => 'required|exists:users,id'
+            'user_id' => 'required|exists:users,id',
         ]);
     }
 

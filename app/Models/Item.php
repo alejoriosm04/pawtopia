@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order;
-use App\Models\Product;
 
 class Item extends Model
 {
@@ -26,7 +26,7 @@ class Item extends Model
             'quantity' => 'required|numeric|gt:0',
             'price' => 'required|numeric|gt:0',
             'order_id' => 'required|exists:orders,id',
-            'product_id' => 'required|exists:products,id'
+            'product_id' => 'required|exists:products,id',
         ]);
     }
 
