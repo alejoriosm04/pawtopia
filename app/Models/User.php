@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function orders(): hasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
@@ -59,5 +59,20 @@ class User extends Authenticatable
     public function setOrders(array $orders): void
     {
         $this->orders = $orders;
+    }
+
+    public function pet(): HasMany
+    {
+        return $this->hasMany(Pet::class);
+    }
+
+    public function getPets(): array
+    {
+        return $this->pet;
+    }
+
+    public function setPets(array $pets): void
+    {
+        $this->pet = $pets;
     }
 }

@@ -141,7 +141,7 @@ class Product extends Model
         }
     }
 
-    public function items(): hasMany
+    public function items(): HasMany
     { 
         return $this->hasMany(Item::class); 
     } 

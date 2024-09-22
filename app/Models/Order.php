@@ -61,7 +61,7 @@ class Order extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -76,7 +76,7 @@ class Order extends Model
         $this->user = $user;
     }
 
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(Item::class);
     }
