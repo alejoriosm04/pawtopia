@@ -3,7 +3,6 @@
 
 @section('content')
 
-<!-- Slider Area con Bootstrap Carousel -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -42,8 +41,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
-<!-- Services Section -->
 <div class="service_area py-5">
     <div class="container">
         <div class="row justify-content-center">
