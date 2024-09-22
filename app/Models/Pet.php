@@ -153,43 +153,13 @@ class Pet extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getUser(): User
-    {
-        return $this->attributes['user'];
-    }
-
-    public function setUser(User $user): void
-    {
-        $this->attributes['user'] = $user;
-    }
-
     public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
     }
 
-    public function getSpeciesId(): int
-    {
-        return $this->attributes['species_id'];
-    }
-
-    public function setSpeciesId(int $speciesId): void
-    {
-        $this->attributes['species_id'] = $speciesId;
-    }
-
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
-    }
-
-    public function getItems(): array
-    {
-        return $this->attributes['items'];
-    }
-
-    public function setItems(array $items): void
-    {
-        $this->attributes['items'] = $items;
     }
 }

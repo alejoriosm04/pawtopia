@@ -144,14 +144,4 @@ class Product extends Model
     {
         return $this->hasMany(Item::class);
     }
-
-    public function getItems(): array
-    {
-        return $this->items;
-    }
-
-    public function setItems($items): void
-    {
-        $this->items = $items;
-    }
 }

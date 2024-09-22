@@ -50,28 +50,8 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function getOrders(): array
-    {
-        return $this->orders;
-    }
-
-    public function setOrders(array $orders): void
-    {
-        $this->orders = $orders;
-    }
-
     public function pet(): HasMany
     {
         return $this->hasMany(Pet::class);
-    }
-
-    public function getPets(): array
-    {
-        return $this->pet;
-    }
-
-    public function setPets(array $pets): void
-    {
-        $this->pet = $pets;
     }
 }

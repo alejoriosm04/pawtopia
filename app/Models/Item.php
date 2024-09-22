@@ -90,43 +90,13 @@ class Item extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function getOrder(): Order
-    {
-        return $this->order;
-    }
-
-    public function setOrder(Order $order): void
-    {
-        $this->order = $order;
-    }
-
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function getProduct(): Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(Product $product): void
-    {
-        $this->product = $product;
-    }
-
     public function pet(): HasMany
     {
         return $this->hasMany(Pet::class);
-    }
-
-    public function getPets(): array
-    {
-        return $this->pets;
-    }
-
-    public function setPets(array $pets): void
-    {
-        $this->pets = $pets;
     }
 }
