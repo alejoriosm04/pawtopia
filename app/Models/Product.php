@@ -19,6 +19,7 @@ class Product extends Model
      * $this->attributes['price'] - int - contains the product price
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product update date
+     * $this->items - Item[] - contains the associated Items
      */
     protected $fillable = [
         'name',
@@ -147,5 +148,10 @@ class Product extends Model
             $this->setImage($imageName);
             $this->save();
         }
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 }
