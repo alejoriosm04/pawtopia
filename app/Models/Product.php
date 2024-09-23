@@ -114,6 +114,10 @@ class Product extends Model
     {
         return $this->belongsTo(Species::class);
     }
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 
     public function users()
     {
