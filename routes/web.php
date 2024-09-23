@@ -32,3 +32,8 @@ Route::get('/cart', 'App\Http\Controllers\ShoppingCartController@index')->name('
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
 Route::get('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 route::post('/cart/update', 'App\Http\Controllers\ShoppingCartController@update')->name('cart.update');
+Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('categories.index');
+Route::get('/products/species/{species}', 'App\Http\Controllers\ProductController@filterBySpecies')->name('product.filterBySpecies');
+Route::get('/products/category/{category}', 'App\Http\Controllers\ProductController@filterByCategory')->name('product.filterByCategory');
+Route::get('/products/brand/{brand}', 'App\Http\Controllers\ProductController@filterByBrand')->name('product.filterByBrand');
+Route::get('/search', 'App\Http\Controllers\ProductController@search')->name('product.search');

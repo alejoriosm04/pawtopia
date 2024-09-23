@@ -67,6 +67,21 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function getSpecies()
+    {
+        return $this->species;
+    }
+
+    public function getSpeciesId(): int
+    {
+        return $this->attributes['species_id'];
+    }
+
+    public function setSpeciesId(int $speciesId): void
+    {
+        $this->attributes['species_id'] = $speciesId;
+    }
+
     public static function validate(Request $request): void
     {
         $request->validate([
