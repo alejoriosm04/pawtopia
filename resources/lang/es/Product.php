@@ -17,6 +17,4 @@ return [
     'results_for' => 'Resultados para:',
     'quantity' => 'Cantidad:',
 
-
-
 ];

@@ -15,8 +15,6 @@ return [
     'products_associated_message' => 'Products associated with the brand:',
     'keyword_results' => 'Results for search:',
     'results_for' => 'Results for:',
-    'quantity' => 'Quantity: '
-
-
+    'quantity' => 'Quantity: ',
 
 ];

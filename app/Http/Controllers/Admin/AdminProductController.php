@@ -34,36 +34,35 @@ class AdminProductController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-{
-    Product::validate($request);
+    {
+        Product::validate($request);
 
-    $creationData = $request->only(['name', 'description', 'category_id', 'species_id']);
+        $creationData = $request->only(['name', 'description', 'category_id', 'species_id']);
 
-    $newProduct = new Product($creationData);
+        $newProduct = new Product($creationData);
 
-    $newProduct->setPrice($request->input('price'));
+        $newProduct->setPrice($request->input('price'));
 
-    if (! $request->hasFile('image')) {
-        $newProduct->image = 'img/default_image.png';
+        if (! $request->hasFile('image')) {
+            $newProduct->image = 'img/default_image.png';
+        }
+
+        $newProduct->save();
+        if ($request->hasFile('image')) {
+            $newProduct->uploadImage($request->file('image'));
+        }
+
+        return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
     }
 
-    $newProduct->save();
-    if ($request->hasFile('image')) {
-        $newProduct->uploadImage($request->file('image'));
-    }
-
-    return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
-}
-
-
-    public function delete($id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         Product::destroy($id);
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.delete_success'));
     }
 
-    public function edit($id): View
+    public function edit(int $id): View
     {
         $viewData = [];
         $viewData['title'] = __('admin/Product.edit_title');
@@ -74,7 +73,7 @@ class AdminProductController extends Controller
         return view('admin.product.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Product::validate($request);
 

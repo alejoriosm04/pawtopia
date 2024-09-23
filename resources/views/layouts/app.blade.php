@@ -77,8 +77,6 @@
 <div class="container my-4">
     @yield('content')
 </div>
-
-<!-- Footer -->
 <div class="bg-dark py-4 text-center text-white">
     <div class="container">
         <small>{{ __('Layout.copyright') }}</small>

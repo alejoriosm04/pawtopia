@@ -3,7 +3,6 @@
 
 @section('content')
     <div class="container py-5">
-        <!-- Título de la marca -->
         <div class="category-title-container text-center mb-5">
             <h2 class="category-title">{{ $viewData['title'] }}</h2>
         </div>
@@ -13,8 +12,6 @@
                 <span class="species-name">{{ $viewData['brand'] }}</span>
             </p>
         </div>
-
-        <!-- Mostrar mensaje si no hay productos -->
         @if(count($viewData['products']) === 0)
             <div class="alert alert-warning text-center">
                 {{ __('Product.no_products') }}
