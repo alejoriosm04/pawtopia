@@ -111,6 +111,6 @@
 </div>
 
 
-<script src="{{ asset('js/shoppingcart.js') }}"></script>
+<script src="{{ asset('js/shoppingcart/shoppingcart.js') }}"></script>
 
 @endsection

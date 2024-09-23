@@ -47,5 +47,5 @@
             </div>
         @endif
     </div>
-    <script src="{{ asset('js/cart_quantity.js') }}"></script>
+    <script src="{{ asset('js/product/cart_quantity.js') }}"></script>
 @endsection
