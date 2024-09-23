@@ -49,12 +49,13 @@ class ProductController extends Controller
             return redirect()->route('home.index');
         }
 
+        $viewData['species'] = $speciesModel;
         $viewData['title'] = __('Product.category_title', ['category' => $speciesModel->getName()]);
         $viewData['subtitle'] = __('Product.category_subtitle', ['category' => $speciesModel->getName()]);
         $viewData['products'] = Product::where('species_id', $speciesModel->getId())->get();
         $viewData['species_categories'] = Species::with('categories')->get();
 
-        return view('product.index')->with('viewData', $viewData);
+        return view('product.filter')->with('viewData', $viewData);
     }
 
     public function filterByCategory(int $categoryId): View

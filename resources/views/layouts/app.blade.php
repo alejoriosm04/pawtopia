@@ -54,7 +54,7 @@
 
             @foreach($viewData['species_categories'] as $species)
                 <div class="nav-item dropdown d-inline-block">
-                    <a class="nav-link dropdown-toggle text-dark mx-2" href="{{ route('product.filterBySpecies', ['species' => $species->getId()]) }}" id="navbarDropdown{{ $species->getId() }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link text-dark mx-2" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}" id="navbarDropdown{{ $species->getId() }}">
                         {{ $species->getName() }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ $species->getId() }}">
