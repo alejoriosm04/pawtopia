@@ -34,21 +34,27 @@ class AdminProductController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-    {
-        Product::validate($request);
+{
+    Product::validate($request);
 
-        $creationData = $request->only(['name', 'description', 'price', 'category_id', 'species_id']);
-        if (! $request->hasFile('image')) {
-            $creationData['image'] = 'img/default_image.png';
-        }
-        $newProduct = Product::create($creationData);
+    $creationData = $request->only(['name', 'description', 'category_id', 'species_id']);
 
-        if ($request->hasFile('image')) {
-            $newProduct->uploadImage($request->file('image'));
-        }
+    $newProduct = new Product($creationData);
 
-        return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
+    $newProduct->setPrice($request->input('price'));
+
+    if (! $request->hasFile('image')) {
+        $newProduct->image = 'img/default_image.png';
     }
+
+    $newProduct->save();
+    if ($request->hasFile('image')) {
+        $newProduct->uploadImage($request->file('image'));
+    }
+
+    return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
+}
+
 
     public function delete($id): RedirectResponse
     {
@@ -73,14 +79,13 @@ class AdminProductController extends Controller
         Product::validate($request);
 
         $product = Product::findOrFail($id);
-        $updateData = $request->only(['name', 'description', 'price', 'category_id', 'species_id']);
-
+        $updateData = $request->only(['name', 'description', 'category_id', 'species_id']);
+        $product->setPrice($request->input('price'));
         if (! $request->hasFile('image')) {
             $updateData['image'] = $product->getImage();
         }
-
         $product->update($updateData);
-
+        $product->save();
         if ($request->hasFile('image')) {
             $product->uploadImage($request->file('image'));
         }

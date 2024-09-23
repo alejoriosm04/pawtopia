@@ -13,33 +13,27 @@
     <title>@yield('title', __('Home.title'))</title>
 </head>
 <body>
-<!-- header -->
+
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20;">
     <div class="container-fluid d-flex align-items-center">
-        <!-- Brand -->
         <a class="navbar-brand ms-5" href="{{ route('home.index') }}" style="color: white;">
             <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 120px;" />
         </a>
 
-        <!-- Search bar -->
-        <form class="d-flex ms-5" style="width: 35%; position: relative; align-items: center;">
-            <input class="form-control me-2" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 25px; font-family: 'Lexend', sans-serif; padding-left: 20px; border: 2px solid #fff; background-color: #f9f9f9;">
+        <form class="d-flex ms-5" action="{{ route('product.search') }}" method="GET" style="width: 35%; position: relative; align-items: center;">
+            <input class="form-control me-2" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 25px; font-family: 'Lexend', sans-serif; padding-left: 20px; border: 2px solid #fff; background-color: #f9f9f9;">
             <button class="btn btn-light" type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">
                 <i class="bi bi-search" style="font-size: 1.5rem; color: #DB4D20;"></i>
             </button>
         </form>
-
-        <!-- Admin Panel, User and Cart icons -->
         <div class="d-flex align-items-center ms-auto">
-            <!-- Admin Panel -->
+
             <a class="nav-link me-3" href="{{ route('admin.home.index') }}" aria-label="Admin Panel" style="color: white;">
                 <i class="bi bi-gear-fill" style="font-size: 1.5rem;"></i> {{ __('Layout.admin_panel') }}
             </a>
-            <!-- User Account -->
             <a class="nav-link me-3" href="" aria-label="User Account" style="color: white;">
                 <i class="bi bi-person-circle" style="font-size: 2rem;"></i> {{ __('User.login_register') }}
             </a>
-            <!-- Shopping Cart -->
             <a class="nav-link me-3" href="{{ route('cart.index') }}" aria-label="Shopping Cart" style="color: white;">
                 <i class="bi bi-cart" style="font-size: 2rem;"></i> {{ __('Cart.title') }}
                 @if (session('cart_count') > 0)
@@ -52,17 +46,15 @@
 <div class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="text-center">
-            <!-- All Products -->
             <div class="nav-item d-inline-block">
                 <a class="nav-link text-dark mx-2" href="{{ route('product.index') }}">
                     {{ __('Category.all_products') }}
                 </a>
             </div>
 
-            <!-- Categorías por especie -->
             @foreach($viewData['species_categories'] as $species)
                 <div class="nav-item dropdown d-inline-block">
-                    <a class="nav-link dropdown-toggle text-dark mx-2" href="#" id="navbarDropdown{{ $species->getId() }}" role="button">
+                    <a class="nav-link dropdown-toggle text-dark mx-2" href="{{ route('product.filterBySpecies', ['species' => $species->getId()]) }}" id="navbarDropdown{{ $species->getId() }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ $species->getName() }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ $species->getId() }}">
@@ -74,7 +66,6 @@
             @endforeach
         </div>
 
-        <!-- Mis Mascotas -->
         <div class="nav-item d-inline-block">
             <a href="{{ route('pet.index') }}" class="nav-link text-dark mx-2">
                 <i class="bi bi-house-heart-fill"></i> {{ __('Pet.my_pets') }}
@@ -83,7 +74,6 @@
     </div>
 </div>
 
-<!-- Rest of your content -->
 <div class="container my-4">
     @yield('content')
 </div>

@@ -66,6 +66,10 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+    public function getSpecies()
+    {
+        return $this->species;
+    }
 
     public static function validate(Request $request): void
     {

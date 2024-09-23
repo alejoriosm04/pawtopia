@@ -15,9 +15,9 @@
 <body class="min-vh-100 d-flex flex-column">
     <div class="row g-0 flex-grow-1">
         <!-- sidebar -->
-        <div class="p-3 col-md-2 text-white bg-dark">
+        <div class="p-3 col-md-2 text-white custom-sidebar">
             <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
-                <img src="{{ asset('img/logo.png') }}" alt="Pawtopia" class="logo img-fluid mb-3" style="max-width: 150px;">
+                <img src="{{ asset('img/logo_gray.png') }}" alt="Pawtopia" class="logo img-fluid mb-3 logo-adjust" style="max-width: 150px;">
                 <span class="fs-4">{{ (__('admin/Layout.panel_title')) }}</span>
             </a>
             <hr />
@@ -50,10 +50,7 @@
     <div class="copyright py-4 text-center text-white" style="background-color: #343a40;">
         <div class="container">
             <small>
-                {{ __('admin/Layout.copyright') }} -
-                <a class="text-reset fw-bold text-decoration-none" target="_blank" href="https://twitter.com/danielgarax">
-                    Daniel Correa
-                </a>
+                {{ __('admin/Layout.copyright') }}
             </small>
         </div>
     </div>

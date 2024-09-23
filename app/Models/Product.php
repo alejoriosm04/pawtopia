@@ -64,15 +64,16 @@ class Product extends Model
         $this->attributes['image'] = $image;
     }
 
-    public function getPrice(): int
+    public function getPrice(): float
     {
-        return $this->attributes['price'];
+        return $this->attributes['price'] / 100;
     }
 
-    public function setPrice(int $price): void
+    public function setPrice(float $price): void
     {
-        $this->attributes['price'] = $price;
+        $this->attributes['price'] = (int)($price * 100);
     }
+
 
     public function getCreatedAt(): string
     {
@@ -113,6 +114,7 @@ class Product extends Model
     {
         return $this->belongsTo(Species::class);
     }
+
 
     public static function validate(Request $request): void
     {
