@@ -8,8 +8,8 @@
             <div class="col-md-9">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <span class="pull-right">(<strong>{{ count($viewData['products']) }}</strong>) items</span>
-                        <h5>{{ __('Items in your cart') }}</h5>
+                        <span class="pull-right">(<strong>{{ count($viewData['products']) }}</strong>) {{ __('cart.items') }}</span>
+                        <h5>{{ __('cart.items_in_cart') }}</h5>
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
@@ -30,14 +30,14 @@
                                         </h3>
 
                                         <dl class="small m-b-none">
-                                            <dt>{{ __('Description') }}</dt>
+                                            <dt>{{ __('cart.description') }}</dt>
                                             <dd>{{ $product->getDescription() }}</dd>
                                         </dl>
 
                                         <div class="m-t-sm">
-                                            <a href="#" class="text-muted"><i class="fa fa-gift"></i> {{ __('Add gift package') }}</a>
+                                            <a href="#" class="text-muted"><i class="fa fa-gift"></i> {{ __('cart.add_gift_package') }}</a>
                                             |
-                                            <a href="{{ route('cart.remove', ['id' => $product->getId()]) }}" class="text-muted"><i class="fa fa-trash"></i> {{ __('Remove item') }}</a>
+                                            <a href="{{ route('cart.remove', ['id' => $product->getId()]) }}" class="text-muted"><i class="fa fa-trash"></i> {{ __('cart.remove_item') }}</a>
                                         </div>
                                     </td>
 
@@ -60,8 +60,8 @@
                     </div>
 
                     <div class="ibox-content">
-                        <button class="btn btn-primary pull-right"><i class="fa fa-shopping-cart"></i> {{ __('Checkout') }}</button>
-                        <a href="{{ route('product.index') }}" class="btn btn-white"><i class="fa fa-arrow-left"></i> {{ __('Continue shopping') }}</a>
+                        <button class="btn btn-primary pull-right"><i class="fa fa-shopping-cart"></i> {{ __('cart.checkout') }}</button>
+                        <a href="{{ route('product.index') }}" class="btn btn-white"><i class="fa fa-arrow-left"></i> {{ __('cart.continue_shopping') }}</a>
                     </div>
                 </div>
             </div>
@@ -69,24 +69,19 @@
             <div class="col-md-3">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <h5>{{ __('Cart Summary') }}</h5>
+                        <h5>{{ __('cart.summary') }}</h5>
                     </div>
                     <div class="ibox-content">
-                        <span>
-                            {{ __('Total') }}
-                        </span>
-                        <h2 class="font-bold">
-                            ${{ $viewData['total'] }}
-                        </h2>
-
+                        <span>{{ __('cart.total') }}</span>
+                        <h2 class="font-bold">${{ $viewData['total'] }}</h2>
                         <hr>
                         <span class="text-muted small">
-                            * {{ __('For Colombia applicable sales tax will be applied') }}
+                             {{ __('cart.tax_info') }}
                         </span>
                         <div class="m-t-sm">
                             <div class="btn-group">
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> {{ __('Checkout') }}</a>
-                                <a href="#" class="btn btn-white btn-sm">{{ __('Cancel') }}</a>
+                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> {{ __('cart.checkout') }}</a>
+                                <a href="#" class="btn btn-white btn-sm">{{ __('cart.cancel') }}</a>
                             </div>
                         </div>
                     </div>
@@ -94,23 +89,19 @@
 
                 <div class="ibox">
                     <div class="ibox-title">
-                        <h5>{{ __('Support') }}</h5>
+                        <h5>{{ __('cart.support') }}</h5>
                     </div>
                     <div class="ibox-content text-center">
                         <h3><i class="fa fa-phone"></i> +57 123456788</h3>
-                        <span class="small">
-                            {{ __('Please contact with us if you have any questions. We are available 24h.') }}
-                        </span>
+                        <span class="small">{{ __('cart.support_info') }}</span>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
 </div>
 
 
+<link rel="stylesheet" href="{{ asset('css/shoppingcart.css') }}">
 <script src="{{ asset('js/shoppingcart/shoppingcart.js') }}"></script>
-
 @endsection
