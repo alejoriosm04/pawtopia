@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -25,20 +25,19 @@ class User extends Authenticatable
      * $this->attributes['updated_at'] - timestamp - contains the user update date
      * $this->attributes['favList'] - array - contains the list of favorite products
      */
-
     protected $fillable = [
-        'name',  
-        'email',  
-        'password', 
-        'image',  
-        'address', 
-        'credit_card',  
+        'name',
+        'email',
+        'password',
+        'image',
+        'address',
+        'credit_card',
     ];
 
     protected $hidden = [
-        'password',  
+        'password',
         'remember_token',
-        'credit_card',  
+        'credit_card',
     ];
 
     protected $casts = [
@@ -116,9 +115,6 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
-     
-    
-    
     public static function validate($request): void
     {
         $request->validate([
@@ -127,16 +123,16 @@ class User extends Authenticatable
             'address' => 'required|string|max:255',
             'credit_card' => 'nullable|string|size:16',
             'password' => 'nullable|string|min:6',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', 
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
     }
-    
+
     public function favList(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
     }
 
-    public function pets()
+    public function pets(): HasMany
     {
         return $this->hasMany(Pet::class);
     }
