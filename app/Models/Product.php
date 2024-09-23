@@ -149,9 +149,4 @@ class Product extends Model
             $this->save();
         }
     }
-
-    public function items(): HasMany
-    {
-        return $this->hasMany(Item::class);
-    }
 }
