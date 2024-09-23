@@ -28,8 +28,6 @@ class Product extends Model
         'category_id',
         'species_id',
     ];
-
-    // Getters and Setters
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -138,7 +136,7 @@ class Product extends Model
         ]);
     }
 
-    public function uploadImage($file): void
+    public function uploadImage(UploadedFile $file): void
     {
         if ($file) {
             $imageName = $this->getId().'.'.$file->extension();
