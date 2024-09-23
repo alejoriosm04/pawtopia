@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -114,20 +116,9 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
-    /** 
-    *public function favList()
-    *{
-    *    return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
-    *}
-    */
-
-    /** 
-    *public function pets()
-    *{
-    *    return $this->hasMany(Pet::class);
-    *}
-    */
-
+     
+    
+    
     public static function validate($request): void
     {
         $request->validate([
@@ -138,5 +129,25 @@ class User extends Authenticatable
             'password' => 'nullable|string|min:6',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', 
         ]);
+    }
+    
+    public function favList(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
+    }
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function pet(): HasMany
+    {
+        return $this->hasMany(Pet::class);
     }
 }

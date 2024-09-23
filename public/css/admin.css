@@ -1,0 +1,58 @@
+
+body {
+    font-family: 'Lexend', sans-serif;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #495057;
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #DB4D20;
+    border-color: #DB4D20;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #FF6347;
+    border-color: #FF6347;
+}
+
+.profile-font {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #495057;
+}
+
+.img-profile {
+    width: 40px;
+    height: 40px;
+}
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+}
+.custom-sidebar {
+    background-color: #343a40;
+    color: white;
+}
+
+.custom-sidebar .nav-link {
+    color: white !important;
+}
+
+.custom-sidebar .nav-link:hover {
+    background-color: #495057;
+}
+.logo-adjust {
+    margin-left: 15px;
+}
+
