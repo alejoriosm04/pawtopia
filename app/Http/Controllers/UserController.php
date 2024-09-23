@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -30,17 +30,16 @@ class UserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         User::validate($request);
-    
-        $user = new User();
+
+        $user = new User;
         $user->setName($request->input('name'));
         $user->setEmail($request->input('email'));
         $user->setAddress($request->input('address'));
-        $user->setCreditCard($request->input('credit_card') ?? '0000000000000000'); 
-        $user->password = $request->input('password'); 
-    
+        $user->setCreditCard($request->input('credit_card') ?? '0000000000000000');
+        $user->password = $request->input('password');
+
         $user->save();
-    
-    
+
         if ($request->hasFile('image')) {
             $imageName = $user->getId().'.'.$request->file('image')->extension();
             Storage::disk('public')->put(
@@ -49,25 +48,22 @@ class UserController extends Controller
             );
             $user->setImage($imageName);
         } else {
-            $user->setImage('default_image.png'); 
+            $user->setImage('default_image.png');
         }
-    
+
         $user->save();
-    
+
         return redirect()->route('user.index')->with('success', __('User created successfully.'));
     }
 
     public function show(int $id): View
     {
-    $viewData = [];
-    $viewData['user'] = User::findOrFail($id);
-    $viewData['title'] = __('Detalles del Usuario');
+        $viewData = [];
+        $viewData['user'] = User::findOrFail($id);
+        $viewData['title'] = __('Details of User');
 
-    return view('user.show')->with('viewData', $viewData);
+        return view('user.show')->with('viewData', $viewData);
     }
-
-    
-    
 
     public function edit(int $id): View
     {
