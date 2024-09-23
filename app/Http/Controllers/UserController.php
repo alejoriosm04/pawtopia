@@ -52,8 +52,6 @@ class UserController extends Controller
             $user->setImage('default_image.png'); 
         }
     
-        //Por si se actualiza, hay que poner una imagen por defecto para hacer las pruebas. 
-        //(Se puede eliminar a futuro)
         $user->save();
     
         return redirect()->route('user.index')->with('success', __('User created successfully.'));

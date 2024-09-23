@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use Notifiable;
 
     /**
      * USER ATTRIBUTES
@@ -22,8 +21,9 @@ class User extends Authenticatable
      * $this->attributes['credit_card'] - string - contains the user credit card information
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
+     * $this->attributes['favList'] - array - contains the list of favorite products
      */
-    
+
     protected $fillable = [
         'name',  
         'email',  
@@ -39,17 +39,10 @@ class User extends Authenticatable
         'credit_card',  
     ];
 
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
-    // Getters and Setters for encapsulation
-
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
     public function getId(): int
     {
@@ -61,7 +54,6 @@ class User extends Authenticatable
         return $this->attributes['name'];
     }
 
-
     public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
@@ -71,7 +63,6 @@ class User extends Authenticatable
     {
         return $this->attributes['email'];
     }
-
 
     public function setEmail(string $email): void
     {
@@ -123,26 +114,19 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    /** 
+    *public function favList()
+    *{
+    *    return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
+    *}
+    */
 
-    // Relaciones
-
-    /**
-     * Define the relationship with pets (1:N)
-     */
-    //public function pets()
-    //{
-    //    return $this->hasMany(Pet::class);
-    //}
-
-    /**
-     * Define the relationship with favorite products (N:M)
-     */
-    //public function favList()
-    //{
-    //    return $this->belongsToMany(Product::class, 'user_favorites');
-    //}
-
-    // Validaciones
+    /** 
+    *public function pets()
+    *{
+    *    return $this->hasMany(Pet::class);
+    *}
+    */
 
     public static function validate($request): void
     {
@@ -155,5 +139,4 @@ class User extends Authenticatable
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', 
         ]);
     }
-    
 }
