@@ -121,5 +121,5 @@
         var categories = @json($viewData['categories']);
     </script>
 
-    <script src="{{ asset('js/species_category.js') }}"></script>
+    <script src="{{ asset('js/admin/product/species_category.js') }}"></script>
 @endsection
