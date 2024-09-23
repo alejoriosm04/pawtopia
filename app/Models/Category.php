@@ -66,6 +66,7 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
     public function getSpecies()
     {
         return $this->species;

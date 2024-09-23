@@ -24,12 +24,10 @@ class ShoppingCartController extends Controller
         return redirect()->route('cart.index');
     }
 
-
     public function index(Request $request)
     {
 
         $productsInCart = $request->session()->get('products', []);
-
 
         $products = Product::findMany(array_keys($productsInCart));
 
@@ -39,13 +37,12 @@ class ShoppingCartController extends Controller
         }
 
         $viewData = [];
-        $viewData['title'] = "Shopping Cart";
-        $viewData['subtitle'] = "Review your items";
+        $viewData['title'] = 'Shopping Cart';
+        $viewData['subtitle'] = 'Review your items';
         $viewData['products'] = $products;
         $viewData['productsInCart'] = $productsInCart;
         $viewData['total'] = $total;
         $viewData['species_categories'] = Species::with('categories')->get();
-
 
         return view('shoppingcart.index')->with('viewData', $viewData);
     }
@@ -71,5 +68,4 @@ class ShoppingCartController extends Controller
 
         return response()->json(['success' => true]);
     }
-
 }

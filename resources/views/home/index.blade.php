@@ -41,8 +41,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
-<!-- Sección de Marcas -->
 <div class="container py-5">
     <h2 class="section-title text-center mb-4">{{ __('Home.brands_title') }}</h2>
     <div class="row justify-content-center text-center brand-grid">

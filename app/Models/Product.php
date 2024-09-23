@@ -29,6 +29,7 @@ class Product extends Model
         'species_id',
     ];
 
+    // Getters and Setters
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -71,9 +72,8 @@ class Product extends Model
 
     public function setPrice(float $price): void
     {
-        $this->attributes['price'] = (int)($price * 100);
+        $this->attributes['price'] = (int) ($price * 100);
     }
-
 
     public function getCreatedAt(): string
     {
@@ -115,7 +115,12 @@ class Product extends Model
         return $this->belongsTo(Species::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_product', 'product_id', 'user_id');
+    }
 
+    // Validation
     public static function validate(Request $request): void
     {
         $request->validate([
@@ -128,7 +133,7 @@ class Product extends Model
         ]);
     }
 
-    public function uploadImage($file)
+    public function uploadImage($file): void
     {
         if ($file) {
             $imageName = $this->getId().'.'.$file->extension();

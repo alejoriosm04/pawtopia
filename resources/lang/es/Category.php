@@ -6,5 +6,5 @@ return [
     'birds' => 'Aves',
     'small_species' => 'Pequeñas Especies',
     'fish' => 'Peces',
-    'all_products' => 'Todos los productos'
+    'all_products' => 'Todos los productos',
 ];

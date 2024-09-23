@@ -14,7 +14,6 @@
 </head>
 <body class="min-vh-100 d-flex flex-column">
     <div class="row g-0 flex-grow-1">
-        <!-- sidebar -->
         <div class="p-3 col-md-2 text-white custom-sidebar">
             <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
                 <img src="{{ asset('img/logo_gray.png') }}" alt="Pawtopia" class="logo img-fluid mb-3 logo-adjust" style="max-width: 150px;">
@@ -34,8 +33,6 @@
                 </li>
             </ul>
         </div>
-        <!-- sidebar -->
-
         <div class="col-md-10 d-flex flex-column">
             <nav class="p-3 shadow text-end">
                 <span class="profile-font">{{ __('admin/Layout.profile_name') }}</span>
@@ -46,7 +43,6 @@
             </div>
         </div>
     </div>
-    <!-- footer -->
     <div class="copyright py-4 text-center text-white" style="background-color: #343a40;">
         <div class="container">
             <small>
@@ -54,7 +50,6 @@
             </small>
         </div>
     </div>
-    <!-- footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
