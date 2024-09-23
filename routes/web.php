@@ -10,3 +10,4 @@ Route::get('/users/{id}', 'App\Http\Controllers\UserController@show')->name('use
 Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit');
 Route::put('/users/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
 Route::delete('/users/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.destroy');
+
