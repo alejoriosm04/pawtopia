@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Species;
 use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
@@ -41,6 +42,7 @@ class ShoppingCartController extends Controller
         $viewData['products'] = $products;
         $viewData['productsInCart'] = $productsInCart;
         $viewData['total'] = $total;
+        $viewData['species_categories'] = Species::with('categories')->get();
 
         return view('shoppingcart.index')->with('viewData', $viewData);
     }

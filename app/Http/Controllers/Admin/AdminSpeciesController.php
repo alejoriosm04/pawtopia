@@ -28,14 +28,14 @@ class AdminSpeciesController extends Controller
         return redirect()->route('admin.species.index')->with('success', __('admin/Species.create_success'));
     }
 
-    public function delete($id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         Species::destroy($id);
 
         return redirect()->route('admin.species.index')->with('success', __('admin/Species.delete_success'));
     }
 
-    public function edit($id): View
+    public function edit(int $id): View
     {
         $viewData = [];
         $viewData['title'] = __('admin/Species.edit_title');
@@ -44,7 +44,7 @@ class AdminSpeciesController extends Controller
         return view('admin.species.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Species::validate($request);
 

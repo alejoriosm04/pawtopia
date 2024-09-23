@@ -21,7 +21,7 @@ class AdminCategoryController extends Controller
         return view('admin.category.index')->with('viewData', $viewData);
     }
 
-    private function getCategoriesBySpecies(Request $request)
+    private function getCategoriesBySpecies(Request $request): array
     {
         $categoriesQuery = Category::query();
 
@@ -49,14 +49,14 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.category.index')->with('success', __('admin/Category.create_success'));
     }
 
-    public function delete($id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         Category::destroy($id);
 
         return redirect()->route('admin.category.index')->with('success', __('admin/Category.delete_success'));
     }
 
-    public function edit($id): View
+    public function edit(int $id): View
     {
         $viewData = [];
         $viewData['title'] = __('admin/Category.edit_title');
@@ -66,7 +66,7 @@ class AdminCategoryController extends Controller
         return view('admin.category.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Category::validate($request);
 

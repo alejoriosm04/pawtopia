@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class Species extends Model
 {
+    /**
+     * SPECIES ATTRIBUTES
+     * $this->attributes['id'] - int - contains the species primary key (id)
+     * $this->attributes['name'] - string - contains the species name
+     * $this->attributes['created_at'] - timestamp - contains the creation date of the species
+     * $this->attributes['updated_at'] - timestamp - contains the last update date of the species
+     */
     protected $fillable = [
         'name',
     ];
@@ -56,5 +63,10 @@ class Species extends Model
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

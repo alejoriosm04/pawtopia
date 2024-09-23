@@ -26,7 +26,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">{{ __('admin/Product.price') }}:</label>
-                            <input name="price" value="{{ old('price') }}" type="number" class="form-control" required>
+                            <input name="price" value="{{ old('price') }}" type="number" step="any" class="form-control" required>
                         </div>
                     </div>
                 </div>
