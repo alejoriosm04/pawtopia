@@ -18,7 +18,6 @@ class Species extends Model
         'name',
     ];
 
-    // Getters and Setters
     public function getId(): int
     {
         return $this->attributes['id'];
