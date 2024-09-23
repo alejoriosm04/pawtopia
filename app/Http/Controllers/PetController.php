@@ -35,6 +35,7 @@ class PetController extends Controller
             $viewData['subtitle'] = __('Pet.pet_info_subtitle', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
+             $viewData['species_categories'] = Species::with('categories')->get();
 
             return view('pet.show')->with('viewData', $viewData);
         } catch (Exception $e) {
@@ -47,6 +48,7 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.create_pet_title');
         $viewData['species'] = Species::all();
+         $viewData['species_categories'] = Species::with('categories')->get();
 
         return view('pet.create')->with('viewData', $viewData);
     }
@@ -71,6 +73,7 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.pet_created_title');
         $viewData['message'] = __('Pet.pet_created_message');
+         $viewData['species_categories'] = Species::with('categories')->get();
 
         return view('pet.save')->with('viewData', $viewData);
     }
@@ -83,6 +86,7 @@ class PetController extends Controller
             $viewData['title'] = __('Pet.edit_pet_title', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
+             $viewData['species_categories'] = Species::with('categories')->get();
 
             return view('pet.edit')->with('viewData', $viewData);
         } catch (Exception $e) {

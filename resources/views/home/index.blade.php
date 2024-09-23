@@ -47,47 +47,48 @@
     <h2 class="section-title text-center mb-4">{{ __('Home.brands_title') }}</h2>
     <div class="row justify-content-center text-center brand-grid">
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Dog Chow']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/dog_chow.png') }}" alt="Dog Chow" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Evolve']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/evolve.png') }}" alt="Evolve" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Felix']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/felix.png') }}" alt="Felix" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Hills']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/hills.png') }}" alt="Hills" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Pedigree']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/pedigree.png') }}" alt="Pedigree" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Royal Canin']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/royal_canin.png') }}" alt="Royal Canin" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Taste of the Wild']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/taste_of_the_wild.png') }}" alt="Taste of the Wild" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
         <div class="col-6 col-md-2 mb-4">
-            <a href="#" class="brand-link">
+            <a href="{{ route('product.filterByBrand', ['brand' => 'Whiskas']) }}" class="brand-link">
                 <img src="{{ asset('img/brands/whiskas.png') }}" alt="Whiskas" class="img-fluid brand-logo shadow-hover">
             </a>
         </div>
     </div>
 </div>
+
 
 <div class="service_area py-3">
      <h2 class="section-title text-center mb-4">{{ __('Home.services_title') }}</h2>

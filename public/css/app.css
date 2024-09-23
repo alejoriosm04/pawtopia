@@ -95,6 +95,10 @@ p, a, .navbar-nav .nav-link {
     z-index: 1000;
     min-width: 200px;
 }
+.dropdown-item:hover {
+    background-color: #FF7F50;
+    color: white;
+}
 .custom-carousel-height .carousel-item img {
     height: 350px;
     object-fit: cover;
@@ -210,3 +214,39 @@ p, a, .navbar-nav .nav-link {
     display: flex;
     flex-direction: column;
 }
+.category-title-container {
+    background-color: #DB4D20;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    max-width: 80%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-title {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0;
+}
+.species-indicator {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.species-indicator-text {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.species-name {
+    font-weight: bold;
+    color: #DB4D20;
+}
+
+

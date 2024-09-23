@@ -35,10 +35,24 @@ body {
     width: 40px;
     height: 40px;
 }
-
-/* Footer */
 .footer {
     background-color: #343a40;
     color: #ffffff;
     padding: 20px 0;
 }
+.custom-sidebar {
+    background-color: #343a40;
+    color: white;
+}
+
+.custom-sidebar .nav-link {
+    color: white !important;
+}
+
+.custom-sidebar .nav-link:hover {
+    background-color: #495057;
+}
+.logo-adjust {
+    margin-left: 15px;
+}
+
