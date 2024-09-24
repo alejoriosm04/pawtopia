@@ -13,10 +13,6 @@ class ShoppingCartController extends Controller
 {
     public function add(Request $request, int $id): RedirectResponse
     {
-        $request->validate([
-            'quantity' => 'required|integer|min:1'
-        ]);
-
         $product = Product::findOrFail($id);
 
         $products = $request->session()->get('products', []);
@@ -67,10 +63,6 @@ class ShoppingCartController extends Controller
 
     public function update(Request $request): JsonResponse
     {
-        $request->validate([
-            'id' => 'required|integer',
-            'quantity' => 'required|integer|min:1',
-        ]);
 
         $product = Product::findOrFail($request->input('id'));
 
