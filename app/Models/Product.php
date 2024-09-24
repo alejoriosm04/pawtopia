@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
@@ -30,6 +31,7 @@ class Product extends Model
         'category_id',
         'species_id',
     ];
+
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -122,7 +124,7 @@ class Product extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_product', 'product_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
     }
 
     // Validation
