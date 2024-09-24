@@ -1,0 +1,21 @@
+/* Estilos del carrito de compras */
+.cart-product-imitation img {
+    max-width: 100px;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+}
+
+.ibox {
+    padding: 20px;
+}
+
+.ibox-title {
+    font-weight: bold;
+}
+
+.pull-right {
+    float: right;
+}
