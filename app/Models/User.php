@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
+use App\Models\FavoriteProduct;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
-
     /**
      * USER ATTRIBUTES
      * $this->attributes['id'] - int - contains the user primary key (id)
@@ -24,14 +23,17 @@ class User extends Authenticatable
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
      * $this->attributes['favList'] - array - contains the list of favorite products
+     * $this->attributes['role'] - string - contains the user role
      */
+    use Notifiable;
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'image',
         'address',
-        'credit_card',
+        'role',
     ];
 
     protected $hidden = [
@@ -42,8 +44,17 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    public function getRole(): string
+    {
+        return $this->attributes['role'];
+    }
+
+    public function setRole(string $role): void
+    {
+        $this->attributes['role'] = $role;
+    }
 
     public function getId(): int
     {
@@ -72,7 +83,7 @@ class User extends Authenticatable
 
     public function getImage(): string
     {
-        return $this->attributes['image'];
+        return $this->attributes['image'] ?? '';
     }
 
     public function setImage(string $image): void
@@ -82,7 +93,7 @@ class User extends Authenticatable
 
     public function getAddress(): string
     {
-        return $this->attributes['address'];
+        return $this->attributes['address'] ?? '';
     }
 
     public function setAddress(string $address): void
@@ -92,7 +103,7 @@ class User extends Authenticatable
 
     public function getCreditCard(): string
     {
-        return $this->attributes['credit_card'];
+        return $this->attributes['credit_card'] ?? '';
     }
 
     public function setCreditCard(string $creditCard): void
@@ -112,8 +123,24 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        $this->attributes['password'] = $value;
     }
+
+    public function getPets()
+    {
+        return $this->pets()->get();
+    }
+
+    public function getFavList()
+    {
+        return $this->favList()->get();
+    }
+
+    public function getOrders()
+    {
+        return $this->orders()->get();
+    }
+
 
     public static function validate($request): void
     {
@@ -124,6 +151,8 @@ class User extends Authenticatable
             'credit_card' => 'nullable|string|size:16',
             'password' => 'nullable|string|min:6',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'pets' => 'nullable|string',
+            'favList' => 'nullable|string',
         ]);
     }
 
