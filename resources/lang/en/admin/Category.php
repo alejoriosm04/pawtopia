@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'index_title' => 'Categories - Admin Panel',
     'create_success' => 'Category successfully created.',

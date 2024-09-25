@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'create_user_title' => 'Create User',
+    'edit_user_title' => 'Edit User',
+    'user_list_title' => 'User List',
+    'user_details_title' => 'User Details',
+    'name' => 'Name',
+    'email' => 'Email',
+    'address' => 'Address',
+    'credit_card' => 'Credit Card',
+    'password' => 'Password',
+    'profile_image' => 'Profile Image',
+    'image' => 'Image',
+    'image_alt' => 'User Image',
+    'pets' => 'Pets',
+    'pet_image' => 'Image',
+    'no_pets' => 'No pets.',
+    'fav_products' => 'Favorite Products',
+    'no_fav_products' => 'No favorite products.',
+    'orders' => 'Orders',
+    'order_number' => 'Order #:',
+    'order_date' => 'Date:',
+    'no_orders' => 'No orders.',
+    'change_profile_image' => 'Change Profile Image',
+    'orders_title' => 'My Orders - Online Store',
+    'orders_subtitle' => 'My Orders',
+];

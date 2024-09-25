@@ -1,10 +1,12 @@
 <?php
-
+// Lina Ballesteros
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Item;
 
 class Product extends Model
 {
@@ -19,6 +21,7 @@ class Product extends Model
      * $this->attributes['price'] - int - contains the product price
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product update date
+     * $this->items - Item[] - contains the associated Items
      */
     protected $fillable = [
         'name',
@@ -64,14 +67,14 @@ class Product extends Model
         $this->attributes['image'] = $image;
     }
 
-    public function getPrice(): int
+    public function getPrice(): float
     {
-        return $this->attributes['price'];
+        return $this->attributes['price'] / 100;
     }
 
-    public function setPrice(int $price): void
+    public function setPrice(float $price): void
     {
-        $this->attributes['price'] = $price;
+        $this->attributes['price'] = (int) ($price * 100);
     }
 
     public function getCreatedAt(): string
@@ -109,11 +112,41 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public static function sumPricesByQuantities($products, $productsInSession)
+    {
+        $total = 0;
+        foreach ($products as $product) {
+            $total = $total + ($product->getPrice() * $productsInSession[$product->getId()]);
+        }
+
+        return $total;
+    }
+
     public function species()
     {
         return $this->belongsTo(Species::class);
     }
 
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+    public function getItems(): Item
+    {
+        return $this->items;
+    }
+
+    public function setItems(Item $items)
+    {
+        $this->items = $items;
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
+    }
+
+    // Validation
     public static function validate(Request $request): void
     {
         $request->validate([
@@ -126,7 +159,7 @@ class Product extends Model
         ]);
     }
 
-    public function uploadImage($file)
+    public function uploadImage(UploadedFile $file): void
     {
         if ($file) {
             $imageName = $this->getId().'.'.$file->extension();
