@@ -1,3 +1,4 @@
+{{-- Lina Ballesteros --}}
 @extends('layouts.app')
 @section('title', __('Home.title'))
 
