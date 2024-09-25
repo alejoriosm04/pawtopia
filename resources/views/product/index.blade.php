@@ -27,6 +27,7 @@
 
                         <button class="btn btn-orange w-100 mt-auto" type="submit">{{ __('Product.add_to_cart') }}</button>
                     </form>
+                <!-- Botón para añadir a favoritos -->
                 </div>
             </div>
         </div>

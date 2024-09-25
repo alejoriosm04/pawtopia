@@ -125,6 +125,7 @@ class UserController extends Controller
             ->with('success', __('Successfully updated user'));
     }
 
+
     public function delete(int $id): RedirectResponse
     {
         User::destroy($id);

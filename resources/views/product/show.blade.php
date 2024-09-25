@@ -41,6 +41,7 @@
                             <i class="bi bi-cart"></i> {{ __('Product.add_to_cart') }}
                         </button>
                     </form>
+                    
                     <div class="mt-4">
                         <a href="{{ route('product.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left"></i> {{ __('Product.back_to_products') }}
