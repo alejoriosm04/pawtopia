@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -56,10 +57,12 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', __('User created successfully.'));
     }
 
-    public function show(int $id): View
+    public function show($id): View
     {
+        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id);
+
         $viewData = [];
-        $viewData['user'] = User::findOrFail($id);
+        $viewData['user'] = $user;
         $viewData['title'] = __('Details of User');
 
         return view('user.show')->with('viewData', $viewData);
@@ -79,13 +82,49 @@ class UserController extends Controller
         User::validate($request);
 
         $user = User::findOrFail($id);
+
         $user->setName($request->input('name'));
         $user->setEmail($request->input('email'));
         $user->setAddress($request->input('address'));
-        $user->setCreditCard($request->input('credit_card'));
+        $user->setCreditCard($request->input('credit_card') ?? '0000000000000000');
+
+        if ($request->hasFile('image')) {
+            $imageName = $user->getId().'.'.$request->file('image')->extension();
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+            $user->setImage($imageName);
+        }
+
         $user->save();
 
-        return redirect()->route('user.index')->with('success', __('User updated successfully.'));
+        if ($request->input('pets')) {
+            $petNames = explode(',', $request->input('pets'));
+            $user->pets()->delete(); 
+            foreach ($petNames as $petName) {
+                $user->pets()->create(['name' => trim($petName)]);
+            }
+        }
+
+        if ($request->input('favList')) {
+            $productNames = explode(',', $request->input('favList'));
+            $user->favList()->detach(); 
+            foreach ($productNames as $productName) {
+                $product = Product::where('name', $productName)->first();
+                if ($product) {
+                    $user->favList()->attach($product->id);
+                }
+            }
+        }
+
+        
+        return redirect()->route('user.show', ['id' => $user->getId()])
+<<<<<<< HEAD
+            ->with('success', __('Successfully updated user.'));
+=======
+            ->with('success', __('Successfully updated user'));
+>>>>>>> e13e0251238bbd2c21073e020467b526ecc2a791
     }
 
     public function delete(int $id): RedirectResponse
