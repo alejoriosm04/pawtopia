@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'created_at' => 'Creado el',
     'updated_at' => 'Actualizado el',
@@ -14,7 +14,7 @@ return [
     'current_species_message' => 'Estás viendo productos para el tipo de especie:',
     'products_associated_message' => 'Productos Asociados a la Marca:',
     'keyword_results' => 'Resultados de la búsqueda:',
-    'results_for' => 'Resultados para:',
+    'results_for' => 'Resultados para: ',
     'quantity' => 'Cantidad:',
 
 ];
