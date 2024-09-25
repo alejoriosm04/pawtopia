@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Pet extends Model
 {
@@ -38,6 +40,7 @@ class Pet extends Model
         'medications',
         'feeding',
         'veterinaryNotes',
+        'user_id',
     ];
 
     public static function validate(Request $request): void
@@ -52,6 +55,18 @@ class Pet extends Model
             'feeding' => 'required|string|max:255',
             'veterinaryNotes' => 'required|string|max:255',
         ]);
+    }
+
+    public static function storeImage(UploadedFile $image): string
+    {
+        return $image->store('images/pets', 'public');
+    }
+
+    public function deleteImage(): void
+    {
+        if ($this->image) {
+            Storage::disk('public')->delete($this->image);
+        }
     }
 
     public function getId(): int
@@ -153,17 +168,7 @@ class Pet extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getUser(): User
-    {
-        return $this->attributes['user'];
-    }
-
-    public function setUser(User $user): void
-    {
-        $this->attributes['user'] = $user;
-    }
-
-    public function species()
+    public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
     }
@@ -173,23 +178,8 @@ class Pet extends Model
         return $this->attributes['species_id'];
     }
 
-    public function setSpeciesId(int $speciesId): void
-    {
-        $this->attributes['species_id'] = $speciesId;
-    }
-
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
-    }
-
-    public function getItems(): array
-    {
-        return $this->attributes['items'];
-    }
-
-    public function setItems(array $items): void
-    {
-        $this->attributes['items'] = $items;
     }
 }

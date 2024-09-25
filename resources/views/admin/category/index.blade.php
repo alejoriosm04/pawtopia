@@ -1,3 +1,4 @@
+{{-- Lina Ballesteros --}}
 @extends('layouts.admin')
 @section('title', $viewData["title"])
 @section('content')
@@ -73,7 +74,7 @@
                         <tr>
                             <td>{{ $category->getId() }}</td>
                             <td>{{ $category->getName() }}</td>
-                            <td>{{ $category->getDescription() }}</td> <!-- Aquí mostramos la descripción -->
+                            <td>{{ $category->getDescription() }}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{ route('admin.category.edit', ['id' => $category->getId()]) }}">
                                     <i class="bi-pencil"></i>
