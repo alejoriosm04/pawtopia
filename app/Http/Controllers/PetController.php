@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pet;
+use App\Models\Product;
 use App\Models\Species;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
+use Illuminate\View\View;
 
 class PetController extends Controller
 {
@@ -135,8 +135,8 @@ class PetController extends Controller
 
         $categoryIds = $recommendedProducts->pluck('category_id');
         $additionalRecommendedProducts = Product::whereIn('category_id', $categoryIds)
-                                                ->whereNotIn('species_id', $speciesIds)
-                                                ->get();
+            ->whereNotIn('species_id', $speciesIds)
+            ->get();
 
         $finalRecommendedProducts = $recommendedProducts->merge($additionalRecommendedProducts);
 

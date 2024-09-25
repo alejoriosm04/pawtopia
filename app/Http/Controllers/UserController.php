@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use App\Models\Order;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -120,11 +120,10 @@ class UserController extends Controller
                 }
             }
         }
-      
+
         return redirect()->route('user.show', ['id' => $user->getId()])
             ->with('success', __('Successfully updated user'));
     }
-
 
     public function delete(int $id): RedirectResponse
     {
@@ -132,14 +131,14 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success', __('User deleted successfully.'));
     }
+
     public function orders(): View
     {
         $viewData = [];
-        $viewData["title"] = __('User.orders_title');
-        $viewData["subtitle"] = __('User.orders_subtitle');
-        $viewData["orders"] = Order::where('user_id', Auth::user()->getId())->get();
+        $viewData['title'] = __('User.orders_title');
+        $viewData['subtitle'] = __('User.orders_subtitle');
+        $viewData['orders'] = Order::where('user_id', Auth::user()->getId())->get();
 
-        return view('user.orders')->with("viewData", $viewData);
+        return view('user.orders')->with('viewData', $viewData);
     }
-
 }

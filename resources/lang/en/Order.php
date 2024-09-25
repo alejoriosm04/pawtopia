@@ -1,4 +1,6 @@
 <?php
+
+// Lina Ballesteros
 return [
     'purchase_completed' => 'Purchase Completed',
     'congratulations' => 'Congratulations, purchase completed.',

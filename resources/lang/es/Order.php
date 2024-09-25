@@ -1,4 +1,6 @@
 <?php
+
+// Lina Ballesteros
 return [
     'purchase_completed' => 'Compra Realizada',
     'congratulations' => 'Felicitaciones, su compra ha sido realizada.',
