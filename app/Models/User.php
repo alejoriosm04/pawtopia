@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\FavoriteProduct;
+use App\Models\Product;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
      * $this->attributes['favList'] - array - contains the list of favorite products
+     * 
      * $this->attributes['role'] - string - contains the user role
      *  $this->orders - Order[] - contains the associated orders
      */
@@ -123,6 +124,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->attributes['updated_at'];
     }
 
+    public function favList(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = $value;
@@ -138,16 +144,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->favList()->get();
     }
 
+    
     public function getOrders()
     {
         return $this->orders()->get();
     }
-
-    public function favList(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
-    }
-
+    
+    
     public static function validate($request): void
     {
         $request->validate([
@@ -161,7 +164,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'favList' => 'nullable|string',
         ]);
     }
-
 
 
     public function pets(): HasMany

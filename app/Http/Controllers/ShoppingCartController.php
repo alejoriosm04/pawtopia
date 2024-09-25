@@ -94,7 +94,7 @@ class ShoppingCartController extends Controller
         $productsInSession = $request->session()->get("products");
 
         if ($productsInSession) {
-            $userId = Auth::user()->getId();
+            $userId = Auth::user()->id;
             $petId = $request->input('pet_id');
 
             $order = new Order();
@@ -126,7 +126,7 @@ class ShoppingCartController extends Controller
             $order->setTotal($total);
             $order->save();
 
-            Auth::user()->save();
+        
 
             $request->session()->forget('products');
 
