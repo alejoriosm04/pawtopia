@@ -1,3 +1,4 @@
+{{-- Lina Ballesteros --}}
 @extends('layouts.app')
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
@@ -5,7 +6,7 @@
     <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 800px; margin: 0 auto;">
         <div class="row g-0">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <img src="{{ asset('/storage/'.$viewData["product"]->getImage()) }}" class="img-fluid rounded shadow-lg" style="max-width: 100%; height: auto;" alt="{{ $viewData['product']->getName() }}">
+                <img src="{{ asset('/storage/'.$viewData["product"]->getImage()) }}" class="img-fluid rounded shadow-lg product-image" alt="{{ $viewData['product']->getName() }}">
             </div>
             <div class="col-md-6">
                 <div class="card-body">
@@ -29,11 +30,11 @@
                     <form method="POST" action="{{ route('cart.add', ['id' => $viewData["product"]->getId()]) }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="quantity" class="form-label">{{ __('Product.quantity') }}</label>
+                            <label for="quantity-{{ $viewData["product"]->getId() }}" class="form-label">{{ __('Product.quantity') }}</label>
                             <div class="input-group">
-                                <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
-                                <input id="quantity" name="quantity" type="number" class="form-control text-center" value="1" min="1">
-                                <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()">+</button>
+                                <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity({{ $viewData['product']->getId() }})">-</button>
+                                <input id="quantity-{{ $viewData["product"]->getId() }}" name="quantity" type="number" class="form-control text-center" value="1" min="1">
+                                <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity({{ $viewData['product']->getId() }})">+</button>
                             </div>
                         </div>
                         <button class="btn btn-orange w-100 mt-3" type="submit">
@@ -50,5 +51,5 @@
         </div>
     </div>
 
-    <script src="{{ asset('/js/product/cart_quantity.js') }}"></script>
+    <script src="{{ asset('js/product/cart_quantity.js') }}"></script>
 @endsection

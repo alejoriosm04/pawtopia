@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'brand' => 'Pawtopia',
     'home' => 'Inicio',
@@ -9,4 +9,5 @@ return [
     'search_placeholder' => 'Search...',
     'all_products' => 'Todos los Productos',
     'copyright' => 'Copyright | Pawtopia',
+    'recommendations' => 'Recomendaciones',
 ];

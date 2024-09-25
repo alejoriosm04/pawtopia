@@ -118,8 +118,8 @@ class UserController extends Controller
                 }
             }
         }
-
-        return redirect()->route('user.show', ['id' => $user->getId()])
+      
+        return redirect()->route('user.show', ['id' => $user->getId()]) 
             ->with('success', __('Successfully updated user.'));
     }
 
