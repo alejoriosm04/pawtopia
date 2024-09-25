@@ -40,6 +40,7 @@ class Pet extends Model
         'medications',
         'feeding',
         'veterinaryNotes',
+        'user_id',
     ];
 
     public static function validate(Request $request): void
@@ -170,6 +171,11 @@ class Pet extends Model
     public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
+    }
+
+    public function getSpeciesId(): int
+    {
+        return $this->attributes['species_id'];
     }
 
     public function items(): HasMany

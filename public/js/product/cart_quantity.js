@@ -1,11 +1,13 @@
-function increaseQuantity() {
-    let quantityInput = document.getElementById('quantity');
-    quantityInput.value = parseInt(quantityInput.value) + 1;
+function increaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    let currentValue = parseInt(quantityInput.value);
+    quantityInput.value = currentValue + 1;
 }
 
-function decreaseQuantity() {
-    let quantityInput = document.getElementById('quantity');
-    if (parseInt(quantityInput.value) > 1) {
-        quantityInput.value = parseInt(quantityInput.value) - 1;
+function decreaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    let currentValue = parseInt(quantityInput.value);
+    if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
     }
 }

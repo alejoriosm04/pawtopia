@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class PetController extends Controller
 {
@@ -67,6 +69,7 @@ class PetController extends Controller
             'medications' => $request->input('medications'),
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
+            'user_id' => auth()->id(),
         ]);
 
         $viewData = [];
@@ -121,5 +124,27 @@ class PetController extends Controller
         $pet->delete();
 
         return redirect()->route('pet.index');
+    }
+
+    public function getRecommendations(): View
+    {
+        $pets = Auth::user()->pets;
+        $speciesIds = $pets->pluck('species_id');
+
+        $recommendedProducts = Product::whereIn('species_id', $speciesIds)->with('category')->get();
+
+        $categoryIds = $recommendedProducts->pluck('category_id');
+        $additionalRecommendedProducts = Product::whereIn('category_id', $categoryIds)
+                                                ->whereNotIn('species_id', $speciesIds)
+                                                ->get();
+
+        $finalRecommendedProducts = $recommendedProducts->merge($additionalRecommendedProducts);
+
+        $viewData = [];
+        $viewData['title'] = __('Pet.recommendations_title');
+        $viewData['subtitle'] = __('Pet.recommendations_subtitle');
+        $viewData['products'] = $finalRecommendedProducts;
+
+        return view('pet.recommendations')->with('viewData', $viewData);
     }
 }
