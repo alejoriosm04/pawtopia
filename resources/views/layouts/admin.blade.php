@@ -13,7 +13,6 @@
 </head>
 <body class="min-vh-100 d-flex flex-column">
     <div class="row g-0 flex-grow-1">
-        <!-- Sidebar -->
         <div class="p-3 col-md-2 text-white custom-sidebar">
             <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
                 <img src="{{ asset('img/logo_gray.png') }}" alt="Pawtopia" class="logo img-fluid mb-3 logo-adjust" style="max-width: 150px;">
@@ -21,7 +20,7 @@
             </a>
             <hr />
             <ul class="nav flex-column">
-                @if(Auth::check() && Auth::user()->role == 'admin') <!-- Only for admins -->
+                @if(Auth::check() && Auth::user()->role == 'admin')
                     <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- {{ __('admin/Layout.home') }}</a></li>
                     <li><a href="{{ route('admin.product.index') }}" class="nav-link text-white">- {{ __('admin/Layout.products') }}</a></li>
                     <li><a href="{{ route('admin.category.index') }}" class="nav-link text-white">- {{ __('admin/Layout.categories') }}</a></li>
@@ -35,15 +34,12 @@
                 </li>
             </ul>
         </div>
-        <!-- Sidebar -->
-
         <div class="col-md-10 d-flex flex-column">
-    <!-- Admin Navbar -->
     <nav class="p-3 shadow text-end">
     @auth
         <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="profile-font text-decoration-none text-light">
             <span>{{ Auth::user()->name }}</span>
-            @if(Auth::user()->image) 
+            @if(Auth::user()->image)
                 <img class="img-profile rounded-circle" src="{{ asset('/storage/'.Auth::user()->image) }}" style="width: 40px; height: 40px;">
             @else
                 <img class="img-profile rounded-circle" src="{{ asset('/img/default_user.png') }}" style="width: 40px; height: 40px;">
