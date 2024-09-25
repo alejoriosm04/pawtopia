@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function show($id): View
     {
-        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id); // Cargar las relaciones
+        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id);
 
         $viewData = [];
         $viewData['user'] = $user;
@@ -120,7 +120,11 @@ class UserController extends Controller
 
         
         return redirect()->route('user.show', ['id' => $user->getId()])
+<<<<<<< HEAD
             ->with('success', __('Successfully updated user.'));
+=======
+            ->with('success', __('Successfully updated user'));
+>>>>>>> e13e0251238bbd2c21073e020467b526ecc2a791
     }
 
     public function delete(int $id): RedirectResponse
