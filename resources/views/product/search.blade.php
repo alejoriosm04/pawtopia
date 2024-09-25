@@ -62,7 +62,7 @@
                                 <form method="POST" action="{{ route('favorites.add', ['id' => $product->getId()]) }}" class="mt-3">
                                     @csrf
                                     <button class="btn btn-outline-danger w-100" type="submit">
-                                        <i class="bi bi-heart"></i> {{ __('messages.add_to_favorites') }}
+                                        <i class="bi bi-heart"></i> {{ __('Messages.add_to_favorites') }}
                                     </button>
                                 </form>
 
