@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class VerificationController extends Controller
 {
@@ -43,7 +44,7 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    public function verifyManual($id): \Illuminate\Http\RedirectResponse
+    public function verifyManual($id): RedirectResponse
     {
         $user = User::findOrFail($id);
 
@@ -59,7 +60,7 @@ class VerificationController extends Controller
         return redirect('/')->with('message', 'Email successfully verified.');
     }
 
-    public function verify(Request $request)
+    public function verify(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect($this->redirectPath());
