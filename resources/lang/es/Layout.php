@@ -10,4 +10,5 @@ return [
     'all_products' => 'Todos los Productos',
     'copyright' => 'Copyright | Pawtopia',
     'my_orders' => 'Mis Ordenes',
+    'recommendations' => 'Recomendaciones',
 ];

@@ -40,6 +40,7 @@ class UserController extends Controller
         $user->setAddress($request->input('address'));
         $user->setCreditCard($request->input('credit_card') ?? '0000000000000000');
         $user->password = $request->input('password');
+        $user->role = $request->input('role', 'regular');
 
         $user->save();
 
@@ -61,7 +62,7 @@ class UserController extends Controller
 
     public function show($id): View
     {
-        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id);
+        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id); // Cargar las relaciones
 
         $viewData = [];
         $viewData['user'] = $user;
@@ -119,8 +120,7 @@ class UserController extends Controller
                 }
             }
         }
-
-
+      
         return redirect()->route('user.show', ['id' => $user->getId()])
             ->with('success', __('Successfully updated user'));
     }
