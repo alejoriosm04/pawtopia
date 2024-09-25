@@ -36,6 +36,10 @@
                     </a>
                 @endif
 
+                <a class="nav-link me-3" href="{{ route('pets.recommendations') }}" aria-label="Recomendaciones" style="color: white;">
+                    <i class="bi bi-star-fill" style="font-size: 1.5rem;"></i> {{ __('Layout.recommendations') }}
+                </a>
+
                 <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="nav-link text-decoration-none text-light d-inline-flex align-items-center">
                     <span>{{ Auth::user()->name }}</span>
                     <a class="nav-link active" style="color: white;" href="{{ route('user.orders') }}">{{ __('Layout.my_orders') }} </a>

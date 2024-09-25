@@ -12,7 +12,7 @@
         </ul>
     @endif
 
-    <form action="{{ route('user.update', ['id' => $viewData['user']->getId()]) }}" method="POST">
+    <form action="{{ route('user.update', ['id' => $viewData['user']->getId()]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

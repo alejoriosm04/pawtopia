@@ -23,11 +23,13 @@ class ResetPasswordController extends Controller
      */
     protected function resetPassword(User $user, string $password): RedirectResponse
     {
+        
         $user->password = $password;
         $user->setRememberToken(Str::random(60));
 
         $user->save();
 
+        
         $this->guard()->login($user);
 
         return redirect($this->redirectPath())->with('success', 'Your password has been successfully changed.');
