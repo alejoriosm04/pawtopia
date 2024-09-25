@@ -67,6 +67,7 @@ class PetController extends Controller
             'medications' => $request->input('medications'),
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
+            'user_id' => auth()->id(),
         ]);
 
         $viewData = [];
