@@ -45,6 +45,7 @@ Route::get('/products/brand/{brand}', 'App\Http\Controllers\ProductController@fi
 Route::get('/search', 'App\Http\Controllers\ProductController@search')->name('product.search');
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/favorites/add/{id}','App\Http\Controllers\UserController@addToFavorites')->name('favorites.add');
     Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('order.index');
     Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
     Route::post('/orders/save', 'App\Http\Controllers\OrderController@save')->name('order.save');
@@ -65,6 +66,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit');
     Route::put('/users/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
 });
-Route::get('/verify-email/{id}', 'App\Http\Controllers\Auth\VerificationController@verifyManual')->name('verification.verify.manual');
 
-Auth::routes(['verify' => true, 'reset' => true]);
+Auth::routes([]);

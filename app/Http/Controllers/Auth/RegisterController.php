@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Notifications\CustomVerifyEmailNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -50,14 +49,12 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
 
-        $user->notify(new CustomVerifyEmailNotification);
-
         return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath())->with('success', 'Registration completed. Please check your email to activate your account.');
+                        ?: redirect($this->redirectPath())->with('success', 'Registration completed.');
     }
 
     protected function registered(Request $request, $user): RedirectResponse
     {
-        return redirect('/')->with('success', 'Registration completed. Please check your email to activate your account.');
+        return redirect('/')->with('success', 'Registration completed.');
     }
 }
