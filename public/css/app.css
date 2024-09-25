@@ -248,5 +248,73 @@ p, a, .navbar-nav .nav-link {
     font-weight: bold;
     color: #DB4D20;
 }
+.no-underline {
+    text-decoration: none;
+    color: inherit;
+}
+
+.no-underline:hover {
+    text-decoration: none;
+}
+.product-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+.text-warning {
+    color: #db4d20 !important;
+}
+
+.btn-warning {
+    background-color: #ffa500;
+    border-color: #ffa500;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #ffa500;
+    border-color: #ffa500;
+}
+
+.small-text {
+    font-size: 1.2rem;
+}
+.support-number {
+    font-size: 1.2rem;
+}
+
+.cart-summary-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+.btn-checkout {
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    background-color: #FFC107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-checkout:hover {
+    background-color: #FFB300;
+    color: white;
+}
+
+.btn-white {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.btn-white:hover {
+    background-color: #f8f8f8;
+    border-color: #bbb;
+}
+
+
 
 

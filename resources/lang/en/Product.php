@@ -14,7 +14,7 @@ return [
     'current_species_message' => 'You are viewing products for the species:',
     'products_associated_message' => 'Products associated with the brand:',
     'keyword_results' => 'Results for search:',
-    'results_for' => 'Results for:',
+    'results_for' => 'Results for: ',
     'quantity' => 'Quantity: ',
 
 ];
