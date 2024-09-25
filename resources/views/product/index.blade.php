@@ -19,8 +19,8 @@
                         <div class="mb-3">
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity({{ $product->getId() }})">-</button>
-                                <input id="quantity-{{ $product->getId() }}" type="number" name="quantity" value="1" class="form-control text-center" min="1">
-                                <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity({{ $product->getId() }})">+</button>
+                                            <input id="quantity-{{ $product->getId() }}" name="quantity" type="number" class="form-control text-center" value="1" min="1">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity({{ $product->getId() }})">+</button>
                             </div>
                         </div>
 
@@ -31,5 +31,5 @@
         </div>
     @endforeach
 </div>
-<script src="{{ asset('js/cart.js') }}"></script>
+    <script src="{{ asset('js/product/cart_quantity.js') }}"></script>
 @endsection
