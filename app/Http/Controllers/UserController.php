@@ -38,6 +38,7 @@ class UserController extends Controller
         $user->setAddress($request->input('address'));
         $user->setCreditCard($request->input('credit_card') ?? '0000000000000000');
         $user->password = $request->input('password');
+        $user->role = $request->input('role', 'regular');
 
         $user->save();
 
@@ -120,11 +121,7 @@ class UserController extends Controller
 
         
         return redirect()->route('user.show', ['id' => $user->getId()])
-<<<<<<< HEAD
             ->with('success', __('Successfully updated user.'));
-=======
-            ->with('success', __('Successfully updated user'));
->>>>>>> e13e0251238bbd2c21073e020467b526ecc2a791
     }
 
     public function delete(int $id): RedirectResponse
