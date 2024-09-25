@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * $this->attributes['favList'] - array - contains the list of favorite products
      * 
      * $this->attributes['role'] - string - contains the user role
+     *  $this->orders - Order[] - contains the associated orders
      */
     use Notifiable;
 

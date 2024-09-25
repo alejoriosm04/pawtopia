@@ -16,5 +16,7 @@ return [
     'cancel' => 'Cancel',
     'support' => 'Support',
     'support_info' => 'Please contact us if you have any questions. We are available 24h.',
+    'select_pet' => 'Select Pet',
+    'no_pets_available' => 'No pets available',
 ];
 
