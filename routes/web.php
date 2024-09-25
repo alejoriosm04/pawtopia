@@ -62,6 +62,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit');
     Route::put('/users/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
 });
-Route::get('/verify-email/{id}', 'App\Http\Controllers\Auth\VerificationController@verifyManual')->name('verification.verify.manual');
 
-Auth::routes(['verify' => true, 'reset' => true]);
+Auth::routes([]);
