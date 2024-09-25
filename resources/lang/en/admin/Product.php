@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'index_title' => 'Admin Page - Products',
     'edit_title' => 'Admin Page - Edit Product',

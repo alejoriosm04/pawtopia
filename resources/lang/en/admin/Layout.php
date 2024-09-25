@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'title' => 'Admin - Online Store',
     'panel_title' => 'Admin Panel',
@@ -10,5 +10,5 @@ return [
     'go_back_home' => 'Go back to the home page',
     'go_back_products' => 'Go back to the Products List page',
     'profile_name' => 'Admin',
-    'copyright' => 'Copyright',
+    'copyright' => 'Copyright | Pawtopia',
 ];

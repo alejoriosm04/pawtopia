@@ -1,3 +1,4 @@
+{{-- Lina Ballesteros --}}
 @extends('layouts.admin')
 @section('title', $viewData["title"])
 @section('content')
@@ -26,7 +27,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">{{ __('admin/Product.price') }}:</label>
-                            <input name="price" value="{{ old('price') }}" type="number" class="form-control" required>
+                            <input name="price" value="{{ old('price') }}" type="number" step="any" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -121,5 +122,5 @@
         var categories = @json($viewData['categories']);
     </script>
 
-    <script src="{{ asset('js/species_category.js') }}"></script>
+    <script src="{{ asset('js/admin/product/species_category.js') }}"></script>
 @endsection
