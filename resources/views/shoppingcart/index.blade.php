@@ -60,8 +60,25 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <button class="btn btn-checkout btn-lg pull-right"><i class="fa fa-shopping-cart"></i> {{ __('Cart.checkout') }}</button>
-                            <a href="{{ route('product.index') }}" class="btn btn-white btn-lg" style="margin-right: 10px;"><i class="fa fa-arrow-left"></i> {{ __('Cart.continue_shopping') }}</a>
+                            @if (count($viewData["products"]) > 0)
+                                <form method="POST" action="{{ route('shoppingcart.purchase') }}">
+                                    @csrf
+                                    <label for="pet_id">{{ __('Cart.select_pet') }}:</label>
+                                   <select name="pet_id" id="pet_id">
+                                        @if ($viewData['pets']->isEmpty())
+                                            <option value="">{{ __('Cart.no_pets_available') }}</option>
+                                        @else
+                                            @foreach ($viewData['pets'] as $pet)
+                                                <option value="{{ $pet->getId() }}">{{ $pet->getName() }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    <button type="submit" class="btn btn-checkout btn-lg">
+                                        <i class="fa fa-shopping-cart"></i> {{ __('Cart.checkout') }}
+                                    </button>
+                                </form>
+                                <a href="{{ route('product.index') }}" class="btn btn-white btn-lg" style="margin-right: 10px;"><i class="fa fa-arrow-left"></i> {{ __('Cart.continue_shopping') }}</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -78,8 +95,10 @@
                             <div class="m-t-sm">
                                 <div class="btn-group d-flex flex-column">
                                     <br>
-                                    <a href="#" class="btn btn-checkout btn-lg mb-3"><i class="fa fa-shopping-cart"></i> {{ __('Cart.checkout') }}</a>
-                                    <a href="#" class="btn btn-white btn-sm">{{ __('Cart.cancel') }}</a>
+                                    @if (count($viewData["products"]) > 0)
+                                        <a href="{{ route('shoppingcart.purchase') }}" class="btn btn-checkout btn-lg pull-right"><i class="fa fa-shopping-cart"></i> {{ __('Cart.checkout') }}</a>
+                                        <a href="{{ route('product.index') }}" class="btn btn-white btn-sm">{{ __('Cart.cancel') }}</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

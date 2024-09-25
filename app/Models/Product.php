@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Item;
 
 class Product extends Model
 {
@@ -119,6 +120,15 @@ class Product extends Model
     public function items()
     {
         return $this->hasMany(Item::class);
+    }
+    public function getItems(): Item
+    {
+        return $this->items;
+    }
+
+    public function setItems(Item $items)
+    {
+        $this->items = $items;
     }
 
     public function users()

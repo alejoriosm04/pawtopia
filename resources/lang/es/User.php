@@ -23,4 +23,6 @@ return [
     'order_date' => 'Fecha:',
     'no_orders' => 'No tienes órdenes.',
     'change_profile_image' => 'Cambiar Imagen de Perfil',
+    'orders_title' => 'Mis Pedidos - Tienda en Línea',
+    'orders_subtitle' => 'Mis Pedidos',
 ];
