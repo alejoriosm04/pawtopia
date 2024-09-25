@@ -143,6 +143,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->orders()->get();
     }
 
+    public function favList(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
+    }
+
     public static function validate($request): void
     {
         $request->validate([
@@ -157,10 +162,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ]);
     }
 
-    public function favList(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class, 'user_favorites_products', 'user_id', 'product_id');
-    }
+
 
     public function pets(): HasMany
     {
@@ -177,8 +179,4 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Pet::class);
     }
 
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new CustomVerifyEmailNotification);
-    }
 }
