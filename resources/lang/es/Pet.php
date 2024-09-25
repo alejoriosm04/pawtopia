@@ -56,4 +56,7 @@ return [
     'fish' => 'Pez',
     'small_pets' => 'Mascotas pequeñas',
     'years_old' => 'años',
+    'my_pets' => 'Mis Mascotas',
+    'recommendations_title' => 'Recomendaciones para tus Mascotas',
+    'recommendations_subtitle' => 'Productos recomendados basados en tus mascotas',
 ];
