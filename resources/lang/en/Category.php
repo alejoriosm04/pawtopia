@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'dogs' => 'Dogs',
     'cats' => 'Cats',

@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'title' => 'Administrador - Tienda en línea',
     'panel_title' => 'Panel de Administración',

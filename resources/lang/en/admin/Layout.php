@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'title' => 'Admin - Online Store',
     'panel_title' => 'Admin Panel',

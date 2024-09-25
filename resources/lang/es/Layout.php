@@ -1,5 +1,5 @@
 <?php
-
+// Lina Ballesteros
 return [
     'brand' => 'Pawtopia',
     'home' => 'Inicio',
