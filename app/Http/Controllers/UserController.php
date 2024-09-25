@@ -60,7 +60,7 @@ class UserController extends Controller
 
     public function show($id): View
     {
-        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id);
+        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id); // Cargar las relaciones
 
         $viewData = [];
         $viewData['user'] = $user;
