@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use App\Services\FavoriteService;
 
 class UserController extends Controller
 {
@@ -126,6 +127,25 @@ class UserController extends Controller
     }
 
 
+    
+    public function addToFavorites(int $productId, FavoriteService $favoriteService): RedirectResponse
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Necesitas iniciar sesión para añadir productos a favoritos.');
+        }
+    
+        $user = Auth::user();
+    
+        if ($favoriteService->addProductToFavorites($user, $productId)) {
+            return redirect()->back()->with('success', 'Producto añadido a tus favoritos.');
+        }
+    
+        return redirect()->back()->with('info', 'El producto ya estaba en tus favoritos.');
+    }
+     
+
+
+
     public function delete(int $id): RedirectResponse
     {
         User::destroy($id);
@@ -137,9 +157,10 @@ class UserController extends Controller
         $viewData = [];
         $viewData["title"] = __('User.orders_title');
         $viewData["subtitle"] = __('User.orders_subtitle');
-        $viewData["orders"] = Order::where('user_id', Auth::user()->getId())->get();
+        $viewData["orders"] = Order::where('user_id', Auth::user()->id)->get();
 
         return view('user.orders')->with("viewData", $viewData);
     }
 
 }
+
