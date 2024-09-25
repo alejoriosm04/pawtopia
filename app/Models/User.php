@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\FavoriteProduct;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -124,6 +125,22 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->attributes['password'] = $value;
     }
+
+    public function getPets()
+    {
+        return $this->pets()->get();
+    }
+
+    public function getFavList()
+    {
+        return $this->favList()->get();
+    }
+
+    public function getOrders()
+    {
+        return $this->orders()->get();
+    }
+
 
     public static function validate($request): void
     {

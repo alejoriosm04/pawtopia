@@ -42,7 +42,7 @@
     @auth
         <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="profile-font text-decoration-none text-light">
             <span>{{ Auth::user()->name }}</span>
-            @if(Auth::user()->image) <!-- Asegurarse de que haya una imagen -->
+            @if(Auth::user()->image) 
                 <img class="img-profile rounded-circle" src="{{ asset('/storage/'.Auth::user()->image) }}" style="width: 40px; height: 40px;">
             @else
                 <img class="img-profile rounded-circle" src="{{ asset('/img/default_user.png') }}" style="width: 40px; height: 40px;">
