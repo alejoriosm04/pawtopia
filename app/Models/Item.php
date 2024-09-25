@@ -20,7 +20,7 @@ class Item extends Model
      * $this->order - Order - contains the associated Order
      * $this->product - Product - contains the associated Product
      */
-    protected $fillable = ['quantity', 'price', 'order_id', 'product_id'];
+    protected $fillable = ['quantity', 'price', 'order_id', 'product_id',  'pet_id'];
 
     public static function validate($request): void
     {
@@ -66,6 +66,15 @@ class Item extends Model
     {
         $this->attributes['order_id'] = $orderId;
     }
+    public function getPetId(): int
+    {
+        return $this->attributes['pet_id'];
+    }
+
+    public function setPetId(int $petId): void
+    {
+        $this->attributes['pet_id'] = $petId;
+    }
 
     public function getProductId(): int
     {
@@ -97,8 +106,13 @@ class Item extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function pet(): HasMany
+    public function pet(): BelongsTo
     {
-        return $this->hasMany(Pet::class);
+        return $this->belongsTo(Pet::class);
     }
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
 }

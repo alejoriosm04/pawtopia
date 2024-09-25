@@ -18,7 +18,7 @@
           <form method="POST" action="{{ route('pet.update', ['id' => $viewData['pet']->getId()]) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            
+
             <div class="form-group mb-2">
               <label for="name">{{ __('Pet.enter_name_field') }}</label>
               <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $viewData['pet']->getName()) }}" required>
@@ -54,7 +54,7 @@
 
             <div class="form-group mb-2">
               <label for="characteristics">{{ __('Pet.select_characteristics') }}</label>
-              
+
               <div class="form-group mb-2">
                 <label for="color">{{ __('Pet.color') }}</label>
                 <select class="form-control" id="color" name="characteristics[color]">

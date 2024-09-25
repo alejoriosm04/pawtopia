@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * $this->attributes['updated_at'] - timestamp - contains the user update date
      * $this->attributes['favList'] - array - contains the list of favorite products
      * $this->attributes['role'] - string - contains the user role
+     *  $this->orders - Order[] - contains the associated orders
      */
     use Notifiable;
 
@@ -140,7 +141,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->orders()->get();
     }
-
 
     public static function validate($request): void
     {

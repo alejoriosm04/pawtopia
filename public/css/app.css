@@ -314,6 +314,14 @@ p, a, .navbar-nav .nav-link {
     background-color: #f8f8f8;
     border-color: #bbb;
 }
+.pet-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
 
 
 

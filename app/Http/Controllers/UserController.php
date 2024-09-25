@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -101,7 +103,7 @@ class UserController extends Controller
 
         if ($request->input('pets')) {
             $petNames = explode(',', $request->input('pets'));
-            $user->pets()->delete(); 
+            $user->pets()->delete();
             foreach ($petNames as $petName) {
                 $user->pets()->create(['name' => trim($petName)]);
             }
@@ -109,7 +111,7 @@ class UserController extends Controller
 
         if ($request->input('favList')) {
             $productNames = explode(',', $request->input('favList'));
-            $user->favList()->detach(); 
+            $user->favList()->detach();
             foreach ($productNames as $productName) {
                 $product = Product::where('name', $productName)->first();
                 if ($product) {
@@ -118,13 +120,9 @@ class UserController extends Controller
             }
         }
 
-        
+
         return redirect()->route('user.show', ['id' => $user->getId()])
-<<<<<<< HEAD
-            ->with('success', __('Successfully updated user.'));
-=======
             ->with('success', __('Successfully updated user'));
->>>>>>> e13e0251238bbd2c21073e020467b526ecc2a791
     }
 
     public function delete(int $id): RedirectResponse
@@ -133,4 +131,14 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success', __('User deleted successfully.'));
     }
+    public function orders(): View
+    {
+        $viewData = [];
+        $viewData["title"] = __('User.orders_title');
+        $viewData["subtitle"] = __('User.orders_subtitle');
+        $viewData["orders"] = Order::where('user_id', Auth::user()->getId())->get();
+
+        return view('user.orders')->with("viewData", $viewData);
+    }
+
 }
