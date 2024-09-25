@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use App\Services\FavoriteService;
 
 class UserController extends Controller
 {
@@ -125,6 +127,25 @@ class UserController extends Controller
     }
 
 
+    
+    public function addToFavorites(int $productId, FavoriteService $favoriteService): RedirectResponse
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Necesitas iniciar sesión para añadir productos a favoritos.');
+        }
+    
+        $user = Auth::user();
+    
+        if ($favoriteService->addProductToFavorites($user, $productId)) {
+            return redirect()->back()->with('success', 'Producto añadido a tus favoritos.');
+        }
+    
+        return redirect()->back()->with('info', 'El producto ya estaba en tus favoritos.');
+    }
+     
+
+
+
     public function delete(int $id): RedirectResponse
     {
         User::destroy($id);
@@ -132,3 +153,4 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', __('User deleted successfully.'));
     }
 }
+
