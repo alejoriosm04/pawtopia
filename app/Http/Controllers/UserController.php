@@ -101,7 +101,7 @@ class UserController extends Controller
 
         if ($request->input('pets')) {
             $petNames = explode(',', $request->input('pets'));
-            $user->pets()->delete(); 
+            $user->pets()->delete();
             foreach ($petNames as $petName) {
                 $user->pets()->create(['name' => trim($petName)]);
             }
@@ -109,7 +109,7 @@ class UserController extends Controller
 
         if ($request->input('favList')) {
             $productNames = explode(',', $request->input('favList'));
-            $user->favList()->detach(); 
+            $user->favList()->detach();
             foreach ($productNames as $productName) {
                 $product = Product::where('name', $productName)->first();
                 if ($product) {
@@ -118,7 +118,6 @@ class UserController extends Controller
             }
         }
 
-        
         return redirect()->route('user.show', ['id' => $user->getId()])
             ->with('success', __('Usuario actualizado correctamente.'));
     }
