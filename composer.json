@@ -6,10 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "guzzlehttp/guzzle": "^7.0.1",
         "laravel-lang/common": "^6.4",
-        "guzzlehttp/guzzle": "^7.0.1"
+        "laravel/framework": "^11.9",
+        "laravel/tinker": "^2.9"
     },
 
     "require-dev": {

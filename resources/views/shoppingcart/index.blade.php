@@ -38,7 +38,7 @@
                                                 <div class="m-t-sm">
                                                     <a href="#" class="text-muted"><i class="fa fa-gift"></i> {{ __('Cart.add_gift_package') }}</a>
                                                     |
-                                                    <a href="{{ route('Cart.remove', ['id' => $product->getId()]) }}" class="text-muted"><i class="fa fa-trash"></i> {{ __('Cart.remove_item') }}</a>
+                                                    <a href="{{ route('cart.remove', ['id' => $product->getId()]) }}" class="text-muted"><i class="fa fa-trash"></i> {{ __('Cart.remove_item') }}</a>
                                                 </div>
                                             </td>
 
