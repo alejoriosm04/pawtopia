@@ -21,19 +21,43 @@
         </a>
 
         <form class="d-flex ms-5" action="{{ route('product.search') }}" method="GET" style="width: 35%; position: relative; align-items: center;">
-            <input class="form-control me-2" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 25px; font-family: 'Lexend', sans-serif; padding-left: 20px; border: 2px solid #fff; background-color: #f9f9f9;">
-            <button class="btn btn-light" type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">
+            <input class="form-control me-2" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 25px; padding-left: 20px; border: 2px solid #fff; background-color: #f9f9f9;">
+            <button class="btn btn-light" type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-radius: 50%; width: 35px; height: 35px;">
                 <i class="bi bi-search" style="font-size: 1.5rem; color: #DB4D20;"></i>
             </button>
         </form>
         <div class="d-flex align-items-center ms-auto">
+            @auth
+                @if(Auth::user()->role == 'admin')
+                    <a class="nav-link me-3" href="{{ route('admin.home.index') }}" aria-label="Admin Panel" style="color: white;">
+                        <i class="bi bi-gear-fill" style="font-size: 1.5rem;"></i> {{ __('Layout.admin_panel') }}
+                    </a>
+                @endif
 
-            <a class="nav-link me-3" href="{{ route('admin.home.index') }}" aria-label="Admin Panel" style="color: white;">
-                <i class="bi bi-gear-fill" style="font-size: 1.5rem;"></i> {{ __('Layout.admin_panel') }}
-            </a>
-            <a class="nav-link me-3" href="" aria-label="User Account" style="color: white;">
-                <i class="bi bi-person-circle" style="font-size: 2rem;"></i> {{ __('User.login_register') }}
-            </a>
+                <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="profile-font text-decoration-none text-light">
+                    <span>{{ Auth::user()->name }}</span>
+
+    
+                    @if(Auth::user()->image) 
+                        <img class="img-profile rounded-circle" src="{{ asset('/storage/'.Auth::user()->image) }}" style="width: 40px; height: 40px;">
+                    @else 
+                        <img class="img-profile rounded-circle" src="{{ asset('/img/default_user.png') }}" style="width: 40px; height: 40px;">
+                    @endif
+                </a>
+
+                <form id="logout" action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button class="btn btn-light">{{ __('Logout') }}</button>
+                </form>
+            @else
+                <a class="nav-link me-3" href="{{ route('login') }}" style="color: white;">
+                    <i class="bi bi-person-circle" style="font-size: 2rem;"></i> {{ __('Login') }}
+                </a>
+                <a class="nav-link me-3" href="{{ route('register') }}" style="color: white;">
+                    {{ __('Register') }}
+                </a>
+            @endauth
+
             <a class="nav-link me-3" href="{{ route('cart.index') }}" aria-label="Shopping Cart" style="color: white;">
                 <i class="bi bi-cart" style="font-size: 2rem;"></i> {{ __('Cart.title') }}
                 @if (session('cart_count') > 0)
@@ -41,8 +65,11 @@
                 @endif
             </a>
         </div>
+
     </div>
 </nav>
+
+<!-- Navigation for Categories -->
 <div class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="text-center">
@@ -52,18 +79,20 @@
                 </a>
             </div>
 
+        @if(isset($viewData['species_categories']))
             @foreach($viewData['species_categories'] as $species)
-                <div class="nav-item dropdown d-inline-block">
-                    <a class="nav-link text-dark mx-2" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}" id="navbarDropdown{{ $species->getId() }}">
-                        {{ $species->getName() }}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ $species->getId() }}">
-                        @foreach($species->getCategories() as $category)
-                            <li><a class="dropdown-item" href="{{ route('product.filterByCategory', ['category' => $category->getId()]) }}">{{ $category->getName() }}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
+        <div class="nav-item dropdown d-inline-block">
+            <a class="nav-link text-dark mx-2" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}">
+                {{ $species->getName() }}
+            </a>
+            <ul class="dropdown-menu">
+                @foreach($species->getCategories() as $category)
+                    <li><a class="dropdown-item" href="{{ route('product.filterByCategory', ['category' => $category->getId()]) }}">{{ $category->getName() }}</a></li>
+                @endforeach
+            </ul>
+        </div>
+             @endforeach
+        @endif
         </div>
 
         <div class="nav-item d-inline-block">
@@ -77,6 +106,7 @@
 <div class="container my-4">
     @yield('content')
 </div>
+
 <div class="bg-dark py-4 text-center text-white">
     <div class="container">
         <small>{{ __('Layout.copyright') }}</small>
