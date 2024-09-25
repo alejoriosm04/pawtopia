@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Species;
-use Illuminate\Http\Request;    
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
+use App\Models\Order;
+use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 
 class ShoppingCartController extends Controller
 {
@@ -50,6 +53,11 @@ class ShoppingCartController extends Controller
         $viewData['productsInCart'] = $productsInCart;
         $viewData['total'] = $total;
         $viewData['species_categories'] = Species::with('categories')->get();
+        if (Auth::check()) {
+            $viewData['pets'] = Auth::user()->pets;
+        } else {
+            $viewData['pets'] = collect();
+        }
 
         return view('shoppingcart.index')->with('viewData', $viewData);
     }
@@ -80,4 +88,57 @@ class ShoppingCartController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function purchase(Request $request): View | RedirectResponse
+    {
+
+        $productsInSession = $request->session()->get("products");
+
+        if ($productsInSession) {
+            $userId = Auth::user()->getId();
+            $petId = $request->input('pet_id');
+
+            $order = new Order();
+            $order->setUserId($userId);
+            $order->setTotal(0);
+            $order->save();
+
+            $total = 0;
+            $productsInCart = Product::findMany(array_keys($productsInSession));
+
+            foreach ($productsInCart as $product) {
+                $quantity = $productsInSession[$product->getId()];
+
+                $item = new Item();
+                $item->setQuantity($quantity);
+                $item->setPrice($product->getPrice());
+                $item->setProductId($product->getId());
+                $item->setOrderId($order->getId());
+
+                if ($petId) {
+                    $item->setPetId($petId);
+                }
+
+                $item->save();
+
+                $total += $product->getPrice() * $quantity;
+            }
+
+            $order->setTotal($total);
+            $order->save();
+
+            Auth::user()->save();
+
+            $request->session()->forget('products');
+
+            $viewData = [];
+            $viewData["title"] = __('Order.title');
+            $viewData["subtitle"] = __('Order.subtitle');
+            $viewData["order"] = $order;
+
+            return view('shoppingcart.purchase')->with("viewData", $viewData);
+        } else {
+            return redirect()->route('cart.index');
+        }
+    }
+
 }
