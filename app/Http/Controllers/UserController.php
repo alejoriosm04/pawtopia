@@ -38,6 +38,7 @@ class UserController extends Controller
         $user->setAddress($request->input('address'));
         $user->setCreditCard($request->input('credit_card') ?? '0000000000000000');
         $user->password = $request->input('password');
+        $user->role = $request->input('role', 'regular');
 
         $user->save();
 
@@ -59,7 +60,7 @@ class UserController extends Controller
 
     public function show($id): View
     {
-        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id);
+        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id); // Cargar las relaciones
 
         $viewData = [];
         $viewData['user'] = $user;
@@ -101,7 +102,7 @@ class UserController extends Controller
 
         if ($request->input('pets')) {
             $petNames = explode(',', $request->input('pets'));
-            $user->pets()->delete(); 
+            $user->pets()->delete();
             foreach ($petNames as $petName) {
                 $user->pets()->create(['name' => trim($petName)]);
             }
@@ -109,7 +110,7 @@ class UserController extends Controller
 
         if ($request->input('favList')) {
             $productNames = explode(',', $request->input('favList'));
-            $user->favList()->detach(); 
+            $user->favList()->detach();
             foreach ($productNames as $productName) {
                 $product = Product::where('name', $productName)->first();
                 if ($product) {
@@ -117,8 +118,7 @@ class UserController extends Controller
                 }
             }
         }
-
-        
+      
         return redirect()->route('user.show', ['id' => $user->getId()]) 
             ->with('success', __('Successfully updated user.'));
     }
