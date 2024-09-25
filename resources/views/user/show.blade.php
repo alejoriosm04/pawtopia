@@ -33,12 +33,17 @@
             @if (count($viewData['user']->getFavList()) > 0)
                 <ul>
                     @foreach($viewData['user']->getFavList() as $product)
-                        <li>{{ $product->name }}</li>
+                        <li>
+                            <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                                {{ $product->name }}
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             @else
                 <p>{{ __('User.no_fav_products') }}</p>
             @endif
+
 
             <h5>{{ __('User.orders') }}</h5>
             @if (count($viewData['user']->getOrders()) > 0)
