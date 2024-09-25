@@ -63,7 +63,7 @@ class UserController extends Controller
 
         $viewData = [];
         $viewData['user'] = $user;
-        $viewData['title'] = __('Detalles del Usuario');
+        $viewData['title'] = __('Details of User');
 
         return view('user.show')->with('viewData', $viewData);
     }
@@ -120,7 +120,7 @@ class UserController extends Controller
 
         
         return redirect()->route('user.show', ['id' => $user->getId()])
-            ->with('success', __('Usuario actualizado correctamente.'));
+            ->with('success', __('Successfully updated user.'));
     }
 
     public function delete(int $id): RedirectResponse

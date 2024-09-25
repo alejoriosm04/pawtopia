@@ -37,10 +37,10 @@
                 <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="profile-font text-decoration-none text-light">
                     <span>{{ Auth::user()->name }}</span>
 
-                    <!-- Verificación de la imagen del usuario -->
-                    @if(Auth::user()->image) <!-- Si el usuario tiene una imagen definida -->
+    
+                    @if(Auth::user()->image) 
                         <img class="img-profile rounded-circle" src="{{ asset('/storage/'.Auth::user()->image) }}" style="width: 40px; height: 40px;">
-                    @else <!-- Si no tiene imagen, se muestra una imagen predeterminada -->
+                    @else 
                         <img class="img-profile rounded-circle" src="{{ asset('/img/default_user.png') }}" style="width: 40px; height: 40px;">
                     @endif
                 </a>
@@ -103,12 +103,10 @@
     </div>
 </div>
 
-<!-- Content Section -->
 <div class="container my-4">
     @yield('content')
 </div>
 
-<!-- Footer -->
 <div class="bg-dark py-4 text-center text-white">
     <div class="container">
         <small>{{ __('Layout.copyright') }}</small>

@@ -16,12 +16,12 @@
             </div>
 
             <h5>{{ __('User.pets') }}</h5>
-            @if (count($viewData['user']->pets) > 0)
+            @if (count($viewData['user']->getPets()) > 0)
                 <ul>
-                    @foreach($viewData['user']->pets as $pet)
+                    @foreach($viewData['user']->getPets() as $pet)
                         <li>
-                            <strong>{{ $pet->name }}</strong><br>
-                            <img src="{{ asset('/storage/'.$pet->image) }}" alt="{{ $pet->name }} {{ __('User.pet_image') }}" class="img-fluid" style="max-width: 150px;">
+                            <strong>{{ $pet->getName() }}</strong><br>
+                            <img src="{{ asset('/storage/'.$pet->getImage()) }}" alt="{{ $pet->getName() }} {{ __('User.pet_image') }}" class="img-fluid" style="max-width: 150px;">
                         </li>
                     @endforeach
                 </ul>
@@ -30,9 +30,9 @@
             @endif
 
             <h5>{{ __('User.fav_products') }}</h5>
-            @if (count($viewData['user']->favList) > 0)
+            @if (count($viewData['user']->getFavList()) > 0)
                 <ul>
-                    @foreach($viewData['user']->favList as $product)
+                    @foreach($viewData['user']->getFavList() as $product)
                         <li>{{ $product->name }}</li>
                     @endforeach
                 </ul>
@@ -41,10 +41,10 @@
             @endif
 
             <h5>{{ __('User.orders') }}</h5>
-            @if (count($viewData['user']->orders) > 0)
+            @if (count($viewData['user']->getOrders()) > 0)
                 <ul>
-                    @foreach($viewData['user']->orders as $order)
-                        <li>{{ __('User.order_number') }} {{ $order->id }} - {{ __('User.order_date') }} {{ $order->created_at }}</li>
+                    @foreach($viewData['user']->getOrders() as $order)
+                        <li>{{ __('User.order_number') }} {{ $order->getId() }} - {{ __('User.order_date') }} {{ $order->getCreatedAt() }}</li>
                     @endforeach
                 </ul>
             @else
