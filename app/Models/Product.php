@@ -111,6 +111,16 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public static function sumPricesByQuantities($products, $productsInSession)
+    {
+        $total = 0;
+        foreach ($products as $product) {
+            $total = $total + ($product->getPrice() * $productsInSession[$product->getId()]);
+        }
+
+        return $total;
+    }
+
     public function species()
     {
         return $this->belongsTo(Species::class);
