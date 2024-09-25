@@ -9,5 +9,6 @@ return [
     'search_placeholder' => 'Search...',
     'all_products' => 'Todos los Productos',
     'copyright' => 'Copyright | Pawtopia',
+    'my_orders' => 'Mis Ordenes',
     'recommendations' => 'Recomendaciones',
 ];
