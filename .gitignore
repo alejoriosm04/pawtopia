@@ -19,3 +19,5 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+/storage/keys/*.json
+storage/keys/gcp-service-account.json

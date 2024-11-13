@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
+    'image_storage' => env('IMAGE_STORAGE', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,6 +56,14 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
+        ],
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GCP_PROJECT_ID'),
+            'key_file' => storage_path('app/private/').env('GCP_KEY_FILE'),
+            'bucket' => env('GCP_BUCKET'),
+            'path_prefix' => env('GCP_PATH_PREFIX', null),
+            'visibility' => 'public',
         ],
 
     ],

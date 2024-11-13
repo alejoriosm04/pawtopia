@@ -58,9 +58,13 @@ class Product extends Model
     }
 
     public function getImage(): string
-    {
+{
+    if (str_starts_with($this->attributes['image'], 'https://storage.googleapis.com')) {
         return $this->attributes['image'];
     }
+
+    return url('storage/' . $this->attributes['image']);
+}
 
     public function setImage(string $image): void
     {
@@ -145,8 +149,17 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
     }
+    public function getCategory()
+    {
+        return $this->category;
+    }
 
-    // Validation
+    public function getSpecies()
+    {
+        return $this->species;
+    }
+
+
     public static function validate(Request $request): void
     {
         $request->validate([
@@ -157,18 +170,5 @@ class Product extends Model
             'species_id' => 'required|exists:species,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    }
-
-    public function uploadImage(UploadedFile $file): void
-    {
-        if ($file) {
-            $imageName = $this->getId().'.'.$file->extension();
-            Storage::disk('public')->put(
-                $imageName,
-                file_get_contents($file->getRealPath())
-            );
-            $this->setImage($imageName);
-            $this->save();
-        }
     }
 }

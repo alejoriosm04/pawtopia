@@ -57,18 +57,6 @@ class Pet extends Model
         ]);
     }
 
-    public static function storeImage(UploadedFile $image): string
-    {
-        return $image->store('images/pets', 'public');
-    }
-
-    public function deleteImage(): void
-    {
-        if ($this->image) {
-            Storage::disk('public')->delete($this->image);
-        }
-    }
-
     public function getId(): int
     {
         return $this->attributes['id'];
