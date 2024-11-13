@@ -66,7 +66,6 @@ class Product extends Model
     return url('storage/' . $this->attributes['image']);
 }
 
-
     public function setImage(string $image): void
     {
         $this->attributes['image'] = $image;
