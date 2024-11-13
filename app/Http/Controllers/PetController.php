@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ImageStorage;
 use App\Models\Pet;
 use App\Models\Species;
 use Carbon\Carbon;
@@ -53,15 +54,14 @@ class PetController extends Controller
         return view('pet.create')->with('viewData', $viewData);
     }
 
-    public function save(Request $request): View
+    public function save(Request $request, ImageStorage $imageStorage): View
     {
         Pet::validate($request);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
-        Pet::create([
+        $petData = [
             'name' => $request->input('name'),
-            'image' => Pet::storeImage($request->file('image')),
             'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
@@ -70,7 +70,17 @@ class PetController extends Controller
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
             'user_id' => auth()->id(),
-        ]);
+        ];
+
+        $pet = Pet::create($petData);
+
+        if ($request->hasFile('image')) {
+            $imagePath = 'pets/' . $pet->getId() . '.' . $request->file('image')->extension();
+            $imageStorage->store($request, $imagePath);
+            $pet->update(['image' => $imagePath]);
+        } else {
+            $pet->update(['image' => 'img/default_image.png']);
+        }
 
         $viewData = [];
         $viewData['title'] = __('Pet.pet_created_title');
@@ -79,6 +89,7 @@ class PetController extends Controller
 
         return view('pet.save')->with('viewData', $viewData);
     }
+
 
     public function edit(int $id): View|RedirectResponse
     {
@@ -96,14 +107,15 @@ class PetController extends Controller
         }
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(Request $request, int $id, ImageStorage $imageStorage): RedirectResponse
     {
         Pet::validate($request);
+
         $pet = Pet::findOrFail($id);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
-        $pet->update([
+        $updateData = [
             'name' => $request->input('name'),
             'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
@@ -112,10 +124,19 @@ class PetController extends Controller
             'medications' => $request->input('medications'),
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $imagePath = 'pets/' . $pet->getId() . '.' . $request->file('image')->extension();
+            $imageStorage->store($request, $imagePath);
+            $updateData['image'] = $imagePath;
+        }
+
+        $pet->update($updateData);
 
         return redirect()->route('pet.show', ['id' => $pet->getId()]);
     }
+
 
     public function delete(int $id): RedirectResponse
     {
@@ -135,8 +156,8 @@ class PetController extends Controller
 
         $categoryIds = $recommendedProducts->pluck('category_id');
         $additionalRecommendedProducts = Product::whereIn('category_id', $categoryIds)
-                                                ->whereNotIn('species_id', $speciesIds)
-                                                ->get();
+            ->whereNotIn('species_id', $speciesIds)
+            ->get();
 
         $finalRecommendedProducts = $recommendedProducts->merge($additionalRecommendedProducts);
 

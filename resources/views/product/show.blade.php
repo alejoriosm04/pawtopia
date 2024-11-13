@@ -21,7 +21,7 @@
         <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 800px; margin: 0 auto;">
             <div class="row g-0">
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="{{ asset('/storage/'.$viewData["product"]->getImage()) }}" class="img-fluid rounded shadow-lg product-image" alt="{{ $viewData['product']->getName() }}">
+                    <img src="{{ $viewData["product"]->getImage() }}" class="img-fluid rounded shadow-lg product-image" alt="{{ $viewData['product']->getName() }}">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
