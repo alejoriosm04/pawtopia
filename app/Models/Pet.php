@@ -74,7 +74,11 @@ class Pet extends Model
 
     public function getImage(): string
     {
-        return $this->attributes['image'];
+        if (str_starts_with($this->attributes['image'], 'https://storage.googleapis.com')) {
+            return $this->attributes['image'];
+        }
+
+        return url('storage/' . $this->attributes['image']);
     }
 
     public function setImage(string $image): void
