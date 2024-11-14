@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
+        DOCKER_PASS: ${{secrets.DOCKERHUB_PASS}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - name: Build the Docker image
+      env:
+        BUCKET_URL: ${{ secrets.BUCKET_URL }}
+      run: docker build . --file Dockerfile --tag alejoriosm04/pawtopia:latest  # Aquí asegúrate de usar 'latest' como tag
+
+    - name: Docker Push
+      run: docker push alejoriosm04/pawtopia:latest  # Aquí también asegúrate de usar 'latest'
+      
