@@ -13,7 +13,8 @@
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "laravel/ui": "^4.5"
+        "laravel/ui": "^4.5",
+        "league/flysystem-google-cloud-storage": "^3.28"
     },
 
     "require-dev": {

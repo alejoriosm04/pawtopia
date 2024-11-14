@@ -48,6 +48,17 @@
                         </div>
                     </div>
                 </div>
+                  <div class="mb-3">
+                    <label class="form-label">{{ __('admin/Product.storage_type') }}:</label>
+                    <select name="storage_type" class="form-control" required>
+                        <option value="local" {{ old('storage_type', 'local') == 'local' ? 'selected' : '' }}>
+                            {{ __('admin/Product.local_storage') }}
+                        </option>
+                        <option value="gcp" {{ old('storage_type', 'local') == 'gcp' ? 'selected' : '' }}>
+                            {{ __('admin/Product.cloud_storage') }}
+                        </option>
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.description') }}</label>
                     <textarea class="form-control" name="description" rows="3" required>{{ $viewData['product']->getDescription() }}</textarea>
@@ -72,6 +83,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <button type="submit" class="btn btn-primary">{{ __('admin/Product.edit_button') }}</button>
             </form>
         </div>

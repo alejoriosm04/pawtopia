@@ -59,11 +59,13 @@ class Product extends Model
 
     public function getImage(): string
     {
-        if (str_starts_with($this->attributes['image'], 'https://storage.googleapis.com')) {
-            return $this->attributes['image'];
+        $image = $this->attributes['image'];
+
+        if (filter_var($image, FILTER_VALIDATE_URL)) {
+            return $image;
         }
 
-        return url('storage/' . $this->attributes['image']);
+        return url('storage/' . ltrim($image, '/'));
     }
 
     public function setImage(string $image): void
