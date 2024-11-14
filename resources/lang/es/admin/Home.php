@@ -1,4 +1,5 @@
 <?php
+
 // Lina Ballesteros
 return [
     'title' => 'Panel de Administración',

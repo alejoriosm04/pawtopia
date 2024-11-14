@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Util;
 
 use App\Interfaces\ImageStorage;
@@ -14,7 +15,7 @@ class ImageGCPStorage implements ImageStorage
             $storage = new StorageClient(['keyFile' => json_decode($gcpKeyFile, true)]);
             $bucket = $storage->bucket(env('GCP_BUCKET'));
 
-            $fileName = uniqid() . '.' . $request->file('image')->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$request->file('image')->getClientOriginalExtension();
 
             $bucket->upload(
                 file_get_contents($request->file('image')->getRealPath()),

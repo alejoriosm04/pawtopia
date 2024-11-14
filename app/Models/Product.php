@@ -1,12 +1,11 @@
 <?php
+
 // Lina Ballesteros
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Item;
 
 class Product extends Model
 {
@@ -58,13 +57,13 @@ class Product extends Model
     }
 
     public function getImage(): string
-{
-    if (str_starts_with($this->attributes['image'], 'https://storage.googleapis.com')) {
-        return $this->attributes['image'];
-    }
+    {
+        if (str_starts_with($this->attributes['image'], 'https://storage.googleapis.com')) {
+            return $this->attributes['image'];
+        }
 
-    return url('storage/' . $this->attributes['image']);
-}
+        return url('storage/'.$this->attributes['image']);
+    }
 
     public function setImage(string $image): void
     {
@@ -135,6 +134,7 @@ class Product extends Model
     {
         return $this->hasMany(Item::class);
     }
+
     public function getItems(): Item
     {
         return $this->items;
@@ -149,6 +149,7 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
     }
+
     public function getCategory()
     {
         return $this->category;
@@ -158,7 +159,6 @@ class Product extends Model
     {
         return $this->species;
     }
-
 
     public static function validate(Request $request): void
     {

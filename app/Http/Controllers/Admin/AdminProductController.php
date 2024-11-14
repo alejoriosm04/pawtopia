@@ -1,15 +1,17 @@
 <?php
+
 // Lina Ballesteros
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Species;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Interfaces\ImageStorage;
 
 class AdminProductController extends Controller
 {
@@ -35,26 +37,25 @@ class AdminProductController extends Controller
     }
 
     public function store(Request $request, ImageStorage $imageStorage): RedirectResponse
-{
-    Product::validate($request);
+    {
+        Product::validate($request);
 
-    $creationData = $request->only(['name', 'description', 'category_id', 'species_id']);
-    $newProduct = new Product($creationData);
-    $newProduct->setPrice($request->input('price'));
+        $creationData = $request->only(['name', 'description', 'category_id', 'species_id']);
+        $newProduct = new Product($creationData);
+        $newProduct->setPrice($request->input('price'));
 
-    $newProduct->save();
-
-    if ($request->hasFile('image')) {
-        $publicUrl = $imageStorage->store($request);
-        $newProduct->setImage($publicUrl);
         $newProduct->save();
-    } else {
-        $newProduct->setImage('img/default_image.png');
+
+        if ($request->hasFile('image')) {
+            $publicUrl = $imageStorage->store($request);
+            $newProduct->setImage($publicUrl);
+            $newProduct->save();
+        } else {
+            $newProduct->setImage('img/default_image.png');
+        }
+
+        return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
     }
-
-    return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
-}
-
 
     public function delete(int $id): RedirectResponse
     {
@@ -75,22 +76,22 @@ class AdminProductController extends Controller
     }
 
     public function update(Request $request, int $id, ImageStorage $imageStorage): RedirectResponse
-{
-    Product::validate($request);
+    {
+        Product::validate($request);
 
-    $product = Product::findOrFail($id);
-    $updateData = $request->only(['name', 'description', 'category_id', 'species_id']);
-    $product->setPrice($request->input('price'));
+        $product = Product::findOrFail($id);
+        $updateData = $request->only(['name', 'description', 'category_id', 'species_id']);
+        $product->setPrice($request->input('price'));
 
-    if ($request->hasFile('image')) {
-        $publicUrl = $imageStorage->store($request);
-        $updateData['image'] = $publicUrl;
-    } else {
-        $updateData['image'] = $product->getImage();
+        if ($request->hasFile('image')) {
+            $publicUrl = $imageStorage->store($request);
+            $updateData['image'] = $publicUrl;
+        } else {
+            $updateData['image'] = $product->getImage();
+        }
+
+        $product->update($updateData);
+
+        return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
-
-    $product->update($updateData);
-    return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
-}
-
 }

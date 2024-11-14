@@ -12,13 +12,12 @@ class ImageServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ImageStorage::class, function ($app, $params) {
-             $storage = env('IMAGE_STORAGE', 'local');
+            $storage = env('IMAGE_STORAGE', 'local');
             if ($storage == 'local') {
-                return new ImageLocalStorage();
+                return new ImageLocalStorage;
             } elseif ($storage == 'gcp') {
-                return new ImageGCPStorage();
+                return new ImageGCPStorage;
             }
         });
     }
 }
-

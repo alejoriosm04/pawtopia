@@ -1,0 +1,38 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to Docker Hub
+      env:
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USER }}
+        DOCKER_PASS: ${{ secrets.DOCKERHUB_PASS }}
+      run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+
+    - name: Set up .env file
+      run: echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
+
+    - name: Set up GCP Service Account key
+      run: echo "${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}" > storage/keys/gcp-service-account.json
+
+    - name: Build the Docker image
+      env:
+        BUCKET_URL: ${{ secrets.BUCKET_URL }}
+      run: docker build . --file Dockerfile --tag alejoriosm04/pawtopia:latest
+
+    - name: Push Docker image
+      run: docker push alejoriosm04/pawtopia:latest

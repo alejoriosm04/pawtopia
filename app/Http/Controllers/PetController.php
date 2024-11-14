@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\ImageStorage;
 use App\Models\Pet;
+use App\Models\Product;
 use App\Models\Species;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
+use Illuminate\View\View;
 
 class PetController extends Controller
 {
@@ -75,7 +75,7 @@ class PetController extends Controller
         $pet = Pet::create($petData);
 
         if ($request->hasFile('image')) {
-            $imagePath = 'pets/' . $pet->getId() . '.' . $request->file('image')->extension();
+            $imagePath = 'pets/'.$pet->getId().'.'.$request->file('image')->extension();
             $imageStorage->store($request, $imagePath);
             $pet->update(['image' => $imagePath]);
         } else {
@@ -89,7 +89,6 @@ class PetController extends Controller
 
         return view('pet.save')->with('viewData', $viewData);
     }
-
 
     public function edit(int $id): View|RedirectResponse
     {
@@ -127,7 +126,7 @@ class PetController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            $imagePath = 'pets/' . $pet->getId() . '.' . $request->file('image')->extension();
+            $imagePath = 'pets/'.$pet->getId().'.'.$request->file('image')->extension();
             $imageStorage->store($request, $imagePath);
             $updateData['image'] = $imagePath;
         }
@@ -136,7 +135,6 @@ class PetController extends Controller
 
         return redirect()->route('pet.show', ['id' => $pet->getId()]);
     }
-
 
     public function delete(int $id): RedirectResponse
     {

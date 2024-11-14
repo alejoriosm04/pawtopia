@@ -19,4 +19,3 @@ return [
     'select_pet' => 'Select Pet',
     'no_pets_available' => 'No pets available',
 ];
-

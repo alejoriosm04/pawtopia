@@ -1,0 +1,46 @@
+name: Laravel-lint
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  laravel-lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copy Project Code
+      uses: actions/checkout@v3
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        
+    - name: Ensure .env file exists
+      run: |
+        if [ ! -f .env ]; then
+          if [ -f .env.example ]; then
+            cp .env.example .env
+          else
+            echo "APP_KEY=" > .env
+          fi
+        fi
+      
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      
+    - name: Generate key
+      run: php artisan key:generate || true
+      
+    - name: Execute Laravel Pint
+      run: vendor/bin/pint
+      
+    - name: Commit and push changes if Pint modified files
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: PHP Linting (Pint)
+        skip_fetch: true

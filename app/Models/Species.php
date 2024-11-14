@@ -1,5 +1,7 @@
 <?php
+
 // Lina Ballesteros
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
