@@ -7,9 +7,11 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
+        "google/cloud-storage": "^1.44",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel-lang/common": "^6.4",
         "laravel/framework": "^11.9",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5"
     },
