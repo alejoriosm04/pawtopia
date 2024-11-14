@@ -73,10 +73,12 @@ class Order extends Model
     {
         return $this->hasMany(Item::class);
     }
+
     public function getItems(): Collection
     {
         return $this->items;
     }
+
     public function pet(): BelongsTo
     {
         return $this->belongsTo(Pet::class, 'pet_id');

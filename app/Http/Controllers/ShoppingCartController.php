@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Species;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
-use App\Models\Order;
-use App\Models\Item;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class ShoppingCartController extends Controller
 {
     public function add(Request $request, int $id): RedirectResponse
     {
         $request->validate([
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
         ]);
 
         $product = Product::findOrFail($id);
@@ -88,16 +88,17 @@ class ShoppingCartController extends Controller
 
         return response()->json(['success' => true]);
     }
-    public function purchase(Request $request): View | RedirectResponse
+
+    public function purchase(Request $request): View|RedirectResponse
     {
 
-        $productsInSession = $request->session()->get("products");
+        $productsInSession = $request->session()->get('products');
 
         if ($productsInSession) {
             $userId = Auth::user()->id;
             $petId = $request->input('pet_id');
 
-            $order = new Order();
+            $order = new Order;
             $order->setUserId($userId);
             $order->setTotal(0);
             $order->save();
@@ -108,7 +109,7 @@ class ShoppingCartController extends Controller
             foreach ($productsInCart as $product) {
                 $quantity = $productsInSession[$product->getId()];
 
-                $item = new Item();
+                $item = new Item;
                 $item->setQuantity($quantity);
                 $item->setPrice($product->getPrice());
                 $item->setProductId($product->getId());
@@ -126,19 +127,16 @@ class ShoppingCartController extends Controller
             $order->setTotal($total);
             $order->save();
 
-        
-
             $request->session()->forget('products');
 
             $viewData = [];
-            $viewData["title"] = __('Order.title');
-            $viewData["subtitle"] = __('Order.subtitle');
-            $viewData["order"] = $order;
+            $viewData['title'] = __('Order.title');
+            $viewData['subtitle'] = __('Order.subtitle');
+            $viewData['order'] = $order;
 
-            return view('shoppingcart.purchase')->with("viewData", $viewData);
+            return view('shoppingcart.purchase')->with('viewData', $viewData);
         } else {
             return redirect()->route('cart.index');
         }
     }
-
 }

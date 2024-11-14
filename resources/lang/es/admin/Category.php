@@ -1,4 +1,5 @@
 <?php
+
 // Lina Ballesteros
 return [
     'index_title' => 'Categorías - Panel de Administración',
