@@ -146,10 +146,7 @@ class PetController extends Controller
 
     public function delete(int $id): RedirectResponse
     {
-        $pet = Pet::findOrFail($id);
-        $pet->deleteImage();
-        $pet->delete();
-
+        Pet::destroy($id);
         return redirect()->route('pet.index');
     }
 
