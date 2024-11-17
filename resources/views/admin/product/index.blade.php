@@ -43,6 +43,18 @@
                 </div>
 
                 <div class="mb-3">
+                    <label class="form-label">{{ __('admin/Product.storage_type') }}:</label>
+                    <select name="storage_type" class="form-control" required>
+                        <option value="local" {{ old('storage_type') == 'local' ? 'selected' : '' }}>
+                            {{ __('admin/Product.local_storage') }}
+                        </option>
+                        <option value="gcp" {{ old('storage_type') == 'gcp' ? 'selected' : '' }}>
+                            {{ __('admin/Product.cloud_storage') }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.species') }}:</label>
                     <select id="species-selector" name="species_id" class="form-control" required>
                         <option value="">{{ __('admin/Product.select_species') }}</option>

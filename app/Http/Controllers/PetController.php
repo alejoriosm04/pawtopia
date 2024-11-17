@@ -10,8 +10,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use Exception;
 
 class PetController extends Controller
 {
@@ -54,14 +57,22 @@ class PetController extends Controller
         return view('pet.create')->with('viewData', $viewData);
     }
 
-    public function save(Request $request, ImageStorage $imageStorage): View
+    public function save(Request $request): View
     {
         Pet::validate($request);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
-        $petData = [
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
+
+        $imageUrl = $request->hasFile('image')
+            ? $imageStorage->store($request, 'pets')
+            : 'img/default_image.png';
+
+        Pet::create([
             'name' => $request->input('name'),
+            'image' => $imageUrl,
             'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
@@ -70,17 +81,7 @@ class PetController extends Controller
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
             'user_id' => auth()->id(),
-        ];
-
-        $pet = Pet::create($petData);
-
-        if ($request->hasFile('image')) {
-            $imagePath = 'pets/'.$pet->getId().'.'.$request->file('image')->extension();
-            $imageStorage->store($request, $imagePath);
-            $pet->update(['image' => $imagePath]);
-        } else {
-            $pet->update(['image' => 'img/default_image.png']);
-        }
+        ]);
 
         $viewData = [];
         $viewData['title'] = __('Pet.pet_created_title');
@@ -106,10 +107,9 @@ class PetController extends Controller
         }
     }
 
-    public function update(Request $request, int $id, ImageStorage $imageStorage): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Pet::validate($request);
-
         $pet = Pet::findOrFail($id);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
@@ -125,23 +125,27 @@ class PetController extends Controller
             'veterinaryNotes' => $request->input('veterinaryNotes'),
         ];
 
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
+
         if ($request->hasFile('image')) {
-            $imagePath = 'pets/'.$pet->getId().'.'.$request->file('image')->extension();
-            $imageStorage->store($request, $imagePath);
-            $updateData['image'] = $imagePath;
+            if ($pet->getImage() !== 'img/default_image.png') {
+                $previousImagePath = str_replace(url('storage') . '/', '', $pet->getImage());
+                $imageStorage->delete($previousImagePath);
+            }
+
+            $updateData['image'] = $imageStorage->store($request, 'pets');
         }
 
         $pet->update($updateData);
 
-        return redirect()->route('pet.show', ['id' => $pet->getId()]);
+        return redirect()->route('pet.show', ['id' => $pet->getId()])
+            ->with('success', __('Pet.update_success'));
     }
 
     public function delete(int $id): RedirectResponse
     {
-        $pet = Pet::findOrFail($id);
-        $pet->deleteImage();
-        $pet->delete();
-
+        Pet::destroy($id);
         return redirect()->route('pet.index');
     }
 

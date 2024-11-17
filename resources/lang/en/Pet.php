@@ -59,4 +59,7 @@ return [
     'my_pets' => 'My Pets',
     'recommendations_title' => 'Recommendations for your Pets',
     'recommendations_subtitle' => 'Recommended products based on your pets',
+    'select_storage_type' => 'Select storage type',
+    'local_storage' => 'Local storage',
+    'cloud_storage' => 'Cloud storage',
 ];

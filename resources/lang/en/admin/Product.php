@@ -23,5 +23,9 @@ return [
     'species' => 'Species',
     'select_category' => 'Select Category',
     'select_species' => 'Select Species',
+    'storage_type' => 'Storage Type',
+    'local_storage' => 'Local Storage',
+    'cloud_storage' => 'Cloud Storage',
+
 
 ];

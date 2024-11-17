@@ -72,7 +72,13 @@ class Pet extends Model
 
     public function getImage(): string
     {
-        return $this->attributes['image'];
+        $image = $this->attributes['image'];
+
+        if (filter_var($image, FILTER_VALIDATE_URL)) {
+            return $image;
+        }
+
+        return url('storage/' . ltrim($image, '/'));
     }
 
     public function setImage(string $image): void

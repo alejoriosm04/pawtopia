@@ -59,4 +59,7 @@ return [
     'my_pets' => 'Mis Mascotas',
     'recommendations_title' => 'Recomendaciones para tus Mascotas',
     'recommendations_subtitle' => 'Productos recomendados basados en tus mascotas',
+    'select_storage_type' => 'Seleccionar Tipo de Almacenamiento',
+    'local_storage' => 'Almacenamiento Local',
+    'cloud_storage' => 'Almacenamiento en la Nube',
 ];

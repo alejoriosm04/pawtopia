@@ -11,7 +11,7 @@
         @foreach($viewData['products'] as $product)
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <img src="{{ asset('/storage/'.$product->getImage()) }}" class="card-img-top" alt="{{ $product->getName() }}">
+                    <img src="{{ $product->getImage() }}" class="card-img-top" alt="{{ $product->getName() }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->getName() }}</h5>
                         <p class="card-text">{{ $product->getDescription() }}</p>

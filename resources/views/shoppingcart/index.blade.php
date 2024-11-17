@@ -20,7 +20,7 @@
                                         <tr>
                                             <td width="90">
                                                 <div class="cart-product-imitation">
-                                                    <img src="{{ asset('/storage/'.$product->getImage()) }}" class="img-fluid">
+                                                    <img src="{{ $product->getImage() }}" class="img-fluid">
                                                 </div>
                                             </td>
                                             <td class="desc">
