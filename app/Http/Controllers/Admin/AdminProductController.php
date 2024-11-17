@@ -106,7 +106,4 @@ class AdminProductController extends Controller
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
-
-        return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
-    }
 }
