@@ -426,7 +426,23 @@ p, a, .navbar-nav .nav-link {
     font-size: 0.7rem;
     top: -5px;
 }
+.btn-custom {
+    background-color: #ffa500;
+    border-color: #ffa500;
+    color: #fff;
+}
+.btn-custom:hover {
+    background-color: #ff8c00;
+    border-color: #ff8c00;
+}
+.forgot-password-link {
+    color: #db4d20;
+    text-decoration: none;
+}
 
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
 
 
 

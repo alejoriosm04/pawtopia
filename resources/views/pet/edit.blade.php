@@ -114,7 +114,7 @@
 
                             <!-- Submit Button -->
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="{{ __('Pet.update') }}">
+                                <input type="submit" class="btn btn-custom" value="{{ __('Pet.update') }}">
                             </div>
                         </form>
                     </div>
