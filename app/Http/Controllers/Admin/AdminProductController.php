@@ -12,7 +12,6 @@ use App\Models\Species;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Interfaces\ImageStorage;
 use Exception;
 
 class AdminProductController extends Controller
