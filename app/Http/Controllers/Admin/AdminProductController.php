@@ -9,10 +9,10 @@ use App\Interfaces\ImageStorage;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Species;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Exception;
 
 class AdminProductController extends Controller
 {
@@ -66,6 +66,7 @@ class AdminProductController extends Controller
     public function delete(int $id): RedirectResponse
     {
         Product::destroy($id);
+
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.delete_success'));
     }
 
@@ -94,7 +95,7 @@ class AdminProductController extends Controller
         if ($request->hasFile('image')) {
 
             if ($product->getImage() !== 'img/default_image.png') {
-                $previousImagePath = str_replace(url('storage') . '/', '', $product->getImage());
+                $previousImagePath = str_replace(url('storage').'/', '', $product->getImage());
                 $imageStorage->delete($previousImagePath);
             }
 
@@ -102,7 +103,6 @@ class AdminProductController extends Controller
         }
 
         $product->update($updateData);
-
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }

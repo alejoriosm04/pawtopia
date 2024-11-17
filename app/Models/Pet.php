@@ -78,7 +78,7 @@ class Pet extends Model
             return $image;
         }
 
-        return url('storage/' . ltrim($image, '/'));
+        return url('storage/'.ltrim($image, '/'));
     }
 
     public function setImage(string $image): void

@@ -27,5 +27,4 @@ return [
     'local_storage' => 'Local Storage',
     'cloud_storage' => 'Cloud Storage',
 
-
 ];

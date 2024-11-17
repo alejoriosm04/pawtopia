@@ -7,6 +7,7 @@ use App\Util\ImageGCPStorage;
 use App\Util\ImageLocalStorage;
 use Illuminate\Support\ServiceProvider;
 use InvalidArgumentException;
+
 class ImageServiceProvider extends ServiceProvider
 {
     public function register(): void
@@ -15,9 +16,9 @@ class ImageServiceProvider extends ServiceProvider
             $storage = $params['storage'] ?? env('IMAGE_STORAGE', 'local');
 
             if ($storage === 'local') {
-                return new ImageLocalStorage();
+                return new ImageLocalStorage;
             } elseif ($storage === 'gcp') {
-                return new ImageGCPStorage();
+                return new ImageGCPStorage;
             }
 
             throw new InvalidArgumentException("Unsupported storage type: $storage");

@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use App\Interfaces\ImageStorage;
 use App\Models\Pet;
 use App\Models\Product;
+use App\Models\Product;
 use App\Models\Species;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product;
-use Exception;
+use Illuminate\View\View;
 
 class PetController extends Controller
 {
@@ -130,7 +128,7 @@ class PetController extends Controller
 
         if ($request->hasFile('image')) {
             if ($pet->getImage() !== 'img/default_image.png') {
-                $previousImagePath = str_replace(url('storage') . '/', '', $pet->getImage());
+                $previousImagePath = str_replace(url('storage').'/', '', $pet->getImage());
                 $imageStorage->delete($previousImagePath);
             }
 
@@ -146,6 +144,7 @@ class PetController extends Controller
     public function delete(int $id): RedirectResponse
     {
         Pet::destroy($id);
+
         return redirect()->route('pet.index');
     }
 
