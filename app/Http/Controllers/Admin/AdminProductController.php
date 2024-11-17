@@ -64,9 +64,6 @@ class AdminProductController extends Controller
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
     }
 
-        return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
-    }
-
     public function delete(int $id): RedirectResponse
     {
         Product::destroy($id);
