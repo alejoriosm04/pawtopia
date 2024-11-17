@@ -439,10 +439,29 @@ p, a, .navbar-nav .nav-link {
     color: #db4d20;
     text-decoration: none;
 }
-
 .forgot-password-link:hover {
     text-decoration: underline;
 }
+.btn-view-product {
+        background-color: #ffa500; /* Color personalizado */
+        color: white;
+        border: none;
+        font-size: 1.2rem; /* Tamaño de fuente más grande */
+        padding: 12px 20px; /* Más espacio alrededor del texto */
+        display: block;
+        width: calc(100% - 20px); /* Reduce el ancho total dejando márgenes */
+        margin: 10px auto; /* Centra el botón con márgenes */
+        text-align: center;
+    }
 
+    .btn-view-product:hover {
+        background-color: #e69500; /* Color más oscuro al hacer hover */
+        color: white;
+    }
+
+    .card-footer {
+        background-color: transparent;
+        text-align: center;
+    }
 
 
