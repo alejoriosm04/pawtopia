@@ -15,90 +15,96 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20;">
-    <div class="container-fluid d-flex align-items-center">
+    <div class="container-fluid">
         <a class="navbar-brand ms-3" href="{{ route('home.index') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 100px;" />
         </a>
-        <form class="d-flex ms-3" action="{{ route('product.search') }}" method="GET" style="width: 30%; position: relative;">
-            <input class="form-control me-2" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 20px; padding-left: 15px; background-color: #f9f9f9;">
-            <button class="btn btn-light d-flex align-items-center justify-content-center" type="submit" style="border-radius: 50%; width: 30px; height: 30px;">
-                <i class="bi bi-search" style="font-size: 1rem; color: #DB4D20;"></i>
-            </button>
-        </form>
 
-        <ul class="navbar-nav ms-auto d-flex align-items-center">
-            @auth
-                @if(Auth::user()->role == 'admin')
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="d-flex ms-lg-3 my-2 my-lg-0 w-100" action="{{ route('product.search') }}" method="GET">
+                <div class="input-group">
+                    <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 20px; background-color: #f9f9f9; padding-right: 40px;">
+                    <button class="btn btn-light d-flex align-items-center justify-content-center" type="submit" style="border-radius: 50%; width: 40px; height: 40px; margin-left: -40px;">
+                        <i class="bi bi-search" style="font-size: 1rem; color: #DB4D20;"></i>
+                    </button>
+                </div>
+            </form>
+
+            <ul class="navbar-nav ms-auto d-flex align-items-center">
+                @auth
+                    @if(Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('admin.home.index') }}">
+                                <i class="bi bi-gear-fill me-1"></i> {{ __('Layout.admin_panel') }}
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item">
-                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('admin.home.index') }}">
-                            <i class="bi bi-gear-fill me-1"></i> {{ __('Layout.admin_panel') }}
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('pets.recommendations') }}">
+                            <i class="bi bi-star-fill me-1"></i> {{ __('Layout.recommendations') }}
                         </a>
                     </li>
-                @endif
+                    <li class="nav-item">
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('user.orders') }}">
+                            <i class="bi bi-bag-fill me-1"></i> {{ __('Layout.my_orders') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('user.show', ['id' => Auth::user()->id]) }}">
+                            <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form id="logout" action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button class="btn btn-light">{{ __('Logout') }}</button>
+                        </form>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('login') }}">
+                            <i class="bi bi-person-circle me-1"></i> {{ __('Login') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('register') }}">
+                            <i class="bi bi-pencil-square me-1"></i> {{ __('Register') }}
+                        </a>
+                    </li>
+                @endauth
 
                 <li class="nav-item">
-                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('pets.recommendations') }}">
-                        <i class="bi bi-star-fill me-1"></i> {{ __('Layout.recommendations') }}
+                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('cart.index') }}">
+                        <i class="bi bi-cart me-1"></i> {{ __('Cart.title') }}
+                        @if (session('cart_count') > 0)
+                            <span class="badge bg-danger">{{ session('cart_count') }}</span>
+                        @endif
                     </a>
                 </li>
-                      <li class="nav-item">
-                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('user.orders') }}">
-                        <i class="bi bi-bag-fill me-1"></i> {{ __('Layout.my_orders') }}
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('user.show', ['id' => Auth::user()->id]) }}">
-                        <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <form id="logout" action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button class="btn btn-light">{{ __('Logout') }}</button>
-                    </form>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('login') }}">
-                        <i class="bi bi-person-circle me-1"></i> {{ __('Login') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('register') }}">
-                        <i class="bi bi-pencil-square me-1"></i> {{ __('Register') }}
-                    </a>
-                </li>
-            @endauth
-
-            <li class="nav-item">
-                <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('cart.index') }}">
-                    <i class="bi bi-cart me-1"></i> {{ __('Cart.title') }}
-                    @if (session('cart_count') > 0)
-                        <span class="badge bg-danger">{{ session('cart_count') }}</span>
-                    @endif
-                </a>
-            </li>
-        </ul>
+            </ul>
+        </div>
     </div>
 </nav>
 
 <div class="bg-light py-2">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap">
         <div class="text-center">
             <div class="nav-item d-inline-block">
                 <a class="nav-link text-dark mx-2" href="{{ route('product.index') }}">
                     {{ __('Category.all_products') }}
                 </a>
             </div>
-
             @if(isset($viewData['species_categories']))
                 @foreach($viewData['species_categories'] as $species)
                     <div class="nav-item dropdown d-inline-block">
-                        <a class="nav-link text-dark mx-2" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}">
+                        <a class="nav-link text-dark mx-2 dropdown-toggle" href="#" id="dropdown{{ $species->getId() }}" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ $species->getName() }}
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" aria-labelledby="dropdown{{ $species->getId() }}">
                             @foreach($species->getCategories() as $category)
                                 <li><a class="dropdown-item" href="{{ route('product.filterByCategory', ['category' => $category->getId()]) }}">{{ $category->getName() }}</a></li>
                             @endforeach
@@ -108,7 +114,7 @@
             @endif
         </div>
 
-        <div class="nav-item d-inline-block">
+        <div class="nav-item d-inline-block mt-2 mt-md-0">
             <a href="{{ route('pet.index') }}" class="nav-link text-dark mx-2">
                 <i class="bi bi-house-heart-fill"></i> {{ __('Pet.my_pets') }}
             </a>
