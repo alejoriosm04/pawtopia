@@ -45,7 +45,7 @@ class Pet extends Model
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'breed' => 'required|string|max:255',
             'birthDate' => 'required|date',
             'characteristics' => 'required|array',

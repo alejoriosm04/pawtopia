@@ -93,17 +93,18 @@ class AdminProductController extends Controller
         $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
 
         if ($request->hasFile('image')) {
-
             if ($product->getImage() !== 'img/default_image.png') {
                 $previousImagePath = str_replace(url('storage').'/', '', $product->getImage());
                 $imageStorage->delete($previousImagePath);
             }
-
             $updateData['image'] = $imageStorage->store($request, 'products');
+        } else {
+            $updateData['image'] = $request->input('current_image');
         }
 
         $product->update($updateData);
 
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
+
 }

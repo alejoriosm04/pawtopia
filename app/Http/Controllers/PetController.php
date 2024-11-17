@@ -132,6 +132,8 @@ class PetController extends Controller
             }
 
             $updateData['image'] = $imageStorage->store($request, 'pets');
+        } else {
+            $updateData['image'] = $request->input('current_image');
         }
 
         $pet->update($updateData);
@@ -139,7 +141,6 @@ class PetController extends Controller
         return redirect()->route('pet.show', ['id' => $pet->getId()])
             ->with('success', __('Pet.update_success'));
     }
-
     public function delete(int $id): RedirectResponse
     {
         Pet::destroy($id);

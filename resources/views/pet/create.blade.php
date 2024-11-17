@@ -29,8 +29,8 @@
                             <div class="form-group mb-2">
                                 <label for="storage_type">{{ __('Pet.select_storage_type') }}</label>
                                 <select id="storage_type" name="storage_type" class="form-control" required>
-                                    <option value="local" {{ old('storage_type') == 'local' ? 'selected' : '' }}>{{ __('Pet.local_storage') }}</option>
                                     <option value="gcp" {{ old('storage_type') == 'gcp' ? 'selected' : '' }}>{{ __('Pet.cloud_storage') }}</option>
+                                    <option value="local" {{ old('storage_type') == 'local' ? 'selected' : '' }}>{{ __('Pet.local_storage') }}</option>
                                 </select>
                             </div>
                             <div class="form-group mb-2">
@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="{{ __('Pet.send') }}">
+                                <input type="submit" class="btn btn-custom" value="{{ __('Pet.send') }}">
                             </div>
                         </form>
                     </div>
