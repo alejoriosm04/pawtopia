@@ -23,6 +23,7 @@
                     {{ __('Product.no_products') }}
                 </div>
             @else
+                <br>
                 <div class="row">
                     @foreach($viewData['products'] as $product)
                         <div class="col-md-3 col-lg-2 mb-4 px-1">

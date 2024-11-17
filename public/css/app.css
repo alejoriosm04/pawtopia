@@ -443,25 +443,35 @@ p, a, .navbar-nav .nav-link {
     text-decoration: underline;
 }
 .btn-view-product {
-        background-color: #ffa500; /* Color personalizado */
-        color: white;
-        border: none;
-        font-size: 1.2rem; /* Tamaño de fuente más grande */
-        padding: 12px 20px; /* Más espacio alrededor del texto */
-        display: block;
-        width: calc(100% - 20px); /* Reduce el ancho total dejando márgenes */
-        margin: 10px auto; /* Centra el botón con márgenes */
-        text-align: center;
-    }
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    text-align: center;
+}
 
-    .btn-view-product:hover {
-        background-color: #e69500; /* Color más oscuro al hacer hover */
-        color: white;
-    }
+.btn-view-product:hover {
+    background-color: #e69500;
+    color: white;
+}
 
-    .card-footer {
-        background-color: transparent;
-        text-align: center;
+.card-footer {
+    background-color: transparent;
+    text-align: center;
+}
+@media (max-width: 991.98px) {
+    .navbar-collapse form {
+        margin: 0 auto !important;
+        justify-content: center !important;
     }
+}
+.uniform-table {
+    width: 100%;
+    table-layout: fixed;
+}
 
 

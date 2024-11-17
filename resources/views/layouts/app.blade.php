@@ -9,11 +9,11 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
     <link rel="icon" type="image/png" href="{{ asset('img/logo_abstraction.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', __('Home.title'))</title>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20;">
     <div class="container-fluid">
         <a class="navbar-brand ms-3" href="{{ route('home.index') }}">
@@ -23,17 +23,17 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
-            <form class="d-flex ms-lg-3 my-2 my-lg-0 w-100" action="{{ route('product.search') }}" method="GET">
-                <div class="input-group">
-                    <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 20px; background-color: #f9f9f9; padding-right: 40px;">
-                    <button class="btn btn-light d-flex align-items-center justify-content-center" type="submit" style="border-radius: 50%; width: 40px; height: 40px; margin-left: -40px;">
-                        <i class="bi bi-search" style="font-size: 1rem; color: #DB4D20;"></i>
+            <form class="d-flex ms-lg-1 my-2 my-lg-0" action="{{ route('product.search') }}" method="GET">
+                <div class="input-group" style="margin-left: -10px; width: 350px;">
+                    <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search"
+                           style="border-radius: 20px; background-color: #f9f9f9; padding-right: 40px; width: calc(100% - 50px);">
+                    <button class="btn btn-light d-flex align-items-center justify-content-center" type="submit"
+                            style="border-radius: 50%; width: 45px; height: 40px; margin-left: -55px;">
+                        <i class="bi bi-search" style="font-size: 1rem; color: #DB4D20; margin-left: 20px;"></i>
                     </button>
                 </div>
             </form>
-
             <ul class="navbar-nav ms-auto d-flex align-items-center">
                 @auth
                     @if(Auth::user()->role == 'admin')
@@ -91,7 +91,7 @@
 </nav>
 
 <div class="bg-light py-2">
-    <div class="container d-flex justify-content-between align-items-center flex-wrap">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap" style="margin-left: 15px;">
         <div class="text-center">
             <div class="nav-item d-inline-block">
                 <a class="nav-link text-dark mx-2" href="{{ route('product.index') }}">
@@ -113,15 +113,13 @@
                 @endforeach
             @endif
         </div>
-
-        <div class="nav-item d-inline-block mt-2 mt-md-0">
+        <div class="nav-item d-inline-block mt-2 mt-md-0" style="position: absolute; right: 15px;">
             <a href="{{ route('pet.index') }}" class="nav-link text-dark mx-2">
-                <i class="bi bi-house-heart-fill"></i> {{ __('Pet.my_pets') }}
+                <i class="material-icons" style="font-size: 18px;">&#xe91d;</i> {{ __('Pet.my_pets') }}
             </a>
         </div>
     </div>
 </div>
-
 <div class="container my-4">
     @yield('content')
 </div>
