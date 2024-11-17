@@ -1,8 +1,11 @@
 <?php
+
 // Lina Ballesteros
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Species;
@@ -61,6 +64,8 @@ class AdminProductController extends Controller
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
     }
 
+        return redirect()->route('admin.product.index')->with('success', __('admin/Product.create_success'));
+    }
 
     public function delete(int $id): RedirectResponse
     {
@@ -87,7 +92,6 @@ class AdminProductController extends Controller
         $updateData = $request->only(['name', 'description', 'category_id', 'species_id']);
         $product->setPrice($request->input('price'));
 
-
         $storageType = $request->input('storage_type', 'local');
         $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
 
@@ -107,4 +111,6 @@ class AdminProductController extends Controller
         return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
     }
 
+        return redirect()->route('admin.product.index')->with('success', __('admin/Product.update_success'));
+    }
 }

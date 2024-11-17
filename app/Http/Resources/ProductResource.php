@@ -19,9 +19,8 @@ class ProductResource extends JsonResource
             'image' => $this->getImage(),
             'category' => $this->getCategory() ? $this->getCategory()->getName() : null,
             'species' => $this->getSpecies() ? $this->getSpecies()->getName() : null,
-            'link' => url(route('api.product.show', ['id' => $this->getId()], false)),
+            'link' => url(route('product.show', ['id' => $this->getId()], false)),
 
         ];
     }
-
 }

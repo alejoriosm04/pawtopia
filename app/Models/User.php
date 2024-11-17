@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Notifications\CustomVerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Product;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -24,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
      * $this->attributes['favList'] - array - contains the list of favorite products
-     * 
+     *
      * $this->attributes['role'] - string - contains the user role
      *  $this->orders - Order[] - contains the associated orders
      */
@@ -144,13 +142,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->favList()->get();
     }
 
-    
     public function getOrders()
     {
         return $this->orders()->get();
     }
-    
-    
+
     public static function validate($request): void
     {
         $request->validate([
@@ -164,7 +160,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'favList' => 'nullable|string',
         ]);
     }
-
 
     public function pets(): HasMany
     {
@@ -180,5 +175,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Pet::class);
     }
-
 }

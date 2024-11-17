@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\ImageStorage;
 use App\Models\Pet;
+use App\Models\Product;
 use App\Models\Species;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -141,8 +142,6 @@ class PetController extends Controller
         return redirect()->route('pet.show', ['id' => $pet->getId()])
             ->with('success', __('Pet.update_success'));
     }
-
-
 
     public function delete(int $id): RedirectResponse
     {

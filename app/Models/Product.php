@@ -1,12 +1,11 @@
 <?php
+
 // Lina Ballesteros
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Item;
 
 class Product extends Model
 {
@@ -137,6 +136,7 @@ class Product extends Model
     {
         return $this->hasMany(Item::class);
     }
+
     public function getItems(): Item
     {
         return $this->items;
@@ -151,6 +151,7 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
     }
+
     public function getCategory()
     {
         return $this->category;
@@ -160,7 +161,6 @@ class Product extends Model
     {
         return $this->species;
     }
-
 
     public static function validate(Request $request): void
     {
