@@ -15,6 +15,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 p, a, .navbar-nav .nav-link {
     font-family: 'Lexend', sans-serif;
     font-weight: 400;
+    padding: 8px 10px;
 }
 
 .navbar-brand .logo {
@@ -27,6 +28,9 @@ p, a, .navbar-nav .nav-link {
     font-size: 1.5rem;
     color: white;
     margin-left: 10px;
+}
+.nav-link:hover i.bi-cart {
+    color: #FFA500 !important;
 }
 
 .navbar-nav .nav-link i.bi-cart:hover,
@@ -259,10 +263,16 @@ p, a, .navbar-nav .nav-link {
     max-width: 80%;
     margin: 0 auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px !important;
+    margin-top: 1px !important;
+    font-size: 0.9rem;
+}
+.container {
+    padding-top: 5px !important;
 }
 
 .category-title {
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: bold;
     letter-spacing: 1px;
     margin: 0;
@@ -358,6 +368,63 @@ p, a, .navbar-nav .nav-link {
 .pet-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.navbar-brand img {
+    width: 100px;
+    height: auto;
+}
+.navbar-nav .nav-link {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.navbar-nav .img-profile {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+.navbar-nav .badge {
+    position: relative;
+    top: -5px;
+}
+.navbar-nav .btn-light {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.navbar-nav .nav-link i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+.img-profile {
+    width: 30px;
+    height: 30px;
+}
+
+.btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
+.navbar {
+    background-color: #DB4D20;
+}
+
+.navbar .container-fluid {
+    gap: 10px;
+}
+
+#logout .btn {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+}
+
+.navbar .badge {
+    font-size: 0.7rem;
+    top: -5px;
 }
 
 

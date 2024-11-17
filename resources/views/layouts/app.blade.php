@@ -1,5 +1,4 @@
-{{-- Lina Ballesteros --}}
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,63 +16,73 @@
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20;">
     <div class="container-fluid d-flex align-items-center">
-        <a class="navbar-brand ms-5" href="{{ route('home.index') }}" style="color: white;">
-            <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 120px;" />
+        <a class="navbar-brand ms-3" href="{{ route('home.index') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 100px;" />
         </a>
+        <form class="d-flex ms-3" action="{{ route('product.search') }}" method="GET" style="width: 30%; position: relative;">
+            <input class="form-control me-2" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 20px; padding-left: 15px; background-color: #f9f9f9;">
+            <button class="btn btn-light d-flex align-items-center justify-content-center" type="submit" style="border-radius: 50%; width: 30px; height: 30px;">
+                <i class="bi bi-search" style="font-size: 1rem; color: #DB4D20;"></i>
+            </button>
+        </form>
 
-       <form class="d-flex ms-5" action="{{ route('product.search') }}" method="GET" style="width: 35%; position: relative; align-items: center;">
-    <input class="form-control me-2" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search" style="border-radius: 25px; padding-left: 20px; border: 2px solid #fff; background-color: #f9f9f9;">
-            <button class="btn btn-light" type="submit" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">        <i class="bi bi-search" style="font-size: 1.5rem; color: #DB4D20;"></i>
-    </button>
-</form>
-
-
-        <div class="d-flex align-items-center ms-auto">
+        <ul class="navbar-nav ms-auto d-flex align-items-center">
             @auth
                 @if(Auth::user()->role == 'admin')
-                    <a class="nav-link me-3" href="{{ route('admin.home.index') }}" aria-label="Admin Panel" style="color: white;">
-                        <i class="bi bi-gear-fill" style="font-size: 1.5rem;"></i> {{ __('Layout.admin_panel') }}
-                    </a>
+                    <li class="nav-item">
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('admin.home.index') }}">
+                            <i class="bi bi-gear-fill me-1"></i> {{ __('Layout.admin_panel') }}
+                        </a>
+                    </li>
                 @endif
 
-                <a class="nav-link me-3" href="{{ route('pets.recommendations') }}" aria-label="Recomendaciones" style="color: white;">
-                    <i class="bi bi-star-fill" style="font-size: 1.5rem;"></i> {{ __('Layout.recommendations') }}
-                </a>
+                <li class="nav-item">
+                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('pets.recommendations') }}">
+                        <i class="bi bi-star-fill me-1"></i> {{ __('Layout.recommendations') }}
+                    </a>
+                </li>
+                      <li class="nav-item">
+                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('user.orders') }}">
+                        <i class="bi bi-bag-fill me-1"></i> {{ __('Layout.my_orders') }}
+                    </a>
+                </li>
 
-                <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="nav-link text-decoration-none text-light d-inline-flex align-items-center">
-                    <span>{{ Auth::user()->name }}</span>
-                    <a class="nav-link active" style="color: white;" href="{{ route('user.orders') }}">{{ __('Layout.my_orders') }} </a>
-
-                    @if(Auth::user()->image)
-                        <img class="img-profile rounded-circle" src="{{ asset('/storage/'.Auth::user()->image) }}" style="width: 40px; height: 40px;">
-                    @else
-                        <img class="img-profile rounded-circle" src="{{ asset('/img/default_user.png') }}" style="width: 40px; height: 40px;">
-                    @endif
-
-
+                <li class="nav-item">
+                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('user.show', ['id' => Auth::user()->id]) }}">
+                        <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
+                    </a>
+                </li>
+                <li class="nav-item">
                     <form id="logout" action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf
                         <button class="btn btn-light">{{ __('Logout') }}</button>
                     </form>
-                    @else
-                        <a class="nav-link me-3" href="{{ route('login') }}" style="color: white;">
-                            <i class="bi bi-person-circle" style="font-size: 2rem;"></i> {{ __('Login') }}
-                        </a>
-                        <a class="nav-link me-3" href="{{ route('register') }}" style="color: white;">
-                            {{ __('Register') }}
-                        </a>
-                    @endauth
-
-                    <a class="nav-link me-3" href="{{ route('cart.index') }}" aria-label="Shopping Cart" style="color: white;">
-                        <i class="bi bi-cart" style="font-size: 2rem;"></i> {{ __('Cart.title') }}
-                        @if (session('cart_count') > 0)
-                            <span class="badge bg-danger" style="position: relative; top: -10px;">{{ session('cart_count') }}</span>
-                        @endif
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('login') }}">
+                        <i class="bi bi-person-circle me-1"></i> {{ __('Login') }}
                     </a>
-        </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('register') }}">
+                        <i class="bi bi-pencil-square me-1"></i> {{ __('Register') }}
+                    </a>
+                </li>
+            @endauth
 
+            <li class="nav-item">
+                <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('cart.index') }}">
+                    <i class="bi bi-cart me-1"></i> {{ __('Cart.title') }}
+                    @if (session('cart_count') > 0)
+                        <span class="badge bg-danger">{{ session('cart_count') }}</span>
+                    @endif
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>
+
 <div class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="text-center">
