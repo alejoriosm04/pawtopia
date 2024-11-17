@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Interfaces\ImageStorage;
 use App\Models\Pet;
 use App\Models\Product;
-use App\Models\Product;
 use App\Models\Species;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
