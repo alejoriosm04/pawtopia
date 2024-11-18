@@ -23,6 +23,12 @@ return [
     'order_date' => 'Date:',
     'no_orders' => 'No orders.',
     'change_profile_image' => 'Change Profile Image',
-    'orders_title' => 'My Orders - Online Store',
+    'orders_title' => 'My Orders',
     'orders_subtitle' => 'My Orders',
+    'created_success' => 'User created successfully.',
+    'updated_success' => 'Successfully updated user.',
+    'deleted_success' => 'User deleted successfully.',
+    'favorites_add_success' => 'Product added to your favorites.',
+    'favorites_add_info' => 'Product was already in your favorites.',
+    'login_required' => 'You need to log in to add products to favorites.',
 ];

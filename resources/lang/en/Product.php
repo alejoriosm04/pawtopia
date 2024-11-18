@@ -17,5 +17,6 @@ return [
     'keyword_results' => 'Results for search:',
     'results_for' => 'Results for: ',
     'quantity' => 'Quantity: ',
+    'brand_products' => 'Products in Brand: ',
 
 ];

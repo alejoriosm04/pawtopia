@@ -22,8 +22,6 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.pets_title');
         $viewData['subtitle'] = __('Pet.pets_subtitle');
         $viewData['pets'] = Auth::user()->pets;
-        $viewData['species'] = Species::all();
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.index');
 
         return view('pet.index')->with('viewData', $viewData);
@@ -37,8 +35,6 @@ class PetController extends Controller
             $viewData['title'] = __('Pet.pet_info_title', ['name' => $pet->getName()]);
             $viewData['subtitle'] = __('Pet.pet_info_subtitle', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
-            $viewData['species'] = Species::all();
-            $viewData['species_categories'] = Species::with('categories')->get();
             $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
             return view('pet.show')->with('viewData', $viewData);
@@ -52,7 +48,6 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.create_pet_title');
         $viewData['species'] = Species::all();
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.create');
 
         return view('pet.create')->with('viewData', $viewData);
@@ -87,7 +82,6 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.pet_created_title');
         $viewData['message'] = __('Pet.pet_created_message');
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
         return view('pet.save')->with('viewData', $viewData);
@@ -101,7 +95,6 @@ class PetController extends Controller
             $viewData['title'] = __('Pet.edit_pet_title', ['name' => $pet->getName()]);
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
-            $viewData['species_categories'] = Species::with('categories')->get();
             $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
             return view('pet.edit')->with('viewData', $viewData);
@@ -178,8 +171,7 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.recommendations_title');
         $viewData['subtitle'] = __('Pet.recommendations_subtitle');
-        $viewData['products'] = $recommendedProducts;
-        $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['products'] = $finalRecommendedProducts;
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.recommendations');
 
         return view('pet.recommendations')->with('viewData', $viewData);

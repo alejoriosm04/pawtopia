@@ -41,7 +41,7 @@
             <input type="file" name="image" class="form-control-file">
         </div>
 
-        <button type="submit" class="btn btn-primary">{{ __('Action.update_user') }}</button>
+        <button type="submit" class="btn btn-custom">{{ __('Action.update_user') }}</button>
     </form>
 </div>
 @endsection

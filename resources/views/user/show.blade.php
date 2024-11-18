@@ -12,7 +12,7 @@
 
             <div class="mb-3">
                 <strong>{{ __('User.profile_image') }}:</strong><br>
-                <img src="{{ asset('/storage/'.$viewData['user']->getImage()) }}" alt="{{ __('User.image_alt') }}" class="img-fluid" style="max-width: 150px;">
+                <img src="{{ $viewData['user']->getImage() }}" alt="{{ __('User.image_alt') }}" class="img-fluid" style="max-width: 150px;">
             </div>
 
             <h5>{{ __('User.pets') }}</h5>

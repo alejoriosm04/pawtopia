@@ -7,9 +7,11 @@ return [
     'home' => 'Administrador - Inicio',
     'products' => 'Administrador - Productos',
     'categories' => 'Administrador - Categorías',
-    'species' => 'Admin - Species',
+    'species' => 'Admin - Especies',
     'go_back_home' => 'Volver a la página de inicio',
     'go_back_products' => 'Volver a la lista de productos',
     'profile_name' => 'Administrador',
     'copyright' => 'Copyright | Pawtopia',
+    'login' => 'Iniciar Sesión',
+    'logout' => 'Cerrar Sesión',
 ];

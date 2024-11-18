@@ -21,7 +21,6 @@ class ProductController extends Controller
         $viewData['title'] = __('Product.index_title');
         $viewData['subtitle'] = __('Product.index_subtitle');
         $viewData['products'] = Product::all();
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.index');
 
         return view('product.index')->with('viewData', $viewData);
@@ -38,7 +37,6 @@ class ProductController extends Controller
         $viewData = [];
         $viewData['title'] = $product->getName();
         $viewData['subtitle'] = $product->getName().' - '.__('Product.product_info');
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['product'] = $product;
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.show', $product);
 
@@ -58,7 +56,6 @@ class ProductController extends Controller
         $viewData['title'] = __('Product.category_title', ['category' => $speciesModel->getName()]);
         $viewData['subtitle'] = __('Product.category_subtitle', ['category' => $speciesModel->getName()]);
         $viewData['products'] = Product::where('species_id', $speciesModel->getId())->get();
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.species', $speciesModel);
 
         return view('product.filter')->with('viewData', $viewData);
@@ -73,7 +70,6 @@ class ProductController extends Controller
         $viewData['title'] = __('Product.category_title', ['category' => $category->getName()]);
         $viewData['products'] = $products;
         $viewData['species'] = $species;
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.category', $category);
 
         if ($products->isEmpty()) {
@@ -89,10 +85,9 @@ class ProductController extends Controller
         $products = Product::where('name', 'like', '%'.$brand.'%')->get();
 
         $viewData = [];
-        $viewData['title'] = __('Products for Brand: ').ucfirst($brand);
+        $viewData['title'] = __('Product.brand_products').ucfirst($brand);
         $viewData['products'] = $products;
         $viewData['brand'] = ucfirst($brand);
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.brand', $brand);
 
         return view('product.brand')->with('viewData', $viewData);
@@ -144,7 +139,6 @@ class ProductController extends Controller
         $viewData['title'] = __('Product.results_for').$keyword;
         $viewData['products'] = $products;
         $viewData['keyword'] = $keyword;
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.search', $keyword);
 
         return view('product.search')->with('viewData', $viewData);

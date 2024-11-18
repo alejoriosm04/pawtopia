@@ -12,4 +12,7 @@ return [
     'go_back_products' => 'Go back to the Products List page',
     'profile_name' => 'Admin',
     'copyright' => 'Copyright | Pawtopia',
+    'login' => 'Login',
+    'logout' => 'Logout',
+
 ];
