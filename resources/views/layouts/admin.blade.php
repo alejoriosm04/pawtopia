@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="footer py-4 text-center text-white" style="background-color: #343a40;">
+<div class="footer py-4 text-center text-white" style="background-color: #495057;">
     <div class="container">
         <small>{{ __('admin/Layout.copyright') }}</small>
     </div>

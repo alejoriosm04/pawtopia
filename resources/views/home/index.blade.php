@@ -46,14 +46,7 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        
     </div>
     <div class="container py-5">
         <h2 class="section-title text-center mb-4">{{ __('Home.brands_title') }}</h2>
@@ -170,9 +163,11 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="single_service">
-                        <img src="{{ asset('img/service/service_icon_3.png') }}" alt="Service Icon 3" class="service_icon">
-                        <h3>{{ __('Home.service_3_title') }}</h3>
-                        <p>{{ __('Home.service_3_description') }}</p>
+                        <a href="{{ route('pets.recommendations') }}" class="no-underline">
+                            <img src="{{ asset('img/service/service_icon_3.png') }}" alt="Service Icon 3" class="service_icon">
+                            <h3>{{ __('Home.service_3_title') }}</h3>
+                            <p>{{ __('Home.service_3_description') }}</p>
+                        </a>
                     </div>
                 </div>
             </div>
