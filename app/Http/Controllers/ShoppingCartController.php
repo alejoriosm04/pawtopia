@@ -6,12 +6,12 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Species;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class ShoppingCartController extends Controller
 {

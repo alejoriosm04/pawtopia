@@ -7,11 +7,11 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Species;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class ProductController extends Controller
 {
@@ -23,6 +23,7 @@ class ProductController extends Controller
         $viewData['products'] = Product::all();
         $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.index');
+
         return view('product.index')->with('viewData', $viewData);
     }
 
@@ -40,6 +41,7 @@ class ProductController extends Controller
         $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['product'] = $product;
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.show', $product);
+
         return view('product.show')->with('viewData', $viewData);
     }
 

@@ -6,12 +6,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\FavoriteService;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class UserController extends Controller
 {
@@ -160,6 +160,7 @@ class UserController extends Controller
         $viewData['subtitle'] = __('User.orders_subtitle');
         $viewData['orders'] = Order::where('user_id', Auth::user()->id)->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('user.orders');
+
         return view('user.orders')->with('viewData', $viewData);
     }
 }

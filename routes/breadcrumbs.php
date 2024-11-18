@@ -1,4 +1,5 @@
 <?php
+
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 Breadcrumbs::for('home', function ($trail) {
@@ -52,12 +53,12 @@ Breadcrumbs::for('product.species', function ($trail, $species) {
 
 Breadcrumbs::for('product.brand', function ($trail, $brand) {
     $trail->parent('product.index');
-    $trail->push(__('Product.products_associated_message') . $brand, route('product.filterByBrand', $brand));
+    $trail->push(__('Product.products_associated_message').$brand, route('product.filterByBrand', $brand));
 });
 
 Breadcrumbs::for('product.search', function ($trail, $keyword) {
     $trail->parent('product.index');
-    $trail->push(__('Product.results_for') . $keyword, route('product.search'));
+    $trail->push(__('Product.results_for').$keyword, route('product.search'));
 });
 
 Breadcrumbs::for('cart.index', function ($trail) {

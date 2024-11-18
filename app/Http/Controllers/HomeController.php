@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Species;
-use Illuminate\View\View;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
