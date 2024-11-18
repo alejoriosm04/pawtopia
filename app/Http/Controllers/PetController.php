@@ -165,9 +165,9 @@ class PetController extends Controller
             ->unique();
 
         $recommendedProducts = Product::with('category')
-            ->where(function($query) use ($speciesIds, $categoryIds) {
+            ->where(function ($query) use ($speciesIds, $categoryIds) {
                 $query->whereIn('species_id', $speciesIds)
-                    ->orWhere(function($q) use ($categoryIds, $speciesIds) {
+                    ->orWhere(function ($q) use ($categoryIds, $speciesIds) {
                         $q->whereIn('category_id', $categoryIds)
                             ->whereNotIn('species_id', $speciesIds);
                     });
