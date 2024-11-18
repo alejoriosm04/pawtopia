@@ -34,7 +34,7 @@
                                 </select>
                             </div>
                             <div class="form-group mb-2">
-                                <label for="species_id">{{ __('Pet.enter_specie_field') }}</label>
+                                <label for="species_id">{{ __('Pet.enter_species_field') }}</label>
                                 <select id="species_id" name="species_id" class="form-control" required>
                                     <option value="">{{ __('Pet.select_species') }}</option>
                                     @foreach ($viewData['species'] as $species)

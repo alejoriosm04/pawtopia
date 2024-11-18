@@ -14,6 +14,6 @@ class ImageController extends Controller
         $storeInterface = app(ImageStorage::class, ['storage' => $storage]);
         $storeInterface->store($request);
 
-        return back()->with('success', 'Image uploaded successfully!');
+        return back()->with('success', __('Home.image_success'));
     }
 }

@@ -14,16 +14,29 @@
     <title>@yield('title', __('Home.title'))</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20; position: relative;">
+<div style="position: absolute; top: 10px; left: 10px; font-size: 10px;">
+  <div class="dropdown">
+    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.15rem 0.3rem; font-size: 0.8rem; line-height: 1; color: #ffffff; background-color: rgba(255, 255, 255, 0.5); border: none;">
+        {{ strtoupper(app()->getLocale()) }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown" style="min-width: auto; font-size: 0.9rem;">
+        <li><a class="dropdown-item text-dark" href="{{ route('language.switch', ['locale' => 'en']) }}">{{ __('Layout.english_language') }}</a></li>
+        <li><a class="dropdown-item text-dark" href="{{ route('language.switch', ['locale' => 'es']) }}">{{ __('Layout.spanish_language') }}</a></li>
+    </ul>
+</div>
+</div>
     <div class="container-fluid">
-        <a class="navbar-brand ms-3" href="{{ route('home.index') }}">
+        <a class="navbar-brand ms-3 d-flex align-items-center" href="{{ route('home.index') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 100px;" />
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Search Form -->
             <form class="d-flex ms-lg-1 my-2 my-lg-0" action="{{ route('product.search') }}" method="GET">
                 <div class="input-group" style="margin-left: -10px; width: 350px;">
                     <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search"
@@ -67,12 +80,12 @@
                 @else
                     <li class="nav-item">
                         <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('login') }}">
-                            <i class="bi bi-person-circle me-1"></i> {{ __('Login') }}
+                            <i class="bi bi-person-circle me-1"></i> {{ __('Layout.login') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('register') }}">
-                            <i class="bi bi-pencil-square me-1"></i> {{ __('Register') }}
+                            <i class="bi bi-pencil-square me-1"></i> {{ __('Layout.register') }}
                         </a>
                     </li>
                 @endauth
@@ -89,7 +102,7 @@
         </div>
     </div>
 </nav>
-
+</div>
 <div class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center flex-wrap" style="margin-left: 15px;">
         <div class="text-center">
@@ -98,8 +111,8 @@
                     {{ __('Category.all_products') }}
                 </a>
             </div>
-            @if(isset($viewData['species_categories']))
-                @foreach($viewData['species_categories'] as $species)
+            @if(isset($species_categories))
+                @foreach($species_categories as $species)
                     <div class="nav-item dropdown d-inline-block">
                         <a class="nav-link text-dark mx-2 dropdown-toggle" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}" id="dropdown{{ $species->getId() }}" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}';">
                             {{ $species->getName() }}
@@ -128,15 +141,40 @@
 <div class="col-md-8">
     @yield('breadcrumbs')
 </div>
-<div class="container my-4">
-    @yield('content')
-</div>
 
-<div class="bg-dark py-4 text-center text-white">
-    <div class="container">
-        <small>{{ __('Layout.copyright') }}</small>
+<main class="flex-grow-1">
+    <div class="container my-4">
+        @yield('content')
     </div>
-</div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h5>{{ __('Layout.about_us') }}</h5>
+            <p>{{ __('Layout.about_text') }}</p>
+        </div>
+        <div class="footer-column">
+            <h5>{{ __('Layout.quick_links') }}</h5>
+            <ul>
+                <li><a href="{{ route('home.index') }}">{{ __('Layout.home') }}</a></li>
+                <li><a href="{{ route('product.index') }}">{{ __('Layout.products') }}</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h5>{{ __('Layout.follow_us') }}</h5>
+            <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    <small>{!! __('Layout.rights_reserved') !!}</small>
+</footer>
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>

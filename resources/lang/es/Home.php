@@ -2,7 +2,7 @@
 
 // Lina Ballesteros
 return [
-    'title' => 'Página de inicio - Pawtopia',
+    'title' => 'Inicio',
 
     'slider_heading_1' => 'Cuida a tu Mascota',
     'slider_subheading_1' => 'Productos para el bienestar',
@@ -36,4 +36,5 @@ return [
     'carousel_3_text' => 'Todo lo que necesitas para que tu mascota luzca y se sienta genial.',
     'carousel_4_heading' => 'Productos de Salud',
     'carousel_4_text' => 'Productos esenciales de salud para asegurar el bienestar de tu mascota.',
+    'image_success' => 'La imagen se subió correctamente.',
 ];
