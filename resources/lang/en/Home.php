@@ -2,7 +2,7 @@
 
 // Lina Ballesteros
 return [
-    'title' => 'Home Page - Pawtopia',
+    'title' => 'Home',
 
     'slider_heading_1' => 'Care for Your Pet',
     'slider_subheading_1' => 'Products for Their Well-being',

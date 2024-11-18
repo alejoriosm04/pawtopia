@@ -12,4 +12,6 @@ return [
     'go_back_products' => 'Volver a la lista de productos',
     'profile_name' => 'Administrador',
     'copyright' => 'Copyright | Pawtopia',
+    'login' => 'Iniciar Sesión',
+    'logout' => 'Cerrar Sesión',
 ];

@@ -23,6 +23,6 @@ return [
     'order_date' => 'Date:',
     'no_orders' => 'No orders.',
     'change_profile_image' => 'Change Profile Image',
-    'orders_title' => 'My Orders - Online Store',
+    'orders_title' => 'My Orders',
     'orders_subtitle' => 'My Orders',
 ];

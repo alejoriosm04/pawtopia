@@ -3,7 +3,7 @@
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 Breadcrumbs::for('home', function ($trail) {
-    $trail->push('Home', route('home.index'));
+    $trail->push(__('Home.title'), route('home.index'));
 });
 
 Breadcrumbs::for('pet.index', function ($trail) {
@@ -97,6 +97,6 @@ Breadcrumbs::for('user.edit', function ($trail, $user) {
 });
 
 Breadcrumbs::for('user.orders', function ($trail) {
-    $trail->parent('user.index');
+    $trail->parent('home');
     $trail->push(__('User.orders_title'), route('user.orders'));
 });

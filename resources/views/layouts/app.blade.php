@@ -14,16 +14,31 @@
     <title>@yield('title', __('Home.title'))</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20;">
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20; position: relative;">
+    <div style="position: absolute; top: 10px; left: 10px;">
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ strtoupper(app()->getLocale()) }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item" href="{{ route('language.switch', ['locale' => 'en']) }}">English</a></li>
+                <li><a class="dropdown-item" href="{{ route('language.switch', ['locale' => 'es']) }}">Español</a></li>
+            </ul>
+        </div>
+    </div>
+
     <div class="container-fluid">
-        <a class="navbar-brand ms-3" href="{{ route('home.index') }}">
+        <a class="navbar-brand ms-3 d-flex align-items-center" href="{{ route('home.index') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 100px;" />
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Search Form -->
             <form class="d-flex ms-lg-1 my-2 my-lg-0" action="{{ route('product.search') }}" method="GET">
                 <div class="input-group" style="margin-left: -10px; width: 350px;">
                     <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search"
@@ -34,6 +49,8 @@
                     </button>
                 </div>
             </form>
+
+            <!-- Authentication Links -->
             <ul class="navbar-nav ms-auto d-flex align-items-center">
                 @auth
                     @if(Auth::user()->role == 'admin')
@@ -89,6 +106,8 @@
         </div>
     </div>
 </nav>
+
+</div>
 
 <div class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center flex-wrap" style="margin-left: 15px;">
