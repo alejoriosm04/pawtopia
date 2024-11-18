@@ -12,4 +12,9 @@ return [
     'copyright' => 'Copyright | Pawtopia',
     'my_orders' => 'Mis Ordenes',
     'recommendations' => 'Recomendaciones',
+    'login' => 'Iniciar Sesión',
+    'logout' => 'Cerrar Sesión',
+    'register' => 'Registrarse',
+    'english_language' => 'Inglés',
+    'spanish_language' => 'Español',
 ];

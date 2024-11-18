@@ -14,20 +14,18 @@
     <title>@yield('title', __('Home.title'))</title>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DB4D20; position: relative;">
-    <div style="position: absolute; top: 10px; left: 10px;">
-        <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ strtoupper(app()->getLocale()) }}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                <li><a class="dropdown-item" href="{{ route('language.switch', ['locale' => 'en']) }}">English</a></li>
-                <li><a class="dropdown-item" href="{{ route('language.switch', ['locale' => 'es']) }}">Español</a></li>
-            </ul>
-        </div>
-    </div>
-
+<div style="position: absolute; top: 10px; left: 10px; font-size: 10px;">
+  <div class="dropdown">
+    <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.15rem 0.3rem; font-size: 0.8rem; line-height: 1; color: #ffffff; background-color: rgba(255, 255, 255, 0.5); border: none;">
+        {{ strtoupper(app()->getLocale()) }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown" style="min-width: auto; font-size: 0.9rem;">
+        <li><a class="dropdown-item text-dark" href="{{ route('language.switch', ['locale' => 'en']) }}">{{ __('Layout.english_language') }}</a></li>
+        <li><a class="dropdown-item text-dark" href="{{ route('language.switch', ['locale' => 'es']) }}">{{ __('Layout.spanish_language') }}</a></li>
+    </ul>
+</div>
+</div>
     <div class="container-fluid">
         <a class="navbar-brand ms-3 d-flex align-items-center" href="{{ route('home.index') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Brand Logo" style="width: 100px;" />
@@ -49,8 +47,6 @@
                     </button>
                 </div>
             </form>
-
-            <!-- Authentication Links -->
             <ul class="navbar-nav ms-auto d-flex align-items-center">
                 @auth
                     @if(Auth::user()->role == 'admin')
@@ -84,12 +80,12 @@
                 @else
                     <li class="nav-item">
                         <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('login') }}">
-                            <i class="bi bi-person-circle me-1"></i> {{ __('Login') }}
+                            <i class="bi bi-person-circle me-1"></i> {{ __('Layout.login') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('register') }}">
-                            <i class="bi bi-pencil-square me-1"></i> {{ __('Register') }}
+                            <i class="bi bi-pencil-square me-1"></i> {{ __('Layout.register') }}
                         </a>
                     </li>
                 @endauth
@@ -106,9 +102,7 @@
         </div>
     </div>
 </nav>
-
 </div>
-
 <div class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center flex-wrap" style="margin-left: 15px;">
         <div class="text-center">

@@ -72,8 +72,6 @@ Route::middleware([App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit');
         Route::put('/users/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
     });
-
+    Auth::routes([]);
 });
-
-Auth::routes([]);
 
