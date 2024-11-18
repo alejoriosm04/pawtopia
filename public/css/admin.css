@@ -74,6 +74,7 @@ body, html {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    flex: 1;
 }
 
 .row.g-0 {
@@ -145,3 +146,83 @@ th, td {
     text-align: center;
 }
 
+
+
+footer {
+    background-color: #495057;
+    color: #f8f9fa;
+    font-size: 12px; /* Ajuste para texto más compacto */
+    text-align: center;
+    padding: 8px 0; /* Menor padding */
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme */
+    align-items: center;
+    flex-wrap: wrap; /* Acomoda elementos en múltiples filas si es necesario */
+    gap: 10px; /* Reduce el espacio entre las secciones */
+    max-width: 100%;
+}
+
+.footer-title {
+    font-weight: bold;
+    font-size: 14px; /* Tamaño reducido para encabezados */
+    margin-bottom: 5px;
+}
+
+.footer-text {
+    font-size: 12px; /* Texto más compacto */
+    line-height: 1.4;
+    margin: 0;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links a {
+    color: #f8f9fa;
+    text-decoration: none;
+    font-size: 12px; /* Tamaño compacto para enlaces */
+    margin-bottom: 5px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Menor espacio entre íconos */
+}
+
+.social-icons i {
+    font-size: 18px; /* Íconos más pequeños */
+    transition: color 0.3s ease;
+}
+
+.social-icons i:hover {
+    color: #FF8C00;
+}
+
+footer small {
+    font-size: 11px; /* Ajuste final para derechos de autor */
+    color: #ced4da;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px; /* Mayor separación para pantallas pequeñas */
+    }
+
+    .footer-title, .footer-text, .footer-links a {
+        font-size: 12px; /* Ajuste más compacto en móvil */
+    }
+}
