@@ -1,5 +1,6 @@
-
-body {
+body, html {
+    height: 100%;
+    margin: 0;
     font-family: 'Lexend', sans-serif;
 }
 
@@ -35,14 +36,25 @@ body {
     width: 40px;
     height: 40px;
 }
+
 .footer {
-    background-color: #343a40;
+    background-color: #495057 !important;
     color: #ffffff;
     padding: 20px 0;
+    text-align: center;
+    width: 100%;
 }
+
+
 .custom-sidebar {
+    min-height: 100%;
     background-color: #343a40;
     color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
 }
 
 .custom-sidebar .nav-link {
@@ -52,7 +64,84 @@ body {
 .custom-sidebar .nav-link:hover {
     background-color: #495057;
 }
+
 .logo-adjust {
     margin-left: 15px;
+}
+
+.content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.row.g-0 {
+    flex-grow: 1;
+}
+
+nav.p-3.shadow {
+    background-color: #495057;
+    color: white;
+}
+
+nav a.profile-font {
+    color: white !important;
+}
+
+nav a.profile-font:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .custom-sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 100%;
+        z-index: 1050;
+        transition: left 0.3s ease-in-out;
+    }
+
+    .custom-sidebar.show {
+        left: 0;
+    }
+
+    .toggle-sidebar, .close-sidebar {
+        display: block;
+    }
+
+    .close-sidebar {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 769px) {
+    .toggle-sidebar {
+        display: none;
+    }
+
+    .close-sidebar {
+        display: none;
+    }
+}
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+}
+
+th, td {
+    word-wrap: break-word;
+    text-align: center;
 }
 

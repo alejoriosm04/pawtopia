@@ -18,13 +18,13 @@
             <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-12">
                         <div class="mb-3">
                             <label class="form-label">{{ __('admin/Product.name') }}:</label>
                             <input name="name" value="{{ old('name') }}" type="text" class="form-control" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-12">
                         <div class="mb-3">
                             <label class="form-label">{{ __('admin/Product.price') }}:</label>
                             <input name="price" value="{{ old('price') }}" type="number" step="any" class="form-control" required>
@@ -36,24 +36,21 @@
                     <label class="form-label">{{ __('admin/Product.description') }}:</label>
                     <textarea name="description" class="form-control" rows="3" required>{{ old('description') }}</textarea>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.image') }}:</label>
                     <input class="form-control" type="file" name="image" required>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.storage_type') }}:</label>
                     <select name="storage_type" class="form-control" required>
+                        <option value="gcp" {{ old('storage_type', 'gcp') == 'gcp' ? 'selected' : '' }}>
+                            {{ __('admin/Product.cloud_storage') }}
+                        </option>
                         <option value="local" {{ old('storage_type') == 'local' ? 'selected' : '' }}>
                             {{ __('admin/Product.local_storage') }}
                         </option>
-                        <option value="gcp" {{ old('storage_type') == 'gcp' ? 'selected' : '' }}>
-                            {{ __('admin/Product.cloud_storage') }}
-                        </option>
                     </select>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.species') }}:</label>
                     <select id="species-selector" name="species_id" class="form-control" required>
@@ -88,8 +85,9 @@
             {{ __('admin/Product.manage_products') }}
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-striped">
-                <thead>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
                     <tr>
                         <th>{{ __('admin/Product.id') }}</th>
                         <th>{{ __('admin/Product.name') }}</th>
@@ -99,8 +97,8 @@
                         <th>{{ __('admin/Product.edit') }}</th>
                         <th>{{ __('admin/Product.delete') }}</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @foreach($viewData['products'] as $product)
                         <tr>
                             <td>{{ $product->getId() }}</td>
@@ -124,8 +122,9 @@
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

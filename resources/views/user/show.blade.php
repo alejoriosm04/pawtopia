@@ -57,6 +57,7 @@
             @endif
         </div>
     </div>
-    <a href="{{ route('user.edit', ['id' => $viewData['user']->getId()]) }}" class="btn btn-primary">{{ __('Action.edit_profile') }}</a>
+    <br>
+    <a href="{{ route('user.edit', ['id' => $viewData['user']->getId()]) }}" class="btn btn-custom">{{ __('Action.edit_profile') }}</a>
 </div>
 @endsection

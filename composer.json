@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
+        "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "google/cloud-storage": "^1.44",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel-lang/common": "^6.4",

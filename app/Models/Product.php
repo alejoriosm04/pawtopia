@@ -170,7 +170,7 @@ class Product extends Model
             'price' => 'required|numeric|gt:0',
             'category_id' => 'required|exists:categories,id',
             'species_id' => 'required|exists:species,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 }

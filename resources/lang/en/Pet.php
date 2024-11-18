@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'pets_title' => 'Pets - Pawtopia',
+    'pets_title' => 'Pets',
     'pets_subtitle' => 'List of pets',
-    'pet_info_title' => ':name - Pawtopia',
+    'pet_info_title' => ':name ',
     'pet_info_subtitle' => ':name - Pet information',
     'create_pet_title' => 'Create pet',
     'create_new_pet_button' => 'Create new pet',

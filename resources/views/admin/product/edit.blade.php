@@ -1,4 +1,3 @@
-{{-- Lina Ballesteros --}}
 @extends('layouts.admin')
 @section('title', $viewData["title"])
 @section('content')
@@ -43,19 +42,22 @@
                         <div class="mb-3 row">
                             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">{{ __('admin/Product.image') }}:</label>
                             <div class="col-lg-10 col-md-6 col-sm-12">
-                                <input class="form-control" type="file" name="image">
+                                <input class="form-control" type="file" name="image" id="imageInput">
+                                <input type="hidden" name="current_image" value="{{ $viewData['product']->getImage() }}">
+                                <img id="imagePreview" src="{{ asset($viewData['product']->getImage()) }}"
+                                     alt="Current Image" class="img-fluid mt-2" style="max-height: 150px;">
                             </div>
                         </div>
                     </div>
                 </div>
-                  <div class="mb-3">
+                <div class="mb-3">
                     <label class="form-label">{{ __('admin/Product.storage_type') }}:</label>
                     <select name="storage_type" class="form-control" required>
-                        <option value="local" {{ old('storage_type', 'local') == 'local' ? 'selected' : '' }}>
-                            {{ __('admin/Product.local_storage') }}
-                        </option>
-                        <option value="gcp" {{ old('storage_type', 'local') == 'gcp' ? 'selected' : '' }}>
+                        <option value="gcp" {{ old('storage_type', 'gcp') == 'gcp' ? 'selected' : '' }}>
                             {{ __('admin/Product.cloud_storage') }}
+                        </option>
+                        <option value="local" {{ old('storage_type') == 'local' ? 'selected' : '' }}>
+                            {{ __('admin/Product.local_storage') }}
                         </option>
                     </select>
                 </div>
@@ -88,4 +90,5 @@
             </form>
         </div>
     </div>
+     <script src="{{ asset('js/product/image_preview.js') }}"></script>
 @endsection

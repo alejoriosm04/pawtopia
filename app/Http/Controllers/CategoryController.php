@@ -5,6 +5,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Species;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class CategoryController extends Controller
 {

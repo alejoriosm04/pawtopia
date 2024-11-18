@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class PetController extends Controller
 {
@@ -23,6 +24,7 @@ class PetController extends Controller
         $viewData['pets'] = Pet::all();
         $viewData['species'] = Species::all();
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.index');
 
         return view('pet.index')->with('viewData', $viewData);
     }
@@ -37,6 +39,7 @@ class PetController extends Controller
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
             $viewData['species_categories'] = Species::with('categories')->get();
+            $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
             return view('pet.show')->with('viewData', $viewData);
         } catch (ModelNotFoundException $e) {
@@ -50,43 +53,45 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.create_pet_title');
         $viewData['species'] = Species::all();
         $viewData['species_categories'] = Species::with('categories')->get();
-
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.create');
         return view('pet.create')->with('viewData', $viewData);
     }
 
     public function save(Request $request): View
-    {
-        Pet::validate($request);
+{
+    Pet::validate($request);
 
-        $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
+    $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
-        $storageType = $request->input('storage_type', 'local');
-        $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
+    $storageType = $request->input('storage_type', 'local');
+    $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
 
-        $imageUrl = $request->hasFile('image')
-            ? $imageStorage->store($request, 'pets')
-            : 'img/default_image.png';
+    $imageUrl = $request->hasFile('image')
+        ? $imageStorage->store($request, 'pets')
+        : 'img/default_image.png';
 
-        Pet::create([
-            'name' => $request->input('name'),
-            'image' => $imageUrl,
-            'species_id' => $request->input('species_id'),
-            'breed' => $request->input('breed'),
-            'birthDate' => $formattedDate,
-            'characteristics' => json_encode($request->input('characteristics')),
-            'medications' => $request->input('medications'),
-            'feeding' => $request->input('feeding'),
-            'veterinaryNotes' => $request->input('veterinaryNotes'),
-            'user_id' => auth()->id(),
-        ]);
+    $pet = Pet::create([
+        'name' => $request->input('name'),
+        'image' => $imageUrl,
+        'species_id' => $request->input('species_id'),
+        'breed' => $request->input('breed'),
+        'birthDate' => $formattedDate,
+        'characteristics' => json_encode($request->input('characteristics')),
+        'medications' => $request->input('medications'),
+        'feeding' => $request->input('feeding'),
+        'veterinaryNotes' => $request->input('veterinaryNotes'),
+        'user_id' => auth()->id(),
+    ]);
 
-        $viewData = [];
-        $viewData['title'] = __('Pet.pet_created_title');
-        $viewData['message'] = __('Pet.pet_created_message');
-        $viewData['species_categories'] = Species::with('categories')->get();
+    $viewData = [];
+    $viewData['title'] = __('Pet.pet_created_title');
+    $viewData['message'] = __('Pet.pet_created_message');
+    $viewData['species_categories'] = Species::with('categories')->get();
+    $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
-        return view('pet.save')->with('viewData', $viewData);
-    }
+    return view('pet.save')->with('viewData', $viewData);
+}
+
 
     public function edit(int $id): View|RedirectResponse
     {
@@ -97,7 +102,7 @@ class PetController extends Controller
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
             $viewData['species_categories'] = Species::with('categories')->get();
-
+            $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
             return view('pet.edit')->with('viewData', $viewData);
         } catch (ModelNotFoundException $e) {
             return redirect()->route('pet.index');
@@ -132,6 +137,8 @@ class PetController extends Controller
             }
 
             $updateData['image'] = $imageStorage->store($request, 'pets');
+        } else {
+            $updateData['image'] = $request->input('current_image');
         }
 
         $pet->update($updateData);
@@ -139,7 +146,6 @@ class PetController extends Controller
         return redirect()->route('pet.show', ['id' => $pet->getId()])
             ->with('success', __('Pet.update_success'));
     }
-
     public function delete(int $id): RedirectResponse
     {
         Pet::destroy($id);
@@ -165,7 +171,8 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.recommendations_title');
         $viewData['subtitle'] = __('Pet.recommendations_subtitle');
         $viewData['products'] = $finalRecommendedProducts;
-
+        $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.recommendations');
         return view('pet.recommendations')->with('viewData', $viewData);
     }
 }
