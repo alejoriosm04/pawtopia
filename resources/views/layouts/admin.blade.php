@@ -55,17 +55,41 @@
             @endauth
         </nav>
 
-        <div class="g-0 m-5 flex-grow-1">
-            @yield('content')
-        </div>
+        <main class="flex-grow-1">
+            <div class="container my-4">
+                @yield('content')
+            </div>
+        </main>
     </div>
 </div>
 
-<div class="footer py-4 text-center text-white" style="background-color: #495057;">
-    <div class="container">
-        <small>{{ __('admin/Layout.copyright') }}</small>
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h5>{{ __('Layout.about_us') }}</h5>
+            <p>{{ __('Layout.about_text') }}</p>
+        </div>
+        <div class="footer-column">
+            <h5>{{ __('Layout.quick_links') }}</h5>
+            <ul>
+                <li><a href="{{ route('home.index') }}">{{ __('Layout.home') }}</a></li>
+                <li><a href="{{ route('product.index') }}">{{ __('Layout.products') }}</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h5>{{ __('Layout.follow_us') }}</h5>
+            <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+            </div>
+        </div>
     </div>
-</div>
+    <small>{!! __('Layout.rights_reserved') !!}</small>
+</footer>
+
+
+
 
 <script src="{{ asset('js/admin/layout/sidebar_responsive.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

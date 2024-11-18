@@ -5,6 +5,9 @@
 
 body {
     font-family: 'Lexend', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
@@ -269,6 +272,7 @@ p, a, .navbar-nav .nav-link {
 }
 .container {
     padding-top: 5px !important;
+    flex: 1;
 }
 
 .category-title {
@@ -512,3 +516,137 @@ p, a, .navbar-nav .nav-link {
 }
 
 
+footer {
+    background-color: #1a1a1a; /* Color oscuro */
+    color: #f8f9fa;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #333;
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.footer-column h5 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.footer-column p {
+    font-size: 14px;
+    color: #d3d3d3;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    color: #d3d3d3;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+    color: #FF8C00;
+}
+
+footer .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .social-icons a {
+    color: #d3d3d3;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    color: #FF8C00;
+}
+
+footer small {
+    display: block;
+    margin-top: 20px;
+    color: #a8a8a8;
+    font-size: 12px;
+}
+
+.footer-divider {
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    footer .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-column {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Centrado vertical del formulario */
+.content-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Ajusta la altura según sea necesario */
+}
+
+/* Estilo para el formulario */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Ajusta el botón */
+.btn-custom {
+    background-color: #FFA500;
+    color: #fff;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #FF8C00;
+}
+
+/* Estilo para el footer compacto */
+footer {
+    background-color: #1a1a1a;
+    color: #f8f9fa;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+    margin-top: auto;
+}
