@@ -37,4 +37,4 @@ return [
     'carousel_4_heading' => 'Productos de Salud',
     'carousel_4_text' => 'Productos esenciales de salud para asegurar el bienestar de tu mascota.',
     'image_success' => 'La imagen se subió correctamente.',
-    ];
+];

@@ -74,4 +74,3 @@ Route::middleware([App\Http\Middleware\SetLocale::class])->group(function () {
     });
     Auth::routes([]);
 });
-
