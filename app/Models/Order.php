@@ -19,7 +19,7 @@ class Order extends Model
      * $this->user - User - contains the associated User
      * $this->items - Item[] - contains the associated Items
      */
-    protected $fillable = ['total', 'user_id'];
+    protected $fillable = ['total', 'user_id', 'coupon_code', 'external_product_link'];
 
     public static function validate($request): void
     {

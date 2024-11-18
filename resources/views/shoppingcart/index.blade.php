@@ -49,7 +49,7 @@
                                                 <input type="number" class="form-control quantity-input" name="quantity" data-product-id="{{ $product->getId() }}" min="1" value="{{ session('products')[$product->getId()] }}">
                                             </td>
                                             <td>
-                                                <h4>
+                                                <h4 id="subtotal-{{ $product->getId() }}">
                                                     ${{ $product->getPrice() * session('products')[$product->getId()] }}
                                                 </h4>
                                             </td>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="card-body">
                             <span>{{ __('Cart.total') }}</span>
-                            <h2 class="font-weight-bold small-text">${{ $viewData['total'] }}</h2>
+                            <h2 class="font-weight-bold small-text" id="cart-total">${{ $viewData['total'] }}</h2>
                             <hr>
                             <span class="text-muted small">{{ __('Cart.tax_info') }}</span>
                             <div class="m-t-sm">

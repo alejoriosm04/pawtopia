@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Species;
+use App\Services\ShoppingCart\ShoppingCartService;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +16,13 @@ use Illuminate\View\View;
 
 class ShoppingCartController extends Controller
 {
+    private ShoppingCartService $shoppingCartService;
+
+    public function __construct(ShoppingCartService $shoppingCartService)
+    {
+        $this->shoppingCartService = $shoppingCartService;
+    }
+
     public function add(Request $request, int $id): RedirectResponse
     {
         $request->validate([
@@ -88,7 +96,17 @@ class ShoppingCartController extends Controller
         $productsInCart[$request->input('id')] = $request->input('quantity');
         $request->session()->put('products', $productsInCart);
 
-        return response()->json(['success' => true]);
+        $total = 0;
+        foreach ($productsInCart as $productId => $quantity) {
+            $productInCart = Product::find($productId);
+            $total += $productInCart->getPrice() * $quantity;
+        }
+
+        return response()->json([
+            'success' => true,
+            'product_price' => $product->getPrice(),
+            'total' => $total,
+        ]);
     }
 
     public function purchase(Request $request): View|RedirectResponse
@@ -99,7 +117,6 @@ class ShoppingCartController extends Controller
         if ($productsInSession) {
             $userId = Auth::user()->id;
             $petId = $request->input('pet_id');
-
             $order = new Order;
             $order->setUserId($userId);
             $order->setTotal(0);
@@ -129,6 +146,8 @@ class ShoppingCartController extends Controller
             $order->setTotal($total);
             $order->save();
 
+            $this->shoppingCartService->attachGiftToOrder($order);
+
             $request->session()->forget('products');
 
             $viewData = [];
@@ -141,5 +160,18 @@ class ShoppingCartController extends Controller
         } else {
             return redirect()->route('cart.index');
         }
+    }
+
+    public function getTotal(Request $request): JsonResponse
+    {
+        $productsInCart = $request->session()->get('products', []);
+        $products = Product::findMany(array_keys($productsInCart));
+
+        $total = 0;
+        foreach ($products as $product) {
+            $total += $product->getPrice() * $productsInCart[$product->getId()];
+        }
+
+        return response()->json(['total' => $total]);
     }
 }

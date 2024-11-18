@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'external_api' => [
+        'products_url' => env('API_PRODUCTS_URL'),
+        'product_base_link' => env('API_PRODUCT_BASE_LINK', 'http://35.208.92.31/products'),
+    ],
+
 ];
