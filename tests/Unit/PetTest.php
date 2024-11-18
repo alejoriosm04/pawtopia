@@ -2,21 +2,22 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Pet;
 use DateTime;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PetTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @return void
      */
     public function test_get_age_correctly_calculates_age()
     {
-        $birthDate = (new DateTime())->modify('-3 years')->format('Y-m-d');
-        
+        $birthDate = (new DateTime)->modify('-3 years')->format('Y-m-d');
+
         $pet = new Pet([
             'birthDate' => $birthDate,
         ]);
@@ -30,7 +31,7 @@ class PetTest extends TestCase
     public function test_get_image_returns_full_url_if_valid()
     {
         $imageUrl = 'https://example.com/images/pet.jpg';
-        
+
         $pet = new Pet([
             'image' => $imageUrl,
         ]);
@@ -45,7 +46,7 @@ class PetTest extends TestCase
     {
         $imagePath = 'images/pet.jpg';
         $expectedUrl = url('storage/images/pet.jpg');
-        
+
         $pet = new Pet([
             'image' => $imagePath,
         ]);
@@ -59,8 +60,8 @@ class PetTest extends TestCase
     public function test_set_and_get_name()
     {
         $name = 'Fido';
-        
-        $pet = new Pet();
+
+        $pet = new Pet;
         $pet->setName($name);
 
         $this->assertEquals($name, $pet->getName());
@@ -73,7 +74,7 @@ class PetTest extends TestCase
     {
         $imagePath = '/images/pet.jpg';
         $expectedUrl = url('storage/images/pet.jpg');
-        
+
         $pet = new Pet([
             'image' => $imagePath,
         ]);
@@ -87,8 +88,8 @@ class PetTest extends TestCase
     public function test_get_age_handles_future_birthdate()
     {
         // Fecha de nacimiento dentro de 2 años
-        $birthDate = (new DateTime())->modify('+2 years')->format('Y-m-d');
-        
+        $birthDate = (new DateTime)->modify('+2 years')->format('Y-m-d');
+
         $pet = new Pet([
             'birthDate' => $birthDate,
         ]);
