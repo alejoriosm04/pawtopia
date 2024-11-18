@@ -21,6 +21,8 @@ class ShoppingCartController extends Controller
     public function __construct(ShoppingCartService $shoppingCartService)
     {
         $this->shoppingCartService = $shoppingCartService;
+        $speciesCategories = Species::with('categories')->get();
+        view()->share('species_categories', $speciesCategories);
     }
 
     public function add(Request $request, int $id): RedirectResponse
@@ -61,7 +63,6 @@ class ShoppingCartController extends Controller
         $viewData['products'] = $products;
         $viewData['productsInCart'] = $productsInCart;
         $viewData['total'] = $total;
-        $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('cart.index');
         if (Auth::check()) {
             $viewData['pets'] = Auth::user()->pets;

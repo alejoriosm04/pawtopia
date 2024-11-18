@@ -7,7 +7,7 @@ return [
     'products' => 'Productos',
     'my_pets' => 'Mis Mascotas',
     'admin_panel' => 'Panel de Administración',
-    'search_placeholder' => 'Search...',
+    'search_placeholder' => 'Buscar...',
     'all_products' => 'Todos los Productos',
     'copyright' => 'Copyright | Pawtopia',
     'my_orders' => 'Mis Ordenes',
@@ -20,4 +20,9 @@ return [
     'products' => 'Productos',
     'pets' => 'Mascotas',
     'rights_reserved' => '&copy; 2024 Pawtopia. Todos los derechos reservados.',
+    'login' => 'Iniciar Sesión',
+    'logout' => 'Cerrar Sesión',
+    'register' => 'Registrarse',
+    'english_language' => 'Inglés',
+    'spanish_language' => 'Español',
 ];

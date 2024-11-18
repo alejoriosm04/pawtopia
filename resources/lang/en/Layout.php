@@ -20,4 +20,9 @@ return [
     'products' => 'Products',
     'pets' => 'Pets',
     'rights_reserved' => '&copy; 2024 Pawtopia. All rights reserved.',
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'register' => 'Register',
+    'english_language' => 'English',
+    'spanish_language' => 'Spanish',
 ];

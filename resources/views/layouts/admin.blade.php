@@ -48,10 +48,10 @@
                 </div>
                 <form id="logout" action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
-                    <button type="submit" class="btn btn-outline-light">{{ __('Logout') }}</button>
+                    <button type="submit" class="btn btn-outline-light">{{ __('admin/Layout.logout') }}</button>
                 </form>
             @else
-                <a href="{{ route('login') }}" class="btn btn-outline-light">{{ __('Login') }}</a>
+                <a href="{{ route('login') }}" class="btn btn-outline-light">{{ __('admin/Layout.login') }}</a>
             @endauth
         </nav>
 
