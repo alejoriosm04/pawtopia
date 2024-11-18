@@ -101,7 +101,7 @@
             @if(isset($viewData['species_categories']))
                 @foreach($viewData['species_categories'] as $species)
                     <div class="nav-item dropdown d-inline-block">
-                        <a class="nav-link text-dark mx-2 dropdown-toggle" href="#" id="dropdown{{ $species->getId() }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link text-dark mx-2 dropdown-toggle" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}" id="dropdown{{ $species->getId() }}" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}';">
                             {{ $species->getName() }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown{{ $species->getId() }}">
@@ -119,6 +119,14 @@
             </a>
         </div>
     </div>
+</div>
+<div class="container d-flex justify-content-start mt-3">
+    @if (isset($viewData['breadcrumbs']))
+        {!! $viewData['breadcrumbs'] !!}
+    @endif
+</div>
+<div class="col-md-8">
+    @yield('breadcrumbs')
 </div>
 <div class="container my-4">
     @yield('content')

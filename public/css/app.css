@@ -473,5 +473,42 @@ p, a, .navbar-nav .nav-link {
     width: 100%;
     table-layout: fixed;
 }
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item a {
+    color: #FFA500;
+    text-decoration: none;
+    margin: 0;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #FF8C00;
+    text-decoration: underline;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: #FFA500;
+    padding: 0 2px;
+}
+
+.breadcrumb-item.active {
+    color: #8D909D;
+    margin-left: -8px;
+}
+
+.breadcrumb-item.active::before {
+    content: "›";
+    color: #FFA500;
+    padding: 0 10px;
+}
 
 

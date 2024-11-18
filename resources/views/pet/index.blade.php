@@ -5,7 +5,6 @@
 <div class="d-flex justify-content-center mb-4">
   <a href="{{ route('pet.create') }}" class="btn btn-success btn-lg">{{ __('Pet.create_new_pet_button') }}</a>
 </div>
-
 <div class="row">
   @foreach ($viewData["pets"] as $pet)
   <div class="col-md-4 col-lg-3 mb-2">

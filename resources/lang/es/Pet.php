@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'pets_title' => 'Mascotas - Pawtopia',
+    'pets_title' => 'Mascotas',
     'pets_subtitle' => 'Lista de mascotas',
-    'pet_info_title' => ':name - Pawtopia',
+    'pet_info_title' => ':name ',
     'pet_info_subtitle' => ':name - Información de la mascota',
     'create_pet_title' => 'Crear mascota',
     'create_new_pet_button' => 'Crear nueva mascota',

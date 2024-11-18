@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class ShoppingCartController extends Controller
 {
@@ -53,6 +54,7 @@ class ShoppingCartController extends Controller
         $viewData['productsInCart'] = $productsInCart;
         $viewData['total'] = $total;
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('cart.index');
         if (Auth::check()) {
             $viewData['pets'] = Auth::user()->pets;
         } else {
@@ -133,6 +135,7 @@ class ShoppingCartController extends Controller
             $viewData['title'] = __('Order.title');
             $viewData['subtitle'] = __('Order.subtitle');
             $viewData['order'] = $order;
+            $viewData['breadcrumbs'] = Breadcrumbs::render('cart.purchase', $order);
 
             return view('shoppingcart.purchase')->with('viewData', $viewData);
         } else {
