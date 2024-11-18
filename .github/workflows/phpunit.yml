@@ -1,0 +1,38 @@
+name: Run PHPUnit Tests
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  phpunit:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, intl, sqlite3
+        coverage: none
+
+    - name: Install Dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+    - name: Copy .env.testing
+      run: cp .env.testing .env
+
+    - name: Generate APP_KEY
+      run: php artisan key:generate --env=testing
+
+    - name: Run Migrations
+      run: php artisan migrate --env=testing --no-interaction --no-ansi
+
+    - name: Run Tests
+      run: vendor/bin/phpunit
