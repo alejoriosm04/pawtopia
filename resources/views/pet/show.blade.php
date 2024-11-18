@@ -5,7 +5,7 @@
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4 d-flex align-items-center justify-content-center">
-      <img src="{{ Storage::url($viewData['pet']->getImage()) }}" class="img-fluid rounded-start" alt="Pet Image" style="max-width: 100%; height: auto;">
+      <img src="{{ $viewData['pet']->getImage() }}" class="img-fluid rounded-start" alt="Pet Image" style="max-width: 100%; height: auto;">
     </div>
     <div class="col-md-8">
       <div class="card-body">

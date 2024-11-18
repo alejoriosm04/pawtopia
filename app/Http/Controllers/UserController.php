@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\FavoriteService;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class UserController extends Controller
         $viewData = [];
         $viewData['title'] = __('User List');
         $viewData['users'] = User::all();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('user.index');
 
         return view('user.index')->with('viewData', $viewData);
     }
@@ -27,6 +29,7 @@ class UserController extends Controller
     {
         $viewData = [];
         $viewData['title'] = __('Create User');
+        $viewData['breadcrumbs'] = Breadcrumbs::render('user.create');
 
         return view('user.create')->with('viewData', $viewData);
     }
@@ -68,6 +71,7 @@ class UserController extends Controller
         $viewData = [];
         $viewData['user'] = $user;
         $viewData['title'] = __('Details of User');
+        $viewData['breadcrumbs'] = Breadcrumbs::render('user.show', $user);
 
         return view('user.show')->with('viewData', $viewData);
     }
@@ -77,6 +81,7 @@ class UserController extends Controller
         $viewData = [];
         $viewData['title'] = __('Edit User');
         $viewData['user'] = User::findOrFail($id);
+        $viewData['breadcrumbs'] = Breadcrumbs::render('user.edit', $viewData['user']);
 
         return view('user.edit')->with('viewData', $viewData);
     }
@@ -154,6 +159,7 @@ class UserController extends Controller
         $viewData['title'] = __('User.orders_title');
         $viewData['subtitle'] = __('User.orders_subtitle');
         $viewData['orders'] = Order::where('user_id', Auth::user()->id)->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('user.orders');
 
         return view('user.orders')->with('viewData', $viewData);
     }

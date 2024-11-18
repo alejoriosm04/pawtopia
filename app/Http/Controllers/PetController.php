@@ -7,6 +7,7 @@ use App\Models\Pet;
 use App\Models\Product;
 use App\Models\Species;
 use Carbon\Carbon;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class PetController extends Controller
         $viewData['pets'] = Pet::all();
         $viewData['species'] = Species::all();
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.index');
 
         return view('pet.index')->with('viewData', $viewData);
     }
@@ -37,6 +39,7 @@ class PetController extends Controller
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
             $viewData['species_categories'] = Species::with('categories')->get();
+            $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
             return view('pet.show')->with('viewData', $viewData);
         } catch (ModelNotFoundException $e) {
@@ -50,18 +53,27 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.create_pet_title');
         $viewData['species'] = Species::all();
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.create');
 
         return view('pet.create')->with('viewData', $viewData);
     }
 
-    public function save(Request $request, ImageStorage $imageStorage): View
+    public function save(Request $request): View
     {
         Pet::validate($request);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
 
-        $petData = [
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
+
+        $imageUrl = $request->hasFile('image')
+            ? $imageStorage->store($request, 'pets')
+            : 'img/default_image.png';
+
+        $pet = Pet::create([
             'name' => $request->input('name'),
+            'image' => $imageUrl,
             'species_id' => $request->input('species_id'),
             'breed' => $request->input('breed'),
             'birthDate' => $formattedDate,
@@ -70,22 +82,13 @@ class PetController extends Controller
             'feeding' => $request->input('feeding'),
             'veterinaryNotes' => $request->input('veterinaryNotes'),
             'user_id' => auth()->id(),
-        ];
-
-        $pet = Pet::create($petData);
-
-        if ($request->hasFile('image')) {
-            $imagePath = 'pets/'.$pet->getId().'.'.$request->file('image')->extension();
-            $imageStorage->store($request, $imagePath);
-            $pet->update(['image' => $imagePath]);
-        } else {
-            $pet->update(['image' => 'img/default_image.png']);
-        }
+        ]);
 
         $viewData = [];
         $viewData['title'] = __('Pet.pet_created_title');
         $viewData['message'] = __('Pet.pet_created_message');
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
         return view('pet.save')->with('viewData', $viewData);
     }
@@ -99,6 +102,7 @@ class PetController extends Controller
             $viewData['pet'] = $pet;
             $viewData['species'] = Species::all();
             $viewData['species_categories'] = Species::with('categories')->get();
+            $viewData['breadcrumbs'] = Breadcrumbs::render('pet.show', $pet);
 
             return view('pet.edit')->with('viewData', $viewData);
         } catch (ModelNotFoundException $e) {
@@ -106,10 +110,9 @@ class PetController extends Controller
         }
     }
 
-    public function update(Request $request, int $id, ImageStorage $imageStorage): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Pet::validate($request);
-
         $pet = Pet::findOrFail($id);
 
         $formattedDate = Carbon::createFromFormat('Y-m-d', $request->input('birthDate'))->format('Y-m-d');
@@ -125,22 +128,29 @@ class PetController extends Controller
             'veterinaryNotes' => $request->input('veterinaryNotes'),
         ];
 
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app()->makeWith(ImageStorage::class, ['storage' => $storageType]);
+
         if ($request->hasFile('image')) {
-            $imagePath = 'pets/'.$pet->getId().'.'.$request->file('image')->extension();
-            $imageStorage->store($request, $imagePath);
-            $updateData['image'] = $imagePath;
+            if ($pet->getImage() !== 'img/default_image.png') {
+                $previousImagePath = str_replace(url('storage').'/', '', $pet->getImage());
+                $imageStorage->delete($previousImagePath);
+            }
+
+            $updateData['image'] = $imageStorage->store($request, 'pets');
+        } else {
+            $updateData['image'] = $request->input('current_image');
         }
 
         $pet->update($updateData);
 
-        return redirect()->route('pet.show', ['id' => $pet->getId()]);
+        return redirect()->route('pet.show', ['id' => $pet->getId()])
+            ->with('success', __('Pet.update_success'));
     }
 
     public function delete(int $id): RedirectResponse
     {
-        $pet = Pet::findOrFail($id);
-        $pet->deleteImage();
-        $pet->delete();
+        Pet::destroy($id);
 
         return redirect()->route('pet.index');
     }
@@ -163,6 +173,8 @@ class PetController extends Controller
         $viewData['title'] = __('Pet.recommendations_title');
         $viewData['subtitle'] = __('Pet.recommendations_subtitle');
         $viewData['products'] = $finalRecommendedProducts;
+        $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet.recommendations');
 
         return view('pet.recommendations')->with('viewData', $viewData);
     }

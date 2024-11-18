@@ -45,7 +45,7 @@ class Pet extends Model
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'breed' => 'required|string|max:255',
             'birthDate' => 'required|date',
             'characteristics' => 'required|array',
@@ -72,7 +72,13 @@ class Pet extends Model
 
     public function getImage(): string
     {
-        return $this->attributes['image'];
+        $image = $this->attributes['image'];
+
+        if (filter_var($image, FILTER_VALIDATE_URL)) {
+            return $image;
+        }
+
+        return url('storage/'.ltrim($image, '/'));
     }
 
     public function setImage(string $image): void
@@ -104,6 +110,11 @@ class Pet extends Model
     {
         $birthDate = new DateTime($this->attributes['birthDate']);
         $now = new DateTime;
+
+        if ($birthDate > $now) {
+            return 0;
+        }
+
         $interval = $now->diff($birthDate);
 
         return $interval->y;

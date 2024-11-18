@@ -11,12 +11,10 @@
             <div class="card-body">
                 <b>{{ __('Order.date') }}:</b> {{ $order->getCreatedAt() }}<br />
                 <b>{{ __('Order.total') }}:</b> ${{ $order->getTotal() }}<br />
-
                 @if($order->pet)
                     <b>{{ __('Order.associated_pet') }}:</b> {{ $order->pet->getName() }}<br />
                 @endif
-
-                <table class="table table-bordered table-striped text-center mt-3">
+                <table class="table table-bordered table-striped text-center mt-3 uniform-table">
                     <thead>
                     <tr>
                         <th scope="col">{{ __('Order.item_id') }}</th>
@@ -45,10 +43,16 @@
                                 </td>
                             </tr>
                         @endif
-
                     @endforeach
                     </tbody>
                 </table>
+                <div class="mt-3">
+                    @if($order->getTotal() > 100)
+                        <b>{{ __('Order.coupon_code') }}:</b> {{ $order->coupon_code }}<br>
+                        <b>{{ __('Order.external_product_link') }}:</b>
+                        <a href="{{ $order->external_product_link }}" target="_blank">{{ __('Order.view_product') }}</a><br>
+                    @endif
+                </div>
             </div>
         </div>
     @empty

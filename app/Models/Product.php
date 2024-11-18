@@ -58,11 +58,13 @@ class Product extends Model
 
     public function getImage(): string
     {
-        if (str_starts_with($this->attributes['image'], 'https://storage.googleapis.com')) {
-            return $this->attributes['image'];
+        $image = $this->attributes['image'];
+
+        if (filter_var($image, FILTER_VALIDATE_URL)) {
+            return $image;
         }
 
-        return url('storage/'.$this->attributes['image']);
+        return url('storage/'.ltrim($image, '/'));
     }
 
     public function setImage(string $image): void
@@ -168,7 +170,7 @@ class Product extends Model
             'price' => 'required|numeric|gt:0',
             'category_id' => 'required|exists:categories,id',
             'species_id' => 'required|exists:species,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 }

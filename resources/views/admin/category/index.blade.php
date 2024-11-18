@@ -23,13 +23,13 @@
             <form method="POST" action="{{ route('admin.category.store') }}">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-12">
                         <div class="mb-3">
                             <label class="form-label">{{ __('admin/Category.name') }}:</label>
                             <input name="name" value="{{ old('name') }}" type="text" class="form-control" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-12">
                         <div class="mb-3">
                             <label class="form-label">{{ __('admin/Category.description') }}:</label>
                             <textarea class="form-control" name="description" rows="3" required>{{ old('description') }}</textarea>
@@ -59,40 +59,42 @@
         <div class="card-body">
             @foreach ($viewData['categoriesBySpecies'] as $speciesName => $categories)
                 <h4>{{ $speciesName }}</h4>
-                <table class="table table-bordered table-striped mb-4">
-                    <thead>
-                    <tr>
-                        <th scope="col">{{ __('admin/Category.id') }}</th>
-                        <th scope="col">{{ __('admin/Category.name') }}</th>
-                        <th scope="col">{{ __('admin/Category.description') }}</th>
-                        <th scope="col">{{ __('admin/Category.edit') }}</th>
-                        <th scope="col">{{ __('admin/Category.delete') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($categories as $category)
-                        <tr>
-                            <td>{{ $category->getId() }}</td>
-                            <td>{{ $category->getName() }}</td>
-                            <td>{{ $category->getDescription() }}</td>
-                            <td>
-                                <a class="btn btn-primary" href="{{ route('admin.category.edit', ['id' => $category->getId()]) }}">
-                                    <i class="bi-pencil"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form action="{{ route('admin.category.delete', $category->getId()) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger">
-                                        <i class="bi-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{ __('admin/Category.id') }}</th>
+                                <th scope="col">{{ __('admin/Category.name') }}</th>
+                                <th scope="col">{{ __('admin/Category.description') }}</th>
+                                <th scope="col">{{ __('admin/Category.edit') }}</th>
+                                <th scope="col">{{ __('admin/Category.delete') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($categories as $category)
+                                <tr>
+                                    <td>{{ $category->getId() }}</td>
+                                    <td>{{ $category->getName() }}</td>
+                                    <td>{{ $category->getDescription() }}</td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ route('admin.category.edit', ['id' => $category->getId()]) }}">
+                                            <i class="bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('admin.category.delete', $category->getId()) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger">
+                                                <i class="bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @endforeach
         </div>
     </div>

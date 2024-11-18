@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Species;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -12,6 +13,8 @@ class HomeController extends Controller
         $viewData = [];
         $viewData['species_categories'] = Species::with('categories')->get();
 
-        return view('home.index')->with('viewData', $viewData);
+        return view('home.index')
+            ->with('viewData', $viewData)
+            ->with('breadcrumbs', Breadcrumbs::render('home'));
     }
 }

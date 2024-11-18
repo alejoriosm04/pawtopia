@@ -27,10 +27,10 @@
     @endif
 
     @foreach ($viewData["products"] as $product)
-    <div class="col-md-3 col-lg-2 mb-2">
+    <div class="col-md-3 col-lg-2 mb-4">
         <div class="card product-card h-100 d-flex flex-column">
             <a href="{{ route('product.show', ['id' => $product->getId()]) }}">
-                <img src="{{ $product->getImage() }}" class="card-img-top">
+                <img src="{{ $product->getImage() }}" class="card-img-top" alt="">
             </a>
             <div class="card-body text-center flex-grow-1">
                 <h5>{{ $product->getName() }}</h5>

@@ -33,6 +33,7 @@ Route::middleware(['auth', 'App\Http\Middleware\AdminMiddleware'])->group(functi
 Route::middleware('auth')->group(function () {
     Route::post('/cart/purchase', 'App\Http\Controllers\ShoppingCartController@purchase')->name('shoppingcart.purchase');
     Route::get('/user/orders', 'App\Http\Controllers\UserController@orders')->name('user.orders');
+    Route::get('/cart/total', 'App\Http\Controllers\ShoppingCartController@getTotal')->name('cart.total');
 });
 Route::get('/cart', 'App\Http\Controllers\ShoppingCartController@index')->name('cart.index');
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');

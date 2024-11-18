@@ -18,4 +18,5 @@ return [
     'support_info' => 'Por favor contáctanos si tienes alguna pregunta. Estamos disponibles 24h.',
     'select_pet' => 'Seleccionar Mascota',
     'no_pets_available' => 'No hay mascotas disponibles',
+    'no_pet' => 'Sin mascotas seleccionadas',
 ];
