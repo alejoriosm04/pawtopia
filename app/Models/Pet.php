@@ -110,6 +110,11 @@ class Pet extends Model
     {
         $birthDate = new DateTime($this->attributes['birthDate']);
         $now = new DateTime;
+
+        if ($birthDate > $now) {
+            return 0;
+        }
+
         $interval = $now->diff($birthDate);
 
         return $interval->y;
