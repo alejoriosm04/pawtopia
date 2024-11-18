@@ -98,8 +98,8 @@
                     {{ __('Category.all_products') }}
                 </a>
             </div>
-            @if(isset($viewData['species_categories']))
-                @foreach($viewData['species_categories'] as $species)
+            @if(isset($species_categories))
+                @foreach($species_categories as $species)
                     <div class="nav-item dropdown d-inline-block">
                         <a class="nav-link text-dark mx-2 dropdown-toggle" href="{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}" id="dropdown{{ $species->getId() }}" data-bs-toggle="dropdown" aria-expanded="false" onclick="window.location.href='{{ route('product.filterBySpecies', ['species' => $species->getName()]) }}';">
                             {{ $species->getName() }}
