@@ -21,7 +21,7 @@
                     @foreach($viewData['user']->getPets() as $pet)
                         <li>
                             <strong>{{ $pet->getName() }}</strong><br>
-                            <img src="{{ asset('/storage/'.$pet->getImage()) }}" alt="{{ $pet->getName() }} {{ __('User.pet_image') }}" class="img-fluid" style="max-width: 150px;">
+                            <img src="{{ $pet->getImage() }}" alt="{{ $pet->getName() }} {{ __('User.pet_image') }}" class="img-fluid" style="max-width: 150px;">
                         </li>
                     @endforeach
                 </ul>
@@ -57,6 +57,7 @@
             @endif
         </div>
     </div>
-    <a href="{{ route('user.edit', ['id' => $viewData['user']->getId()]) }}" class="btn btn-primary">{{ __('Action.edit_profile') }}</a>
+    <br>
+    <a href="{{ route('user.edit', ['id' => $viewData['user']->getId()]) }}" class="btn btn-custom">{{ __('Action.edit_profile') }}</a>
 </div>
 @endsection

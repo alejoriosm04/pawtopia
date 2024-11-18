@@ -9,7 +9,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <a href="{{ route('user.create') }}" class="btn btn-primary mb-2">{{ __('Action.create_user') }}</a>
+    <a href="{{ route('user.create') }}" class="btn btn-custom mb-2">{{ __('Action.create_user') }}</a>
     <table class="table table-striped">
         <thead>
             <tr>

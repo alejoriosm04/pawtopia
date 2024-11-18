@@ -11,12 +11,10 @@
             <div class="card-body">
                 <b>{{ __('Order.date') }}:</b> {{ $order->getCreatedAt() }}<br />
                 <b>{{ __('Order.total') }}:</b> ${{ $order->getTotal() }}<br />
-
                 @if($order->pet)
                     <b>{{ __('Order.associated_pet') }}:</b> {{ $order->pet->getName() }}<br />
                 @endif
-
-                <table class="table table-bordered table-striped text-center mt-3">
+                <table class="table table-bordered table-striped text-center mt-3 uniform-table">
                     <thead>
                     <tr>
                         <th scope="col">{{ __('Order.item_id') }}</th>
@@ -45,7 +43,6 @@
                                 </td>
                             </tr>
                         @endif
-
                     @endforeach
                     </tbody>
                 </table>

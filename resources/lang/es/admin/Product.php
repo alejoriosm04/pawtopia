@@ -23,4 +23,8 @@ return [
     'species' => 'Especie',
     'select_category' => 'Selecciona Categoría',
     'select_species' => 'Seleccionar Especie',
+    'storage_type' => 'Tipo de Almacenamiento',
+    'local_storage' => 'Almacenamiento Local',
+    'cloud_storage' => 'Almacenamiento en la Nube',
+
 ];

@@ -1,4 +1,3 @@
-{{-- Lina Ballesteros --}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -12,59 +11,64 @@
     <link rel="icon" type="image/png" href="{{ asset('img/logo_abstraction.png') }}">
 </head>
 <body class="min-vh-100 d-flex flex-column">
-    <div class="row g-0 flex-grow-1">
-        <div class="p-3 col-md-2 text-white custom-sidebar">
-            <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
-                <img src="{{ asset('img/logo_gray.png') }}" alt="Pawtopia" class="logo img-fluid mb-3 logo-adjust" style="max-width: 150px;">
-                <span class="fs-4">{{ __('admin/Layout.panel_title') }}</span>
-            </a>
-            <hr />
-            <ul class="nav flex-column">
-                @if(Auth::check() && Auth::user()->role == 'admin')
-                    <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- {{ __('admin/Layout.home') }}</a></li>
-                    <li><a href="{{ route('admin.product.index') }}" class="nav-link text-white">- {{ __('admin/Layout.products') }}</a></li>
-                    <li><a href="{{ route('admin.category.index') }}" class="nav-link text-white">- {{ __('admin/Layout.categories') }}</a></li>
-                    <li><a href="{{ route('admin.species.index') }}" class="nav-link text-white">- {{ __('admin/Layout.species') }}</a></li>
-                @endif
-                <li>
-                    <a href="{{ route('home.index') }}" class="mt-2 btn btn-primary text-white">{{ __('admin/Layout.go_back_home') }}</a>
-                </li>
-                <li>
-                    <a href="{{ route('product.index') }}" class="mt-2 btn btn-primary text-white">{{ __('admin/Layout.go_back_products') }}</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-10 d-flex flex-column">
-    <nav class="p-3 shadow text-end">
-    @auth
-        <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="profile-font text-decoration-none text-light">
-            <span>{{ Auth::user()->name }}</span>
-            @if(Auth::user()->image)
-                <img class="img-profile rounded-circle" src="{{ asset('/storage/'.Auth::user()->image) }}" style="width: 40px; height: 40px;">
-            @else
-                <img class="img-profile rounded-circle" src="{{ asset('/img/default_user.png') }}" style="width: 40px; height: 40px;">
-            @endif
+<div class="row g-0 flex-grow-1">
+    <div class="custom-sidebar p-3 col-md-2 text-white">
+        <span class="close-sidebar" onclick="toggleSidebar()">&larr;</span>
+        <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none d-flex flex-column align-items-center">
+            <img src="{{ asset('img/logo_gray.png') }}" alt="Pawtopia" class="logo img-fluid mb-3" style="max-width: 150px;">
+            <span class="fs-4">{{ __('admin/Layout.panel_title') }}</span>
         </a>
-        <form id="logout" action="{{ route('logout') }}" method="POST" style="display: inline;">
-            @csrf
-            <button type="submit" class="btn btn-outline-light">{{ __('Logout') }}</button>
-        </form>
-    @else
-        <a href="{{ route('login') }}" class="btn btn-outline-light">{{ __('Login') }}</a>
-    @endauth
-</nav>
+        <hr />
+        <ul class="nav flex-column">
+            @if(Auth::check() && Auth::user()->role == 'admin')
+                <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- {{ __('admin/Layout.home') }}</a></li>
+                <li><a href="{{ route('admin.product.index') }}" class="nav-link text-white">- {{ __('admin/Layout.products') }}</a></li>
+                <li><a href="{{ route('admin.category.index') }}" class="nav-link text-white">- {{ __('admin/Layout.categories') }}</a></li>
+                <li><a href="{{ route('admin.species.index') }}" class="nav-link text-white">- {{ __('admin/Layout.species') }}</a></li>
+            @endif
+            <li>
+                <a href="{{ route('home.index') }}" class="mt-2 btn btn-primary text-white">{{ __('admin/Layout.go_back_home') }}</a>
+            </li>
+            <li>
+                <a href="{{ route('product.index') }}" class="mt-2 btn btn-primary text-white">{{ __('admin/Layout.go_back_products') }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-10 d-flex flex-column content-area">
+        <nav class="p-3 shadow text-end" style="background-color: #495057;">
+            <button class="btn btn-light toggle-sidebar" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            @auth
+                <div class="d-inline-block me-3">
+                    <a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="profile-font text-decoration-none text-light d-flex align-items-center">
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span>{{ Auth::user()->name }}</span>
+                    </a>
+                </div>
+                <form id="logout" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light">{{ __('Logout') }}</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-outline-light">{{ __('Login') }}</a>
+            @endauth
+        </nav>
 
-    <div class="g-0 m-5 flex-grow-1">
-        @yield('content')
+        <div class="g-0 m-5 flex-grow-1">
+            @yield('content')
+        </div>
     </div>
 </div>
 
-    <div class="copyright py-4 text-center text-white" style="background-color: #343a40;">
-        <div class="container">
-            <small>{{ __('admin/Layout.copyright') }}</small>
-        </div>
+<div class="footer py-4 text-center text-white" style="background-color: #343a40;">
+    <div class="container">
+        <small>{{ __('admin/Layout.copyright') }}</small>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="{{ asset('js/admin/layout/sidebar_responsive.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

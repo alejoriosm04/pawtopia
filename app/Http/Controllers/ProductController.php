@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Species;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class ProductController extends Controller
         $viewData['subtitle'] = __('Product.index_subtitle');
         $viewData['products'] = Product::all();
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('product.index');
 
         return view('product.index')->with('viewData', $viewData);
     }
@@ -38,6 +40,7 @@ class ProductController extends Controller
         $viewData['subtitle'] = $product->getName().' - '.__('Product.product_info');
         $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['product'] = $product;
+        $viewData['breadcrumbs'] = Breadcrumbs::render('product.show', $product);
 
         return view('product.show')->with('viewData', $viewData);
     }
@@ -56,6 +59,7 @@ class ProductController extends Controller
         $viewData['subtitle'] = __('Product.category_subtitle', ['category' => $speciesModel->getName()]);
         $viewData['products'] = Product::where('species_id', $speciesModel->getId())->get();
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('product.species', $speciesModel);
 
         return view('product.filter')->with('viewData', $viewData);
     }
@@ -70,6 +74,8 @@ class ProductController extends Controller
         $viewData['products'] = $products;
         $viewData['species'] = $species;
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('product.category', $category);
+
         if ($products->isEmpty()) {
             $viewData['message'] = __('Product.no_products');
         }
@@ -87,6 +93,7 @@ class ProductController extends Controller
         $viewData['products'] = $products;
         $viewData['brand'] = ucfirst($brand);
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('product.brand', $brand);
 
         return view('product.brand')->with('viewData', $viewData);
     }
@@ -138,6 +145,7 @@ class ProductController extends Controller
         $viewData['products'] = $products;
         $viewData['keyword'] = $keyword;
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('product.search', $keyword);
 
         return view('product.search')->with('viewData', $viewData);
     }

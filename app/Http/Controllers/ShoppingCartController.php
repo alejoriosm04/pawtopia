@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Species;
 use App\Services\ShoppingCart\ShoppingCartService;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -61,6 +62,7 @@ class ShoppingCartController extends Controller
         $viewData['productsInCart'] = $productsInCart;
         $viewData['total'] = $total;
         $viewData['species_categories'] = Species::with('categories')->get();
+        $viewData['breadcrumbs'] = Breadcrumbs::render('cart.index');
         if (Auth::check()) {
             $viewData['pets'] = Auth::user()->pets;
         } else {
@@ -152,6 +154,7 @@ class ShoppingCartController extends Controller
             $viewData['title'] = __('Order.title');
             $viewData['subtitle'] = __('Order.subtitle');
             $viewData['order'] = $order;
+            $viewData['breadcrumbs'] = Breadcrumbs::render('cart.purchase', $order);
 
             return view('shoppingcart.purchase')->with('viewData', $viewData);
         } else {
