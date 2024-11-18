@@ -21,7 +21,7 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.pets_title');
         $viewData['subtitle'] = __('Pet.pets_subtitle');
-        $viewData['pets'] = Pet::all();
+        $viewData['pets'] = Auth::user()->pets;
         $viewData['species'] = Species::all();
         $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.index');
