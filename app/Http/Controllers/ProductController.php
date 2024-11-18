@@ -85,7 +85,7 @@ class ProductController extends Controller
         $products = Product::where('name', 'like', '%'.$brand.'%')->get();
 
         $viewData = [];
-        $viewData['title'] = __('Products for Brand: ').ucfirst($brand);
+        $viewData['title'] = __('Product.brand_products').ucfirst($brand);
         $viewData['products'] = $products;
         $viewData['brand'] = ucfirst($brand);
         $viewData['breadcrumbs'] = Breadcrumbs::render('product.brand', $brand);

@@ -36,4 +36,5 @@ return [
     'carousel_3_text' => 'Everything you need to keep your pet looking and feeling great.',
     'carousel_4_heading' => 'Healthcare Essentials',
     'carousel_4_text' => 'Essential healthcare products to ensure your pet’s wellbeing.',
-];
+    'image_success' => 'The image was successfully uploaded.',
+    ];

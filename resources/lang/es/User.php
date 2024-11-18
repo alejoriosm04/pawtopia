@@ -25,4 +25,10 @@ return [
     'change_profile_image' => 'Cambiar Imagen de Perfil',
     'orders_title' => 'Mis Pedidos',
     'orders_subtitle' => 'Mis Pedidos',
+    'created_success' => 'Usuario creado exitosamente.',
+    'updated_success' => 'Usuario actualizado con éxito.',
+    'deleted_success' => 'Usuario eliminado con éxito.',
+    'favorites_add_success' => 'Producto añadido a tus favoritos.',
+    'favorites_add_info' => 'El producto ya estaba en tus favoritos.',
+    'login_required' => 'Necesitas iniciar sesión para añadir productos a favoritos.',
 ];

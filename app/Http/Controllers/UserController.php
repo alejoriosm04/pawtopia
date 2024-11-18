@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = __('User List');
+        $viewData['title'] = __('User.user_list_title');
         $viewData['users'] = User::all();
         $viewData['breadcrumbs'] = Breadcrumbs::render('user.index');
 
@@ -28,7 +28,7 @@ class UserController extends Controller
     public function create(): View
     {
         $viewData = [];
-        $viewData['title'] = __('Create User');
+        $viewData['title'] = __('User.create_user_title');
         $viewData['breadcrumbs'] = Breadcrumbs::render('user.create');
 
         return view('user.create')->with('viewData', $viewData);
@@ -61,16 +61,16 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.index')->with('success', __('User created successfully.'));
+        return redirect()->route('user.index')->with('success', __('User.created_success'));
     }
 
     public function show($id): View
     {
-        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id); // Cargar las relaciones
+        $user = User::with(['pet', 'favList', 'orders'])->findOrFail($id);
 
         $viewData = [];
         $viewData['user'] = $user;
-        $viewData['title'] = __('Details of User');
+        $viewData['title'] = __('User.user_details_title');
         $viewData['breadcrumbs'] = Breadcrumbs::render('user.show', $user);
 
         return view('user.show')->with('viewData', $viewData);
@@ -79,7 +79,7 @@ class UserController extends Controller
     public function edit(int $id): View
     {
         $viewData = [];
-        $viewData['title'] = __('Edit User');
+        $viewData['title'] = __('User.edit_user_title');
         $viewData['user'] = User::findOrFail($id);
         $viewData['breadcrumbs'] = Breadcrumbs::render('user.edit', $viewData['user']);
 
@@ -128,29 +128,29 @@ class UserController extends Controller
         }
 
         return redirect()->route('user.show', ['id' => $user->getId()])
-            ->with('success', __('Successfully updated user'));
+            ->with('success', __('User.updated_success'));
     }
 
     public function addToFavorites(int $productId, FavoriteService $favoriteService): RedirectResponse
     {
         if (! Auth::check()) {
-            return redirect()->route('login')->with('error', 'Necesitas iniciar sesión para añadir productos a favoritos.');
+            return redirect()->route('login')->with('error', __('User.login_required'));
         }
 
         $user = Auth::user();
 
         if ($favoriteService->addProductToFavorites($user, $productId)) {
-            return redirect()->back()->with('success', 'Producto añadido a tus favoritos.');
+            return redirect()->back()->with('success', __('User.favorites_add_success'));
         }
 
-        return redirect()->back()->with('info', 'El producto ya estaba en tus favoritos.');
+        return redirect()->back()->with('info', __('User.favorites_add_info'));
     }
 
     public function delete(int $id): RedirectResponse
     {
         User::destroy($id);
 
-        return redirect()->route('user.index')->with('success', __('User deleted successfully.'));
+        return redirect()->route('user.index')->with('success', __('User.deleted_success'));
     }
 
     public function orders(): View
