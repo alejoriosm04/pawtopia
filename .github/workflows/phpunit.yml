@@ -32,10 +32,7 @@ jobs:
       run: php artisan key:generate --env=testing
 
     - name: Run Migrations
-      run: php artisan migrate --env=testing --no-interaction --no-ansi
-
-    - name: Configuration cache
-      run: php artisan config:cache
+      run: php artisan migrate
 
     - name: Run Tests
       run: vendor/bin/phpunit
