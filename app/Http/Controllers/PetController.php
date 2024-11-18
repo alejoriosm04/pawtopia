@@ -157,22 +157,28 @@ class PetController extends Controller
 
     public function getRecommendations(): View
     {
-        $pets = Auth::user()->pets;
-        $speciesIds = $pets->pluck('species_id');
+        $pets = Auth::user()->pets()->with('species')->get();
+        $speciesIds = $pets->pluck('species_id')->unique();
 
-        $recommendedProducts = Product::whereIn('species_id', $speciesIds)->with('category')->get();
+        $categoryIds = Product::whereIn('species_id', $speciesIds)
+            ->pluck('category_id')
+            ->unique();
 
-        $categoryIds = $recommendedProducts->pluck('category_id');
-        $additionalRecommendedProducts = Product::whereIn('category_id', $categoryIds)
-            ->whereNotIn('species_id', $speciesIds)
-            ->get();
-
-        $finalRecommendedProducts = $recommendedProducts->merge($additionalRecommendedProducts);
+        $recommendedProducts = Product::with('category')
+            ->where(function($query) use ($speciesIds, $categoryIds) {
+                $query->whereIn('species_id', $speciesIds)
+                    ->orWhere(function($q) use ($categoryIds, $speciesIds) {
+                        $q->whereIn('category_id', $categoryIds)
+                            ->whereNotIn('species_id', $speciesIds);
+                    });
+            })
+            ->get()
+            ->unique('id');
 
         $viewData = [];
         $viewData['title'] = __('Pet.recommendations_title');
         $viewData['subtitle'] = __('Pet.recommendations_subtitle');
-        $viewData['products'] = $finalRecommendedProducts;
+        $viewData['products'] = $recommendedProducts;
         $viewData['species_categories'] = Species::with('categories')->get();
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.recommendations');
 
