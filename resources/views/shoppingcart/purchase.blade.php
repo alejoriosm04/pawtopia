@@ -10,6 +10,11 @@
             <div class="alert alert-success" role="alert">
                 {{ __('Order.congratulations') }} {{ __('Order.order_number') }} <b>#{{ $viewData["order"]->getId() }}</b>
             </div>
+            @if($viewData["order"]->getTotal() > 100)
+                <div class="alert alert-info" role="alert">
+                    🎁 {{ __('Order.gift_notification') }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection
