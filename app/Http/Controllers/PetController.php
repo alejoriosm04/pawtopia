@@ -171,7 +171,7 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.recommendations_title');
         $viewData['subtitle'] = __('Pet.recommendations_subtitle');
-        $viewData['products'] = $finalRecommendedProducts;
+        $viewData['products'] = $recommendedProducts;
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.recommendations');
 
         return view('pet.recommendations')->with('viewData', $viewData);
