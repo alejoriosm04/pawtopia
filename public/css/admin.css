@@ -295,11 +295,11 @@ footer {
 }
 
 .custom-favorite-link {
-    color: #198754; /* Naranja oscuro */
+    color: #DB4D20; /* Naranja oscuro */
     text-decoration: none; /* Elimina el subrayado si lo deseas */
 }
 
 .custom-favorite-link:hover {
-    color: #6c757d; /* Verde apagado al pasar el mouse */
+    color: #FFA500; /* Verde apagado al pasar el mouse */
     text-decoration: underline; /* Opcional para resaltar */
 }
