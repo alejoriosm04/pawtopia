@@ -31,4 +31,5 @@ return [
     'favorites_add_success' => 'Product added to your favorites.',
     'favorites_add_info' => 'Product was already in your favorites.',
     'login_required' => 'You need to log in to add products to favorites.',
+    'welcome' => 'Welcome back,',
 ];

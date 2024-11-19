@@ -31,4 +31,5 @@ return [
     'favorites_add_success' => 'Producto añadido a tus favoritos.',
     'favorites_add_info' => 'El producto ya estaba en tus favoritos.',
     'login_required' => 'Necesitas iniciar sesión para añadir productos a favoritos.',
+    'welcome' => 'Bienvenido de nuevo,',
 ];
