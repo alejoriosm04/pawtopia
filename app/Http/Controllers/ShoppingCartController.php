@@ -21,8 +21,7 @@ class ShoppingCartController extends Controller
     public function __construct(ShoppingCartService $shoppingCartService)
     {
         $this->shoppingCartService = $shoppingCartService;
-        $speciesCategories = Species::with('categories')->get();
-        view()->share('species_categories', $speciesCategories);
+        parent::__construct();
     }
 
     public function add(Request $request, int $id): RedirectResponse
