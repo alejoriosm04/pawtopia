@@ -34,7 +34,7 @@
                 <ul>
                     @foreach($viewData['user']->getFavList() as $product)
                         <li>
-                            <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                            <a href="{{ route('product.show', ['id' => $product->id]) }}" class="custom-favorite-link">
                                 {{ $product->name }}
                             </a>
                         </li>
