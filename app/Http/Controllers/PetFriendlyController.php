@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\GooglePlacesService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Services\GooglePlacesService;
+
 // use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class PetFriendlyController extends Controller
@@ -21,7 +22,7 @@ class PetFriendlyController extends Controller
     {
         $latitude = $request->input('lat');
         $longitude = $request->input('lng');
-        
+
         $places = [];
 
         if ($latitude && $longitude) {

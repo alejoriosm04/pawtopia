@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Species;
 use App\Services\ShoppingCart\ShoppingCartService;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\JsonResponse;
