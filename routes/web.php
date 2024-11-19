@@ -38,19 +38,6 @@ Route::middleware([App\Http\Middleware\SetLocale::class])->group(function () {
         Route::post('/cart/purchase', 'App\Http\Controllers\ShoppingCartController@purchase')->name('shoppingcart.purchase');
         Route::get('/user/orders', 'App\Http\Controllers\UserController@orders')->name('user.orders');
         Route::get('/cart/total', 'App\Http\Controllers\ShoppingCartController@getTotal')->name('cart.total');
-    });
-
-    Route::get('/cart', 'App\Http\Controllers\ShoppingCartController@index')->name('cart.index');
-    Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
-    Route::get('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
-    Route::post('/cart/update', 'App\Http\Controllers\ShoppingCartController@update')->name('cart.update');
-    Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('categories.index');
-    Route::get('/products/species/{species}', 'App\Http\Controllers\ProductController@filterBySpecies')->name('product.filterBySpecies');
-    Route::get('/products/category/{category}', 'App\Http\Controllers\ProductController@filterByCategory')->name('product.filterByCategory');
-    Route::get('/products/brand/{brand}', 'App\Http\Controllers\ProductController@filterByBrand')->name('product.filterByBrand');
-    Route::get('/search', 'App\Http\Controllers\ProductController@search')->name('product.search');
-
-    Route::middleware(['auth'])->group(function () {
         Route::post('/favorites/add/{id}', 'App\Http\Controllers\UserController@addToFavorites')->name('favorites.add');
         Route::get('/orders', 'App\Http\Controllers\OrderController@index')->name('order.index');
         Route::get('/orders/create', 'App\Http\Controllers\OrderController@create')->name('order.create');
@@ -71,6 +58,18 @@ Route::middleware([App\Http\Middleware\SetLocale::class])->group(function () {
         Route::get('/users/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
         Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit');
         Route::put('/users/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
+        Route::get('/pet-friendly', 'App\Http\Controllers\PetFriendlyController@index')->name('pet_friendly.index');
     });
+
+    Route::get('/cart', 'App\Http\Controllers\ShoppingCartController@index')->name('cart.index');
+    Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
+    Route::get('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
+    Route::post('/cart/update', 'App\Http\Controllers\ShoppingCartController@update')->name('cart.update');
+    Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('categories.index');
+    Route::get('/products/species/{species}', 'App\Http\Controllers\ProductController@filterBySpecies')->name('product.filterBySpecies');
+    Route::get('/products/category/{category}', 'App\Http\Controllers\ProductController@filterByCategory')->name('product.filterByCategory');
+    Route::get('/products/brand/{brand}', 'App\Http\Controllers\ProductController@filterByBrand')->name('product.filterByBrand');
+    Route::get('/search', 'App\Http\Controllers\ProductController@search')->name('product.search');
+
     Auth::routes([]);
 });
