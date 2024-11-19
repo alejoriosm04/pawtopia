@@ -14,7 +14,6 @@
         <thead>
             <tr>
                 <th>{{ __('User.id') }}</th>
-                <th>{{ __('User.image') }}</th>
                 <th>{{ __('User.name') }}</th>
                 <th>{{ __('User.email') }}</th>
                 <th>{{ __('Action.actions') }}</th>
@@ -24,9 +23,6 @@
             @foreach($viewData['users'] as $user)
             <tr>
                 <td>{{ $user->getId() }}</td>
-                <td>
-                    <img src="{{ asset('storage/'.$user->getImage()) }}" alt="{{ __('User.image_alt') }}" width="50" height="50">
-                </td>
                 <td>{{ $user->getName() }}</td>
                 <td>{{ $user->getEmail() }}</td>
                 <td>
