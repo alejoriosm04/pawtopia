@@ -7,4 +7,6 @@ return [
     'rating' => 'Calificación',
     'view_on_map' => 'Ver en Google Maps',
     'no_results' => 'No se encontraron lugares pet friendly cerca.',
+    'nearby_places' => 'Lugares Cercanos',
+
 ];
