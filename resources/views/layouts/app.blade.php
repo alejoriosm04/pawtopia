@@ -37,20 +37,20 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <!-- Search Form -->
-            <form class="d-flex ms-lg-1 my-2 my-lg-0" action="{{ route('product.search') }}" method="GET">
-                <div class="input-group" style="margin-left: -10px; width: 350px;">
-                    <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search"
-                           style="border-radius: 20px; background-color: #f9f9f9; padding-right: 40px; width: calc(100% - 50px);">
-                    <button class="btn btn-light d-flex align-items-center justify-content-center" type="submit"
-                            style="border-radius: 50%; width: 45px; height: 40px; margin-left: -55px;">
-                        <i class="bi bi-search" style="font-size: 1rem; color: #DB4D20; margin-left: 20px;"></i>
-                    </button>
-                </div>
-            </form>
+           <form class="d-flex me-auto ms-lg-1 my-2 my-lg-0" action="{{ route('product.search') }}" method="GET">
+    <div class="input-group" style="margin-left: -20px; width: 350px;">
+        <input class="form-control" name="search" type="search" placeholder="{{ __('Layout.search_placeholder') }}" aria-label="Search">
+        <button class="btn btn-light" type="submit">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+</form>
+
+
             <ul class="navbar-nav ms-auto d-flex align-items-center">
                 @auth
                     @if(Auth::user()->role == 'admin')
-                        <li class="nav-item">
+                       <li class="nav-item ms-5">
                             <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('admin.home.index') }}">
                                 <i class="bi bi-gear-fill me-1"></i> {{ __('Layout.admin_panel') }}
                             </a>

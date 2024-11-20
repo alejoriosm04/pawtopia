@@ -6,7 +6,7 @@ use App\Services\GooglePlacesService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-// use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 class PetFriendlyController extends Controller
 {
@@ -34,6 +34,7 @@ class PetFriendlyController extends Controller
         $viewData['latitude'] = $latitude;
         $viewData['longitude'] = $longitude;
         $viewData['places'] = $places;
+        $viewData['breadcrumbs'] = Breadcrumbs::render('pet_friendly.index');
 
         return view('pet_friendly.index')->with('viewData', $viewData);
     }

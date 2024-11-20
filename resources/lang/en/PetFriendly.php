@@ -7,4 +7,5 @@ return [
     'rating' => 'Rating',
     'view_on_map' => 'View on Google Maps',
     'no_results' => 'No pet friendly places found nearby.',
+    'nearby_places' => 'Nearby places',
 ];

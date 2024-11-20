@@ -78,12 +78,12 @@ Breadcrumbs::for('cart.purchase', function ($trail, $order) {
 
 Breadcrumbs::for('user.index', function ($trail) {
     $trail->parent('home');
-    $trail->push(__('User List'), route('user.index'));
+    $trail->push(__('User.user_list_title'), route('user.index'));
 });
 
 Breadcrumbs::for('user.create', function ($trail) {
     $trail->parent('user.index');
-    $trail->push(__('Create User'), route('user.create'));
+    $trail->push(__('User.create_user_title'), route('user.create'));
 });
 
 Breadcrumbs::for('user.show', function ($trail, $user) {
@@ -93,10 +93,14 @@ Breadcrumbs::for('user.show', function ($trail, $user) {
 
 Breadcrumbs::for('user.edit', function ($trail, $user) {
     $trail->parent('user.show', $user);
-    $trail->push(__('Edit User'), route('user.edit', $user->getId()));
+    $trail->push(__('User.edit_user_title'), route('user.edit', $user->getId()));
 });
 
 Breadcrumbs::for('user.orders', function ($trail) {
     $trail->parent('home');
     $trail->push(__('User.orders_title'), route('user.orders'));
+});
+Breadcrumbs::for('pet_friendly.index', function ($trail) {
+    $trail->parent('home');
+    $trail->push(__('PetFriendly.pet_friendly_title'), route('pet_friendly.index'));
 });
