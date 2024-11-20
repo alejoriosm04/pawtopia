@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 class GooglePlacesService
 {
     protected $client;
+
     protected $apiKey;
 
     public function __construct()

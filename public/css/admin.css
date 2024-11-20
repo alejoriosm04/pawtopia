@@ -147,7 +147,7 @@ th, td {
 }
 
 footer {
-    background-color: #343a40; /* Color oscuro */
+    background-color: #1a1a1a; /* Color oscuro */
     color: #f8f9fa;
     padding: 40px 0;
     text-align: center;
@@ -163,8 +163,7 @@ footer .footer-content {
     margin: 0 auto;
     flex-wrap: wrap;
     gap: 20px;
-}
-
+  
 .footer-column {
     flex: 1;
     margin: 0 10px;
@@ -233,14 +232,71 @@ footer small {
     margin: 20px 0;
 }
 
+/* Responsiveness */
 @media (max-width: 768px) {
-    .footer-content {
+    footer .footer-content {
         flex-direction: column;
         text-align: center;
-        gap: 15px; /* Mayor separación para pantallas pequeñas */
     }
 
-    .footer-title, .footer-text, .footer-links a {
-        font-size: 12px; /* Ajuste más compacto en móvil */
+    .footer-column {
+        margin-bottom: 20px;
     }
+}
+
+
+/* Centrado vertical del formulario */
+.content-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Ajusta la altura según sea necesario */
+}
+
+/* Estilo para el formulario */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Ajusta el botón */
+.btn-custom {
+    background-color: #FFA500;
+    color: #fff;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #FF8C00;
+}
+
+/* Estilo para el footer compacto */
+footer {
+    background-color: #1a1a1a;
+    color: #f8f9fa;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+    margin-top: auto;
+}
+
+
+.custom-product-link {
+    color: #DB4D20; /* Naranja oscuro */
+    text-decoration: none; /* Elimina el subrayado si lo deseas */
+}
+
+.custom-product-link:hover {
+    color: #FFA500; /* Naranja más claro al pasar el mouse */
+    text-decoration: underline; /* Opcional para resaltar */
+}
+
+.custom-favorite-link {
+    color: #DB4D20; /* Naranja oscuro */
+    text-decoration: none; /* Elimina el subrayado si lo deseas */
+}
+
+.custom-favorite-link:hover {
+    color: #FFA500; /* Verde apagado al pasar el mouse */
+    text-decoration: underline; /* Opcional para resaltar */
 }

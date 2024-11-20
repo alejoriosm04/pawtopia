@@ -164,7 +164,19 @@ class User extends Authenticatable implements MustVerifyEmail
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'pets' => 'nullable|string',
             'favList' => 'nullable|string',
-        ]);
+        ],
+            [
+                'name.required' => __('validation.required', ['attribute' => __('User.name')]),
+                'email.required' => __('validation.required', ['attribute' => __('User.email')]),
+                'email.email' => __('validation.email', ['attribute' => __('User.email')]),
+                'address.required' => __('validation.required', ['attribute' => __('User.address')]),
+                'credit_card.size' => __('validation.size', ['attribute' => __('User.credit_card')]),
+                'password.min' => __('validation.min.string', ['attribute' => __('User.password'), 'min' => 6]),
+                'image.image' => __('validation.image', ['attribute' => __('User.image')]),
+                'image.mimes' => __('validation.mimes', ['attribute' => __('User.image'), 'values' => 'jpg, jpeg, png, gif']),
+                'image.max' => __('validation.max.file', ['attribute' => __('User.image'), 'max' => 2048]),
+            ]
+        );
     }
 
     public function pets(): HasMany
