@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Species;
 use App\Services\ShoppingCart\ShoppingCartService;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Http\JsonResponse;
@@ -21,8 +20,7 @@ class ShoppingCartController extends Controller
     public function __construct(ShoppingCartService $shoppingCartService)
     {
         $this->shoppingCartService = $shoppingCartService;
-        $speciesCategories = Species::with('categories')->get();
-        view()->share('species_categories', $speciesCategories);
+        parent::__construct();
     }
 
     public function add(Request $request, int $id): RedirectResponse

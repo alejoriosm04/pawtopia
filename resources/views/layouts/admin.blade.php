@@ -89,10 +89,6 @@
     </div>
     <small>{!! __('Layout.rights_reserved') !!}</small>
 </footer>
-
-
-
-
 <script src="{{ asset('js/admin/layout/sidebar_responsive.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>

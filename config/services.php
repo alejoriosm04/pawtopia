@@ -40,4 +40,7 @@ return [
         'product_base_link' => env('API_PRODUCT_BASE_LINK', 'http://35.208.92.31/products'),
     ],
 
+    'google' => [
+        'places_api_key' => env('GOOGLE_PLACES_API_KEY'),
+    ],
 ];

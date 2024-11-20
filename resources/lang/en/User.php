@@ -19,7 +19,7 @@ return [
     'fav_products' => 'Favorite Products',
     'no_fav_products' => 'No favorite products.',
     'orders' => 'Orders',
-    'order_number' => 'Order #:',
+    'order_number' => 'Order:',
     'order_date' => 'Date:',
     'no_orders' => 'No orders.',
     'change_profile_image' => 'Change Profile Image',
@@ -31,4 +31,6 @@ return [
     'favorites_add_success' => 'Product added to your favorites.',
     'favorites_add_info' => 'Product was already in your favorites.',
     'login_required' => 'You need to log in to add products to favorites.',
+    'welcome' => 'Welcome back,',
+    'current_image' => 'Current Image',
 ];

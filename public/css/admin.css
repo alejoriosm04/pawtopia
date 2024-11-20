@@ -146,8 +146,6 @@ th, td {
     text-align: center;
 }
 
-
-
 footer {
     background-color: #1a1a1a; /* Color oscuro */
     color: #f8f9fa;
@@ -165,8 +163,7 @@ footer .footer-content {
     margin: 0 auto;
     flex-wrap: wrap;
     gap: 20px;
-}
-
+  
 .footer-column {
     flex: 1;
     margin: 0 10px;
