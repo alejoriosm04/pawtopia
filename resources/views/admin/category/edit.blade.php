@@ -35,7 +35,7 @@
                     <label class="form-label">{{ __('admin/Category.species') }}:</label>
                     <select name="species_id" class="form-control" required>
                         @foreach($viewData['species'] as $species)
-                            <option value="{{ $species->getId() }}" {{ $viewData['category']->getSpeciesId() == $species->getId() ? 'selected' : '' }}>
+                            <option value="{{ $species->getId() }}" {{ $viewData['category']->getSpecies()->getId() == $species->getId() ? 'selected' : '' }}>
                                 {{ $species->getName() }}
                             </option>
                         @endforeach
