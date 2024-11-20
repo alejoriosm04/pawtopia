@@ -43,7 +43,7 @@
                                 <select id="species_id" name="species_id" class="form-control" required>
                                     <option value="">{{ __('Pet.select_species') }}</option>
                                     @foreach ($viewData['species'] as $species)
-                                        <option value="{{ $species->getId() }}" {{ $viewData['pet']->getSpeciesId() == $species->getId() ? 'selected' : '' }}>
+                                        <option value="{{ $species->getId() }}" {{ $viewData['pet']->getSpecies()->getId() == $species->getId() ? 'selected' : '' }}>
                                             {{ $species->getName() }}
                                         </option>
                                     @endforeach

@@ -170,11 +170,6 @@ class Pet extends Model
         return $this->belongsTo(Species::class);
     }
 
-    public function getSpeciesId(): int
-    {
-        return $this->attributes['species_id'];
-    }
-
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);

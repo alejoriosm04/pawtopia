@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
 
 class Item extends Model
 {
@@ -23,7 +24,7 @@ class Item extends Model
      */
     protected $fillable = ['quantity', 'price', 'order_id', 'product_id',  'pet_id'];
 
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'quantity' => 'required|numeric|gt:0',

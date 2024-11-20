@@ -5,6 +5,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class Product extends Model
@@ -92,16 +94,6 @@ class Product extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function getSpeciesId(): int
-    {
-        return $this->attributes['species_id'];
-    }
-
-    public function setSpeciesId(int $speciesId): void
-    {
-        $this->attributes['species_id'] = $speciesId;
-    }
-
     public function getCategoryId(): int
     {
         return $this->attributes['category_id'];
@@ -112,12 +104,12 @@ class Product extends Model
         $this->attributes['category_id'] = $categoryId;
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public static function sumPricesByQuantities($products, $productsInSession)
+    public static function sumPricesByQuantities(array $products, array $productsInSession)
     {
         $total = 0;
         foreach ($products as $product) {
@@ -127,12 +119,12 @@ class Product extends Model
         return $total;
     }
 
-    public function species()
+    public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
     }
 
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(Item::class);
     }
@@ -142,22 +134,22 @@ class Product extends Model
         return $this->items;
     }
 
-    public function setItems(Item $items)
+    public function setItems(Item $items): void
     {
         $this->items = $items;
     }
 
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
     }
 
-    public function getCategory()
+    public function getCategory(): Category
     {
         return $this->category;
     }
 
-    public function getSpecies()
+    public function getSpecies(): Species
     {
         return $this->species;
     }
