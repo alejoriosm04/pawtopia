@@ -19,19 +19,17 @@ class PetFriendlyController extends Controller
 
     public function index(Request $request): View
     {
-        $latitude = $request->input('lat');
-        $longitude = $request->input('lng');
-        
-        $places = [];
+        $defaultLatitude = 40.7128;
+        $defaultLongitude = -74.0060;
 
-        if ($latitude && $longitude) {
-            $places = $this->googlePlaces->searchPetFriendlyPlaces($latitude, $longitude);
-        }
+        $latitude = $request->input('lat', $defaultLatitude);
+        $longitude = $request->input('lng', $defaultLongitude);
+
+        $places = $this->googlePlaces->searchPetFriendlyPlaces($latitude, $longitude);
 
         $viewData = [];
         $viewData['title'] = __('PetFriendly.pet_friendly_title');
         $viewData['subtitle'] = __('PetFriendly.pet_friendly_subtitle');
-        // $viewData['breadcrumbs'] = Breadcrumbs::render('pet_friendly.index');
         $viewData['latitude'] = $latitude;
         $viewData['longitude'] = $longitude;
         $viewData['places'] = $places;

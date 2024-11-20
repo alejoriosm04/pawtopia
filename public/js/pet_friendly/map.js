@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const defaultLat = 40.7128; // Default latitude (e.g., NYC)
+    const defaultLng = -74.0060; // Default longitude (e.g., NYC)
+
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(showPosition, () => showDefaultPosition(defaultLat, defaultLng));
     } else {
         alert("Geolocation is not supported by this browser.");
+        showDefaultPosition(defaultLat, defaultLng);
     }
 
     function showPosition(position) {
@@ -17,21 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
         initMap(lat, lng);
     }
 
-    function showError(error) {
-        switch (error.code) {
-            case error.PERMISSION_DENIED:
-                alert("User denied the request for Geolocation.");
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert("Location information is unavailable.");
-                break;
-            case error.TIMEOUT:
-                alert("The request to get user location timed out.");
-                break;
-            case error.UNKNOWN_ERROR:
-                alert("An unknown error occurred.");
-                break;
-        }
+    function showDefaultPosition(lat, lng) {
+        alert("Using default location as user location is unavailable.");
+        initMap(lat, lng);
     }
 
     function initMap(lat, lng) {

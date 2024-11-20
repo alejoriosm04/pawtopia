@@ -57,6 +57,11 @@
                         </li>
                     @endif
                     <li class="nav-item">
+                        <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('pet_friendly.index') }}">
+                            <i class="bi bi-shop"></i> {{ __('PetFriendly.pet_friendly_title') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-light me-3 d-flex align-items-center" href="{{ route('pets.recommendations') }}">
                             <i class="bi bi-star-fill me-1"></i> {{ __('Layout.recommendations') }}
                         </a>
