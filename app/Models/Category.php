@@ -6,6 +6,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -59,29 +61,19 @@ class Category extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function species()
+    public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
     }
 
-    public function products()
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
 
-    public function getSpecies()
+    public function getSpecies(): Species
     {
         return $this->species;
-    }
-
-    public function getSpeciesId(): int
-    {
-        return $this->attributes['species_id'];
-    }
-
-    public function setSpeciesId(int $speciesId): void
-    {
-        $this->attributes['species_id'] = $speciesId;
     }
 
     public static function validate(Request $request): void
