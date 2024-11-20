@@ -169,7 +169,7 @@ class Pet extends Model
     {
         return $this->belongsTo(Species::class);
     }
-    
+
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
