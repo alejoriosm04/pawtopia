@@ -21,7 +21,7 @@ class PetController extends Controller
         $viewData = [];
         $viewData['title'] = __('Pet.pets_title');
         $viewData['subtitle'] = __('Pet.pets_subtitle');
-        $viewData['pets'] = Auth::user()->pets;
+        $viewData['pets'] = Auth::user()->getPets();
         $viewData['breadcrumbs'] = Breadcrumbs::render('pet.index');
 
         return view('pet.index')->with('viewData', $viewData);
@@ -150,7 +150,7 @@ class PetController extends Controller
 
     public function getRecommendations(): View
     {
-        $pets = Auth::user()->pets()->with('species')->get();
+        $pets = Auth::user()->getPets()->with('species')->get();
         $speciesIds = $pets->pluck('species_id')->unique();
 
         $categoryIds = Product::whereIn('species_id', $speciesIds)

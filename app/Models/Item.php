@@ -104,6 +104,11 @@ class Item extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function getOrder(): Order
+    {
+        return $this->order;
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
@@ -112,6 +117,11 @@ class Item extends Model
     public function pet(): BelongsTo
     {
         return $this->belongsTo(Pet::class);
+    }
+
+    public function getPet(): Pet
+    {
+        return $this->pet;
     }
 
     public function getProduct(): ?Product

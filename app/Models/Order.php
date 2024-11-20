@@ -70,6 +70,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
@@ -78,10 +83,5 @@ class Order extends Model
     public function getItems(): Collection
     {
         return $this->items;
-    }
-
-    public function pet(): BelongsTo
-    {
-        return $this->belongsTo(Pet::class, 'pet_id');
     }
 }

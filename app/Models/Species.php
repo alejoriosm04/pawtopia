@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class Species extends Model
 {
@@ -58,9 +59,19 @@ class Species extends Model
         return $this->hasMany(Pet::class);
     }
 
+    public function getPets(): Collection
+    {
+        return $this->pets;
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function getProducts(): Collection
+    {
+        return $this->products;
     }
 
     public function categories(): HasMany
@@ -68,7 +79,7 @@ class Species extends Model
         return $this->hasMany(Category::class);
     }
 
-    public function getCategories()
+    public function getCategories(): Collection
     {
         return $this->categories;
     }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -138,22 +140,22 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->attributes['password'] = $value;
     }
 
-    public function getPets()
+    public function getPets(): Collection
     {
         return $this->pets()->get();
     }
 
-    public function getFavList()
+    public function getFavList(): Collection
     {
         return $this->favList()->get();
     }
 
-    public function getOrders()
+    public function getOrders(): Collection
     {
         return $this->orders()->get();
     }
 
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'name' => 'required|string|max:255',

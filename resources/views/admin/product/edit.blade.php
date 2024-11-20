@@ -79,7 +79,7 @@
                     <label class="form-label">{{ __('admin/Product.category') }}:</label>
                     <select name="category_id" class="form-control" required>
                         @foreach($viewData['categories'] as $category)
-                            <option value="{{ $category->getId() }}" {{ $viewData['product']->getCategoryId() == $category->getId() ? 'selected' : '' }}>
+                            <option value="{{ $category->getId() }}" {{ $viewData['product']->getCategory()->getId() == $category->getId() ? 'selected' : '' }}>
                                 {{ $category->getName() }}
                             </option>
                         @endforeach

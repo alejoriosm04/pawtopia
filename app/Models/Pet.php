@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class Pet extends Model
 {
@@ -165,13 +166,28 @@ class Pet extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
     public function species(): BelongsTo
     {
         return $this->belongsTo(Species::class);
     }
 
+    public function getSpecies(): Species
+    {
+        return $this->species;
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
+    }
+
+    public function getItems(): Collection
+    {
+        return $this->items;
     }
 }

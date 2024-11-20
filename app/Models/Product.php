@@ -94,16 +94,6 @@ class Product extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function getCategoryId(): int
-    {
-        return $this->attributes['category_id'];
-    }
-
-    public function setCategoryId(int $categoryId): void
-    {
-        $this->attributes['category_id'] = $categoryId;
-    }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -134,14 +124,14 @@ class Product extends Model
         return $this->items;
     }
 
-    public function setItems(Item $items): void
-    {
-        $this->items = $items;
-    }
-
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_favorites_products', 'product_id', 'user_id');
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
     }
 
     public function getCategory(): Category
