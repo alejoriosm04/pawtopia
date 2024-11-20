@@ -149,32 +149,31 @@
 </main>
 
 <footer>
-    <div class="footer-content">
-        <div class="footer-column">
-            <h5>{{ __('Layout.about_us') }}</h5>
-            <p>{{ __('Layout.about_text') }}</p>
-        </div>
-        <div class="footer-column">
-            <h5>{{ __('Layout.quick_links') }}</h5>
-            <ul>
-                <li><a href="{{ route('home.index') }}">{{ __('Layout.home') }}</a></li>
-                <li><a href="{{ route('product.index') }}">{{ __('Layout.products') }}</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h5>{{ __('Layout.follow_us') }}</h5>
-            <div class="social-icons">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-twitter"></i></a>
+    <div class="footer-content container">
+        <div class="row">
+            <div class="footer-column col-12 col-md-4">
+                <h5>{{ __('Layout.about_us') }}</h5>
+                <p>{{ __('Layout.about_text') }}</p>
+            </div>
+            <div class="footer-column col-12 col-md-4">
+                <h5>{{ __('Layout.quick_links') }}</h5>
+                <ul>
+                    <li><a href="{{ route('home.index') }}">{{ __('Layout.home') }}</a></li>
+                    <li><a href="{{ route('product.index') }}">{{ __('Layout.products') }}</a></li>
+                </ul>
+            </div>
+            <div class="footer-column col-12 col-md-4">
+                <h5>{{ __('Layout.follow_us') }}</h5>
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                </div>
             </div>
         </div>
     </div>
     <small>{!! __('Layout.rights_reserved') !!}</small>
 </footer>
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>

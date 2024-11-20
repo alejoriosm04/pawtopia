@@ -40,22 +40,20 @@
                     @endif
                 </div>
 
-                <div class="mt-4">
-                    <h5>{{ __('User.fav_products') }}</h5>
-                    @if (count($viewData['user']->getFavList()) > 0)
-                        <ul class="list-group list-group-flush">
-                            @foreach($viewData['user']->getFavList() as $product)
-                                <li class="list-group-item">
-                                    <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                                        {{ $product->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p>{{ __('User.no_fav_products') }}</p>
-                    @endif
-                </div>
+            <h5>{{ __('User.fav_products') }}</h5>
+            @if (count($viewData['user']->getFavList()) > 0)
+                <ul>
+                    @foreach($viewData['user']->getFavList() as $product)
+                        <li>
+                            <a href="{{ route('product.show', ['id' => $product->id]) }}" class="custom-favorite-link">
+                                {{ $product->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>{{ __('User.no_fav_products') }}</p>
+            @endif
 
                 <div class="mt-4">
                     <h5>{{ __('User.orders') }}</h5>
